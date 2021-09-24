@@ -1,0 +1,12 @@
+.chatHistoryMessageCodeSection {
+  background-color: black;
+  color: silver;
+  display: inline;
+  max-width: 100%;
+  overflow-x: scroll;
+  border: 2px solid black;
+  border-radius: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-top: 2px;
+}

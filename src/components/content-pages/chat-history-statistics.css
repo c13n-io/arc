@@ -1,0 +1,19 @@
+.chatHistoryStatistics {
+  width: 250px;
+  z-index: 97;
+}
+.contentHeaderTotalAmount {
+  color: green;
+}
+
+.chat-history-statistics-ArrowDownOutlined {
+  color: white;
+}
+
+.chat-history-statistics-contentHeaderTotalAmount {
+  color: red;
+}
+
+.chat-history-statistics-ArrowUpOutlined {
+  color: white;
+}

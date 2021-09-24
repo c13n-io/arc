@@ -1,0 +1,14 @@
+.user-preview-modal {
+  display: block;
+}
+
+#userPreviewAddress {
+  position: fixed;
+  opacity: 0;
+}
+
+.user-preview-address {
+  font-size: 75%;
+  text-decoration: underline;
+  cursor: pointer;
+}

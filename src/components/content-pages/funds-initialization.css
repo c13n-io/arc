@@ -1,0 +1,17 @@
+.funds-initialization-btn {
+  width: 50%;
+  border: none !important;
+}
+
+.funds-initialization-input {
+  border: none !important;
+  border-bottom: 1px solid gray;
+}
+
+.funds-initialization-suggested {
+  line-height: 0px;
+  left: 400px;
+  bottom: 275px;
+  position: relative;
+  color: gray;
+}

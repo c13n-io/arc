@@ -1,0 +1,251 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+}
+
+.accountsListItem {
+  transition: 0.3s;
+}
+
+.accountsListItem:hover {
+  background-color: rgb(65, 65, 85);
+}
+
+.accountsScreen {
+  scrollbar-color: #656585 #353555;
+}
+
+.accountsScreen::-webkit-scrollbar {
+  display: none;
+}
+
+.userContainer {
+  color: lightgrey;
+  transition: 0.3s;
+  user-select: text;
+  cursor: default;
+  overflow-wrap: break-word;
+}
+
+.userContainer:hover {
+  background-color: rgb(45, 45, 65);
+}
+
+.userContainer-selected {
+  background-color: rgb(65, 65, 85);
+  text-align: center;
+  margin-bottom: 1%;
+  user-select: none;
+  overflow-wrap: break-word;
+}
+
+.usersList {
+  overflow: visible;
+  max-height: 80vh;
+}
+
+.userSearchContainer {
+  transition: 0.3s;
+  /* height: 'auto'; */
+  color: lightgrey;
+  overflow-wrap: break-word;
+  margin-left: 2px;
+  /* padding: 50px; */
+  border-radius: 2px;
+}
+
+.discussionsList::-webkit-scrollbar {
+  display: none;
+}
+
+.sideSelfInfoPanel {
+  height: 100px;
+  color: lightgrey;
+  margin: auto;
+  word-wrap: normal;
+  overflow: hidden;
+}
+
+.sideContactBulbWrapper {
+  color: cyan;
+  display: inline;
+  transition: 0.5s;
+  margin-left: 2%;
+}
+
+.sideContactUserWrapper {
+  display: inline;
+  line-height: 125%;
+  text-align: left;
+  width: 100%;
+  padding-left: 2%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contentPanel {
+  display: inherit;
+  background-color: rgb(45, 45, 65);
+  overflow: hidden;
+  min-width: "250px";
+  height: 100vh;
+  user-select: none;
+}
+
+.contentHeaderTitle {
+  color: lightgray;
+  margin-left: 1%;
+  overflow: hidden;
+  line-height: 125%;
+}
+
+.contentHeaderTotalAmount {
+  display: "inline";
+  float: "right";
+}
+
+.userContactButtonWrapper {
+  display: inline;
+  float: right;
+  margin-right: 3%;
+  margin-left: 2%;
+}
+
+.contentHeaderCurrentFee {
+  display: inline;
+  user-select: none;
+  float: right;
+  margin: 1%;
+  font-size: 50%;
+}
+
+.contentHeaderAddress {
+  font-size: 45%;
+  color: lightgray;
+  min-width: 0;
+  overflow: hidden;
+  max-width: calc(100% - 125px);
+  text-overflow: clip;
+}
+
+.contentBody {
+  background-color: rgb(45, 45, 65);
+  color: lightgray;
+  user-select: text;
+  overflow: auto;
+  height: calc(100%);
+  scrollbar-color: #656585 #353555;
+}
+
+.contentBody::-webkit-scrollbar {
+  display: none;
+}
+
+.chatHistoryList {
+  overflow: auto;
+  height: 100%;
+  user-select: text;
+  color: lightgray;
+  scrollbar-color: #656585 #353555;
+}
+
+.chatHistoryList::-webkit-scrollbar {
+  display: none;
+}
+
+.chatHistorySender {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 1%;
+  padding-right: 2%;
+  background-color: darkslategray;
+  border-radius: 2px;
+}
+
+.chatHistoryFlexWrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.chatHistoryMessageWrapper {
+  display: flexbox;
+  min-width: 1vw;
+  width: 100%;
+  overflow-wrap: break-word;
+}
+
+.chatHistoryMessage {
+  border-radius: 0.75vh;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  vertical-align: middle;
+  line-height: 120%;
+  font-size: 100%;
+}
+
+.chatHistoryMessageCodeSection {
+  scrollbar-color: #656585 #353555;
+}
+
+.chatHistoryMessageCodeSection::-webkit-scrollbar {
+  display: none;
+}
+
+.chatHistoryCost {
+  display: "inline-flex";
+  color: lightgray;
+}
+
+.searchUsersContents {
+  margin: 1%;
+  max-height: calc(100vh - 80px);
+  overflow: auto;
+  scrollbar-color: #656585 #353555;
+}
+
+.searchUsersContents::-webkit-scrollbar {
+  display: none;
+}
+
+.contentFooter {
+  height: 50px;
+}
+
+.contentFooterInputMsat {
+  -webkit-appearance: none;
+  margin: 0;
+  scrollbar-color: #656585 #353555;
+}
+
+.contentFooterInputMsat::-webkit-scrollbar {
+  display: none;
+}
+
+.interactiveLogo {
+  font-size: 250px;
+  font-weight: bolder;
+  text-align: center;
+  letter-spacing: -0.15em;
+  margin-top: 10vh;
+  user-select: none;
+}
+
+.github-picker {
+  background: none !important;
+  border: none !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

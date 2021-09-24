@@ -1,0 +1,25 @@
+{
+    "env": {
+        "browser": true
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "sourceType": "module",
+        "ecmaVersion": 12
+    },
+    "rules": {
+        "react/prop-types": "off",
+        "no-extra-semi": "error",
+        "curly": "error",
+        "no-useless-return": "error",
+        "array-bracket-spacing": "error",
+        "brace-style": "error",
+        "indent": ["error", 2],
+        "no-multiple-empty-lines": "error",
+        "no-trailing-spaces": "error",
+        "semi": ["error", "always"],
+        "arrow-parens": "error"
+    }
+}

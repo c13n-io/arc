@@ -1,0 +1,160 @@
+.chat-history {
+  display: grid;
+  grid-template-rows: minmax(min-content, max-content) 1fr;
+  grid-template-columns: 1fr;
+  height: 100vh;
+}
+
+.chat-hIstory-header {
+  height: 4rem;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: auto auto auto 1fr auto;
+  grid-column-gap: 5px;
+  justify-items: center;
+  align-items: center;
+}
+
+.chat-history-header-UserIcon {
+  margin-right: auto;
+}
+
+.chat-history-header-UserName {
+  font-size: 20px;
+}
+
+.chat-history-dropdοwn {
+  grid-column-start: 5;
+  margin-bottom: auto;
+  border: none !important;
+}
+
+.chat-history-content {
+  overflow: auto;
+  padding: 0.01rem 0.01rem 0 0.02rem;
+  height: 100%;
+}
+
+.chat-history-layout {
+  height: calc(100vh - 64px);
+}
+
+.chatHistoryArrow {
+  margin-right: auto;
+  font-size: 45px;
+  cursor: pointer;
+  z-index: 2;
+  color: white;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.headerUserPreview {
+  width: 40vh;
+  height: 25vh;
+  background-color: black;
+  color: white;
+  font-size: 14px;
+}
+
+.chatHistoryList {
+  z-index: 75;
+}
+
+.chat-history-arrowMore {
+  position: fixed;
+  z-index: 2;
+  font-size: 50px;
+}
+
+.chat-history-DownCircleOutlined-button {
+  width: 100%;
+  text-align: center;
+  border: none;
+}
+
+.chat-history-loadingOutlined {
+  font-size: 400%;
+}
+
+.chat-history-listItem {
+  padding: 0 !important;
+  border: none;
+}
+
+.chatHistoryFlexWrapper {
+  line-height: 100%;
+  vertical-align: top;
+}
+
+.chatHistoryFlexWrapperAfter {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.chatHistoryMessageWrapper {
+  padding: 0px;
+  margin: 0px;
+  margin-bottom: 3px;
+}
+
+.chatHistoryMessageWrapperDiv {
+  display: flex;
+}
+
+.chat-history-interlocutorsName {
+  transition: 8s;
+  transition-timing-function: steps(1, jump-end);
+  cursor: pointer;
+}
+
+.chatHistoryMessageWrapperDivider {
+  display: flex;
+}
+
+.chatHistoryMessage {
+  text-align: left;
+  white-space: normal;
+  font-size: 15px;
+}
+
+.chat-history-btn {
+  display: inline;
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  font-size: 25px;
+  line-height: 100%;
+  border: none;
+}
+
+.chat-history-footer {
+  width: 100%;
+  margin: 0;
+}
+
+.chat-history-footer-span {
+  display: inline;
+  float: left;
+  line-height: 120%;
+}
+
+.chat-history-padding {
+  padding-left: 4px;
+}
+
+.chatHistoryCost {
+  display: flex;
+}
+
+.chat-history-spanAfterDivider {
+  text-align: center;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.chat-history-setSelectedMessage {
+  margin-left: 5px;
+  color: yello;
+  cursor: pointer;
+}

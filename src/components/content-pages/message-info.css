@@ -1,0 +1,23 @@
+.message-info-routeHopsList {
+  max-height: 50vh;
+  overflow: auto;
+  padding: 1%;
+  margin-top: 10px;
+  background-color: #151515;
+}
+
+.message-info-routeHopsList-Outilined {
+  font-size: 15px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.message-info-routeHopsList-input {
+  position: fixed;
+  opacity: 0;
+}
+
+.message-info-routeHopsList-span {
+  display: inline;
+  float: right;
+}

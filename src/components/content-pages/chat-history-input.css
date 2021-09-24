@@ -1,0 +1,160 @@
+.chat-history-footer-container {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  vertical-align: bottom;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: min-content 1fr repeat(2, min-content);
+}
+
+.chat-history-footer-addMedia {
+  cursor: pointer;
+  font-size: 22px;
+  width: 3vh;
+  height: 100%;
+  justify-items: center;
+  align-items: center;
+  margin-top: 20%;
+  grid-row: 1/2;
+  grid-column: 1/2;
+}
+
+.chat-history-footer-messageMoney {
+  width: calc(100% - 35px);
+  grid-row: 1/2;
+  grid-column: 2/3;
+}
+
+.chat-history-footer-emoticons {
+  display: inline;
+  position: relative;
+  width: 0px;
+  height: 0px;
+}
+
+.chat-history-footer-emoticonsSmile {
+  font-size: 18px;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: -10px;
+}
+
+.chat-history-footer-input-addAmount {
+  display: inline;
+  position: relative;
+  width: 0px;
+  height: 0px;
+}
+
+.chat-history-footer-emojiPicker {
+  position: absolute;
+  right: 50px;
+  bottom: 50px;
+}
+
+.chat-history-input-theme {
+  width: calc(100% - 60px);
+  display: inline-block;
+}
+
+.chat-history-input-dropdown {
+  width: 80px;
+}
+
+.chat-history-input-fileImageOutlined {
+  font-size: 35px;
+}
+
+@media (max-width: 600px) {
+  .chat-history-input-afterInputEnd {
+    display: none;
+  }
+}
+
+.chat-history-footer-input-addAmount-amount {
+  height: 25px;
+  margin-left: 10px !important;
+  text-align: center;
+  border-radius: 15px !important;
+  border: 2px solid gray;
+  position: relative;
+  bottom: 10px;
+  -moz-appearance: textfield !important;
+}
+
+.chat-history-footer-input-currency {
+  font-size: 12px;
+  cursor: pointer;
+  position: absolute;
+  left: 28px;
+  top: 7px;
+}
+
+.chat-history-footer-sendButtonContainer {
+  display: inline-block;
+  border-bottom-left-radius: 25% 60%;
+  border-bottom-right-radius: 25% 60%;
+  border-top-left-radius: 25% 60%;
+  border-top-right-radius: 25% 60%;
+  width: 45px;
+  height: 30px;
+  bottom: 8px;
+  right: 5px;
+}
+
+.chat-history-footer-feeContainer {
+  display: inline;
+  position: relative;
+  width: 0px;
+  height: 0px;
+}
+
+.chat-history-footer-feeText {
+  font-size: 9.5px;
+  position: absolute;
+  text-align: center;
+  line-height: 100%;
+  right: 2px;
+  bottom: -31px;
+  height: 50px;
+}
+
+.chat-history-footer-sendButton {
+  padding: 0;
+  width: 45px;
+  height: 30px !important;
+  border-bottom-left-radius: 25% 60% !important;
+  border-bottom-right-radius: 25% 60% !important;
+  border-top-left-radius: 25% 60% !important;
+  border-top-right-radius: 25% 60% !important;
+  vertical-align: top;
+}
+
+.chat-history-footer-sendButtonSvg {
+  display: inline;
+  position: absolute;
+  bottom: -2px;
+  right: 1px;
+  font-size: 20px;
+  width: 45px;
+  height: 30px;
+  z-index: 99;
+  fill: rgba(244, 175, 48, 0.82);
+  background-image: linear-gradient(
+    to bottom,
+    rgba(228, 223, 216, 0.52),
+    rgba(42, 39, 83, 0.73)
+  );
+  border-bottom-left-radius: 25% 60%;
+  border-bottom-right-radius: 25% 60%;
+  border-top-left-radius: 25% 60%;
+  border-top-right-radius: 25% 60%;
+}
+
+.chat-history-footer-sendButtonSvg:hover {
+  fill: rgba(34, 105, 168, 0.82);
+  background-image: rgba(34, 105, 168, 0.82);
+  border-color: rgba(34, 105, 168, 0.82);
+}
