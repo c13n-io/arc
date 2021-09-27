@@ -8062,6 +8062,7 @@
     "uuid" "^3.3.3"
 
 "macaroon@git+https://github.com/tierion/js-macaroon.git#ts":
+  "integrity" "sha512-kd+Pat0XPbtd891V42SUcufMFzWV4XjzFX8sr5vsg8JxyJZ+E3biWugYM6sDwCAsxSqwfDr/lXOG+b0D3qc5nA=="
   "resolved" "git+ssh://git@github.com/tierion/js-macaroon.git#f3654fd314f8fa778299b2286b87f78366a941e1"
   "version" "3.1.0"
   dependencies:
