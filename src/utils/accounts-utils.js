@@ -3,16 +3,14 @@
    * @param {*} account Object containing account information
    */
 const addToAccounts = (props, account) => {
-  let res = props.accounts.find((elem) => {
-    return elem.url === account.url;
+  let res = props.accounts.filter((elem) => {
+    return elem.url !== account.url;
   });
-  if (!res) {
-    props.setAccounts((oldAccounts) => {
-      oldAccounts.push(account);
-      saveAccounts(oldAccounts);
-      return oldAccounts;
-    });
-  }
+  props.setAccounts((oldAccounts) => {
+    res.push(account);
+    saveAccounts(res);
+    return res;
+  });
 };
 
 /**
