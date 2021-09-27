@@ -34,23 +34,11 @@ const cryptoUtils = require("../utils/crypto-utils");
  */
 const Side = (props) => {
   // Discussion Filtering Variables
-  const [
-    stringToSearch,
-    SetStringToSearch
-  ] = useState("");
-  const [
-    selectedSearchOption,
-    setSelectedSearchOption
-  ] = useState("Name");
-  const [
-    selectedSideDiscussion,
-    setSelectedSideDiscussion
-  ] = useState();
+  const [stringToSearch, SetStringToSearch] = useState("");
+  const [selectedSearchOption, setSelectedSearchOption] = useState("Name");
+  const [selectedSideDiscussion, setSelectedSideDiscussion] = useState();
 
-  const [
-    deleteDiscussionModalActive,
-    setDeleteDiscussionModalActive
-  ] =
+  const [deleteDiscussionModalActive, setDeleteDiscussionModalActive] =
     useState(false);
 
   /**
@@ -113,7 +101,13 @@ const Side = (props) => {
    */
   return (
     <div
-      className={`sidePanel ${props.sideSquashed ? props.sideActivated ? "sidePanel-mobile" : "" : ""} `}
+      className={`sidePanel ${
+        props.sideSquashed
+          ? props.sideActivated
+            ? "sidePanel-mobile"
+            : ""
+          : ""
+      } `}
     >
       <Dropdown
         trigger="click"
@@ -175,11 +169,11 @@ const Side = (props) => {
           }}
         >
           <div className="side-user-info-icon">
-            {props.backendStatus && props.selfInfo.address ?
+            {props.backendStatus && props.selfInfo.address ? (
               generateIdenticon(props.selfInfo.address, 60)
-              :
+            ) : (
               <LoadingOutlined spin />
-            }
+            )}
           </div>
           <span className="side-user-info-name">
             <span
@@ -192,10 +186,10 @@ const Side = (props) => {
             </span>
           </span>
           <div id="currentFundsWrapper" className="currentFundsWrapper">
-            <span id="sideLastFundChange">
+            <span id="currentFundsWrapperChange">
               {cryptoUtils.parseLastFundChange(props)}
             </span>
-            <span className="currentFundsWrapperSpan">
+            <span className="currentFundsWrapperChangeLogo">
               {props.selectedCryptoUnit && props.lastFundChange !== 0
                 ? props.selectedCryptoUnit
                 : ""}
@@ -283,16 +277,16 @@ const Side = (props) => {
                 >
                   {item.participantsList.length > 1
                     ? generateIdenticon(
-                      concatUserAddresses(props, [
-                        props.selfInfo.address,
-                        ...item.participantsList,
-                      ]),
-                      30
-                    )
+                        concatUserAddresses(props, [
+                          props.selfInfo.address,
+                          ...item.participantsList,
+                        ]),
+                        30
+                      )
                     : generateIdenticon(
-                      concatUserAddresses(props, [item.participantsList]),
-                      30
-                    )}
+                        concatUserAddresses(props, [item.participantsList]),
+                        30
+                      )}
                 </div>
                 <div
                   className="sideContactUserWrapper"
@@ -316,9 +310,9 @@ const Side = (props) => {
                     {item.participantsList.length == 1
                       ? userLookup
                         ? `${userLookup.address.substring(
-                          0,
-                          5
-                        )}...${userLookup.address.substring(61, 66)}`
+                            0,
+                            5
+                          )}...${userLookup.address.substring(61, 66)}`
                         : ""
                       : "Group Discussion"}
                   </div>
