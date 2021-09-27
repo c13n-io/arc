@@ -16,7 +16,7 @@ import messageClient from "../services/messageServices";
 
 import getExchangeRates from "../utils/fiat-rates";
 import sleep from "../utils/system";
-import { loadAccounts } from "../utils/accounts-utils";
+import { addToAccounts, loadAccounts } from "../utils/accounts-utils";
 import {
   loadAutomaticImageLoadingSetting,
   loadSmoothAnimationsSetting,
@@ -392,6 +392,7 @@ const Main = () => {
             if (initial) {
               setChainInfo(res.chainsList[0]);
               setSelfInfo(res.info);
+              addToAccounts(mainProps, {url: localStorage.getItem('url'), address: res.info.address, lastActive: Date.now()});
               setBackendStatus(true);
             } else {
               if (oldStatus === false) {

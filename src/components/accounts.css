@@ -1,43 +1,139 @@
-.accountsScreen {
+.login-page {
   background-color: rgb(45, 45, 64);
   height: 100vh;
   width: 100vw;
   position: fixed;
   left: 0;
   top: 0;
-  padding: 5%;
+  padding: 0;
   overflow: auto;
   z-index: 98;
+  display: grid;
+  grid-template-columns: 20vw 1fr 20vw;
+  grid-template-rows:
+    minmax(min-content, max-content) min-content minmax(
+      min-content,
+      max-content
+    )
+    min-content;
+  row-gap: 2rem;
 }
 
-.accountsList {
-  width: 95vw;
+@media screen and (max-width: 618px) {
+  .login-page {
+    grid-template-columns: 1fr;
+  }
+}
+
+.login-page-logo-container {
+  grid-column: 2/3;
+  grid-template-rows: 1/2;
+  width: 100%;
+  height: 40vh;
+  display: grid;
+  justify-items: center;
+  margin-top: 1rem;
+  align-items: center;
+}
+
+@media screen and (max-width: 618px) {
+  .login-page-logo-container {
+    grid-column: 1/2;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .login-page-logo-container {
+    height: 40vh;
+  }
+  .login-page-logo {
+    width: 23vh !important;
+    height: 30vh !important;
+  }
+}
+
+.login-page-logo {
+  width: 30vh;
+  height: 39.5vh;
+}
+
+.login-page-select {
+  grid-column: 2/3;
+  grid-template-rows: 2/3;
+  padding-left: 15px;
+  font-size: 18px;
+}
+
+@media screen and (max-width: 618px) {
+  .login-page-select {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    font-size: 25px;
+    grid-column: 1/2;
+  }
+}
+
+.login-page-accountsList {
+  grid-column: 2/3;
+  grid-template-rows: 3/4;
+  width: 100%;
+  padding: 0 1.7rem 0 1.7rem !important;
+}
+
+@media screen and (max-width: 618px) {
+  .login-page-accountsList {
+    grid-column: 1/2;
+  }
+}
+
+.login-page-addButton {
+  grid-column: 2/3;
+  grid-template-rows: 4/5;
+  width: 100%;
+  height: 3rem !important;
+  font-size: 18px !important;
+  display: grid !important;
+  justify-items: start;
+  align-items: center;
+  border: none !important;
+}
+
+@media screen and (max-width: 618px) {
+  .login-page-addButton {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    font-size: 25px !important;
+    grid-column: 1/2;
+  }
 }
 
 .accountsListItem {
   padding: 20px;
+  display: grid !important;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr minmax(min-content, max-content);
 }
 
 .accountsForm {
   margin: 0;
   padding: 0;
   width: 100%;
+  grid-row: 1/2;
+  grid-column: 1/2;
+  display: grid;
 }
 
-.accountsFormItem {
-  margin-bottom: 0px;
-}
-
-.accountsFormItemError {
-  font-weight: bold;
-  color: red;
-}
-
-.accountsDiv {
-  position: absolute;
-  right: 20px;
+.accountsButtons {
   z-index: 99;
-  width: 200px;
+  width: 4rem;
+  height: 2.5rem;
+  grid-row: 1/2;
+  grid-column: 2/3;
+  display: grid;
+  justify-items: center;
+  align-items: center;
 }
 
 .accountsButton {
@@ -45,17 +141,76 @@
   float: right;
 }
 
-.accountsButtonModalTrue {
+.login-page-addButton-Text {
+  border-bottom: 0.1rem groove lightcyan;
+}
+
+@media screen and (max-width: 618px) {
+  .login-page-addButton-Text {
+  }
+}
+
+.accountsFormItem {
+  margin-bottom: 0px !important;
+  border-bottom: 0.1rem groove lightcyan;
+  display: grid !important;
+  grid-template-rows: 1fr;
+  grid-template-columns: minmax(min-content, max-content) 1fr;
+  align-items: center;
+}
+
+.accountsFormItem:hover {
+  color: #177ddc;
+  border-color: #177ddc;
+}
+
+@media screen and (max-width: 618px) {
+  .accountsFormItem {
+    border: 0.1rem groove lightcyan;
+    padding: 0.7rem !important;
+  }
+}
+
+.ant-form-item-control {
+  grid-row: 1/2;
+  grid-column: 2/3;
+}
+
+.ant-form-item-control-input-content {
+  display: flex;
+  align-items: center !important;
+  font-size: 18px;
+}
+
+.accountsFormItemError {
+  font-weight: bold;
+  color: red;
+}
+
+.login-page-modal-logo-container {
+  grid-column: 1/2;
+  grid-template-rows: 1/2;
   width: 100%;
-  height: 50px;
+  height: 16vh;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.login-page-modal-logo {
+  width: 15vh;
+  height: 16vh;
 }
 
 .accountsInput {
   border-top: none;
   border-left: none;
   border-right: none;
+  margin-bottom: 1.5rem !important;
 }
 
 .accountsInputCred {
   width: 60%;
+  margin-bottom: 1.5rem !important;
 }
