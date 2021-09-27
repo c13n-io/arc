@@ -274,30 +274,6 @@ const Accounts = (props) => {
           }}
         />
       </Modal>
-      <Modal
-        title="Editing Account"
-        visible={!!editAccountModalVisible}
-        onOk={() => {
-          removeFromAccounts(props, selectedAccount);
-          addToAccounts(props, { url: urlToAdd });
-          // setUrlToAdd('')
-          setEditAccountModalVisible(false);
-        }}
-        onCancel={() => {
-          setUrlToAdd("");
-          setEditAccountModalVisible(false);
-        }}
-        okButtonProps={{ type: "default" }}
-      >
-        <Input
-          placeholder="Address:Port"
-          value={urlToAdd}
-          className="accountsInput"
-          onChange={(e) => {
-            setUrlToAdd(e.target.value);
-          }}
-        />
-      </Modal>
     </div>
   );
 };
