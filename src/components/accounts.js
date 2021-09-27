@@ -112,11 +112,9 @@ const Accounts = (props) => {
         locale={{
           emptyText: "No Accounts",
         }}
-        dataSource={props.accounts
-          .sort(function (lastActive, b) {
-            return lastActive - b;
-          })
-          .reverse()}
+        dataSource={props.accounts.sort(function (a, b) {
+          return b.lastActive - a.lastActive;
+        })}
         renderItem={(item) => {
           return (
             <List.Item className="accountsListItem">
