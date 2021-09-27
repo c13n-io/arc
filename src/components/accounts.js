@@ -10,6 +10,7 @@ import { addToAccounts, removeFromAccounts } from "../utils/accounts-utils";
 
 import "./accounts.css";
 import c13nLogo from "../media/C13N_Logo.png";
+import generateIdenticon from "../utils/identicon";
 
 const { Version } = require("../rpc/rpc_pb.js");
 
@@ -22,7 +23,6 @@ const Accounts = (props) => {
   const [addAccountModalVisible, setAddAccountModalVisible] = useState(false);
   const [deleteAccountModalVisible, setDeleteAccountModalVisible] =
     useState(false);
-  const [editAccountModalVisible, setEditAccountModalVisible] = useState(false);
   const [credentialsModalVisible, setCredentialsModalVisible] = useState(false);
   const [usernameToUse, setUsernameToUse] = useState("");
   const [passwordToUse, setPasswordToUse] = useState("");
@@ -87,12 +87,12 @@ const Accounts = (props) => {
   /**
    * Performs a login with current credentials.
    */
-  const credentialsModalLogin = () => {
+  const credentialsModalLogin = (account) => {
     if (usernameToUse && passwordToUse) {
-      console.log("Logging:", selectedAccount);
+      console.log("Logging:", account);
       window.localStorage.setItem("httpUsername", usernameToUse);
       window.localStorage.setItem("httpPassword", passwordToUse);
-      window.localStorage.setItem("url", selectedAccount.url);
+      window.localStorage.setItem("url", account.url);
       window.location.reload(true);
       setCredentialsModalVisible(false);
     }
@@ -112,13 +112,16 @@ const Accounts = (props) => {
         locale={{
           emptyText: "No Accounts",
         }}
-        dataSource={props.accounts}
+        dataSource={props.accounts
+          .sort(function (lastActive, b) {
+            return lastActive - b;
+          })
+          .reverse()}
         renderItem={(item) => {
           return (
             <List.Item className="accountsListItem">
               <Form className="accountsForm">
                 <Form.Item
-                  label="URL"
                   className="accountsFormItem"
                   onClick={() => {
                     if (item.url !== "") {
@@ -127,6 +130,7 @@ const Accounts = (props) => {
                     }
                   }}
                 >
+                  {generateIdenticon(item.address, 30)}
                   {item.url !== "" ? (
                     item.url
                   ) : (
@@ -137,18 +141,6 @@ const Accounts = (props) => {
                 </Form.Item>
               </Form>
               <div className="accountsButtons">
-                {/* <Button
-                  className="accountsButton"
-                  onClick={() => {
-                    if (item.url !== "") {
-                      setSelectedAccount(item);
-                      setCredentialsModalVisible(true);
-                    }
-                  }}
-                >
-                  Connect
-                  <LoginOutlined />
-                </Button> */}
                 <Button
                   className="accountsButton"
                   onClick={() => {
@@ -175,10 +167,15 @@ const Accounts = (props) => {
         visible={!!addAccountModalVisible}
         onOk={() => {
           if (urlToAdd !== "") {
-            addToAccounts(props, { url: urlToAdd });
+            addToAccounts(props, { url: urlToAdd, address: "", lastActive: 0 });
+            setSelectedAccount({ url: urlToAdd, address: "", lastActive: 0 });
             setUrlToAdd("");
             setAddAccountModalVisible(false);
-            credentialsModalLogin();
+            credentialsModalLogin({
+              url: urlToAdd,
+              address: "",
+              lastActive: 0,
+            });
           }
         }}
         onCancel={() => {
@@ -217,7 +214,7 @@ const Accounts = (props) => {
             return e.key === "Enter"
               ? e.shiftKey
                 ? undefined
-                : credentialsModalLogin()
+                : credentialsModalLogin(selectedAccount)
               : undefined;
           }}
         />
@@ -238,7 +235,7 @@ const Accounts = (props) => {
       <Modal
         visible={!!credentialsModalVisible}
         onOk={() => {
-          credentialsModalLogin();
+          credentialsModalLogin(selectedAccount);
         }}
         onCancel={() => {
           setCredentialsModalVisible(false);
@@ -269,7 +266,7 @@ const Accounts = (props) => {
             return e.key === "Enter"
               ? e.shiftKey
                 ? undefined
-                : credentialsModalLogin()
+                : credentialsModalLogin(selectedAccount)
               : undefined;
           }}
         />
