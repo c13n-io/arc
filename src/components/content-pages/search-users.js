@@ -46,11 +46,19 @@ const SearchUsers = (props) => {
   const [addressFormValid, setAddressFormValid] = useState(false);
 
 
-  const enteredAliasIsValid = () => {return enteredAlias.length >= 4;}
-  const aliasInputIsInvalid = () => {return !enteredAliasIsValid() && searchAliasTouched;}
+  const enteredAliasIsValid = () => {
+    return enteredAlias.length >= 4;
+  };
+  const aliasInputIsInvalid = () => {
+    return !enteredAliasIsValid() && searchAliasTouched;
+  };
 
-  const enteredAddressIsValid = () => {return enteredAddress.length >= 4;}
-  const addressInputIsInvalid = () => {return !enteredAddressIsValid() && searchAddressTouched};
+  const enteredAddressIsValid = () => {
+    return enteredAddress.length >= 4;
+  };
+  const addressInputIsInvalid = () => {
+    return !enteredAddressIsValid() && searchAddressTouched;
+  };
 
   useEffect(() => {
     if (enteredAliasIsValid() && aliasFormValid == false) {
