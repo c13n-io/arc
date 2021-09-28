@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Input, List, Modal } from "antd";
 import {
   SearchOutlined,
@@ -33,20 +33,48 @@ const SearchUsers = (props) => {
   const [contactRemoveModalActive, setContactRemoveModalActive] =
     useState(false);
   const [searchAliasLoading, setSearchAliasLoading] = useState(false);
+  const [searchAliasEmptyText, setSearchAliasEmptyText] = useState('Search Users by Alias');
   const [searchAddressLoading, setSearchAddressLoading] = useState(false);
+  const [searchAddressEmptyText, setSearchAddressEmptyText] = useState('Search Users by Alias');
 
   const [enteredAlias, setEnteredAlias] = useState("");
   const [searchAliasTouched, setSearchAliasTouched] = useState(false);
-
-  const enteredAliasIsValid = enteredAlias.length >= 4;
-  const aliasInputIsInvalid = !enteredAliasIsValid && searchAliasTouched;
+  const [aliasFormValid, setAliasFormValid] = useState(false);
 
   const [enteredAddress, setEnteredAddress] = useState("");
   const [searchAddressTouched, setSearchAddressTouched] = useState(false);
+  const [addressFormValid, setAddressFormValid] = useState(false);
 
-  const enteredAddressIsValid = enteredAddress.length >= 4;
-  const addressInputIsInvalid = !enteredAddressIsValid && searchAddressTouched;
 
+  const enteredAliasIsValid = () => {
+    return enteredAlias.length >= 4;
+  };
+  const aliasInputIsInvalid = () => {
+    return !enteredAliasIsValid() && searchAliasTouched;
+  };
+
+  const enteredAddressIsValid = () => {
+    return enteredAddress.length >= 4;
+  };
+  const addressInputIsInvalid = () => {
+    return !enteredAddressIsValid() && searchAddressTouched;
+  };
+
+  useEffect(() => {
+    if (enteredAliasIsValid() && aliasFormValid == false) {
+      setAliasFormValid(true);
+    } else if (!enteredAliasIsValid() && aliasFormValid == true) {
+      setAliasFormValid(false);
+    }
+  }, [enteredAlias]);
+
+  useEffect(() => {
+    if (enteredAddressIsValid() && addressFormValid == false) {
+      setAddressFormValid(true);
+    } else if (!enteredAddressIsValid() && addressFormValid == true) {
+      setAddressFormValid(false);
+    }
+  }, [enteredAddress]);
   /**
    * Creates a new contact based on selected user and (optional) entered friendly name.
    */
@@ -139,6 +167,7 @@ const SearchUsers = (props) => {
    */
   const searchUsersByAlias = () => {
     setSearchAliasLoading(true);
+    setSearchAliasEmptyText('Loading');
     nodeInfoClient().searchNodeByAlias(
       {
         alias: aliasToSearch,
@@ -151,6 +180,7 @@ const SearchUsers = (props) => {
         if (res) {
           setSearchedAlias(res.nodesList);
         }
+        setSearchAliasEmptyText('No results');
         setSearchAliasLoading(false);
       }
     );
@@ -161,6 +191,7 @@ const SearchUsers = (props) => {
    */
   const searchUsersByAddress = () => {
     setSearchAddressLoading(true);
+    setSearchAddressEmptyText('Loading');
     nodeInfoClient().searchNodeByAddress(
       {
         address: addressToSearch,
@@ -174,6 +205,7 @@ const SearchUsers = (props) => {
           console.log(res);
           setSearchedAddress(res.nodesList);
         }
+        setSearchAddressEmptyText('No results');
         setSearchAddressLoading(false);
       }
     );
@@ -182,12 +214,6 @@ const SearchUsers = (props) => {
   /**
    * Validating if the user entered more than 4 characters and touched the inputs
    */
-
-  let AliasFormIsValid = false;
-
-  if (enteredAliasIsValid) {
-    AliasFormIsValid = true;
-  }
 
   const aliasInputChangeHandler = (event) => {
     setEnteredAlias(event.target.value);
@@ -210,12 +236,6 @@ const SearchUsers = (props) => {
     setEnteredAlias("");
     setSearchAliasTouched(false);
   };
-
-  let AddressFormIsValid = false;
-
-  if (enteredAddressIsValid) {
-    AddressFormIsValid = true;
-  }
 
   const addressInputChangeHandler = (event) => {
     setEnteredAddress(event.target.value);
@@ -282,7 +302,7 @@ const SearchUsers = (props) => {
                   onBlur={aliasInputBlurHandler}
                   value={enteredAlias}
                   onKeyDown={
-                    AliasFormIsValid ? (
+                    aliasFormValid ? (
                       (e) => {
                         return e.key === "Enter"
                           ? e.shiftKey
@@ -290,14 +310,14 @@ const SearchUsers = (props) => {
                             : searchUsersByAlias()
                           : undefined;
                       }
-                    ) : (
+                    ) : () => (
                       <p className="error-validation">Minimum 4 characters</p>
                     )
                   }
                 />
                 <Button
                   className="search-users-button"
-                  disabled={!AliasFormIsValid}
+                  disabled={!aliasFormValid}
                   onClick={() => {
                     searchUsersByAlias();
                   }}
@@ -309,12 +329,12 @@ const SearchUsers = (props) => {
                   )}
                 </Button>
               </div>
-              {aliasInputIsInvalid && (
+              {aliasInputIsInvalid() && (
                 <p className="error-validation">Minimum 4 characters</p>
               )}
               <List
                 locale={{
-                  emptyText: "Search Users by Alias",
+                  emptyText: searchAliasEmptyText,
                 }}
                 className="search-users-description"
                 placeholder=""
@@ -418,7 +438,7 @@ const SearchUsers = (props) => {
                   onChange={addressInputChangeHandler}
                   onBlur={addressInputBlurHandler}
                   onKeyDown={
-                    AddressFormIsValid ? (
+                    addressFormValid ? (
                       (e) => {
                         return e.key === "Enter"
                           ? e.shiftKey
@@ -426,7 +446,7 @@ const SearchUsers = (props) => {
                             : searchUsersByAddress()
                           : undefined;
                       }
-                    ) : (
+                    ) : () => (
                       <p className="error-validation">Minimum 4 characters</p>
                     )
                   }
@@ -437,7 +457,7 @@ const SearchUsers = (props) => {
                   onClick={() => {
                     searchUsersByAddress();
                   }}
-                  disabled={!AddressFormIsValid}
+                  disabled={!addressFormValid}
                 >
                   {searchAddressLoading ? (
                     <LoadingOutlined spin />
@@ -446,12 +466,12 @@ const SearchUsers = (props) => {
                   )}
                 </Button>
               </div>
-              {addressInputIsInvalid && (
+              {addressInputIsInvalid() && (
                 <p className="error-validation">Minimum 4 characters</p>
               )}
               <List
                 locale={{
-                  emptyText: "Search Users by Address",
+                  emptyText: searchAddressEmptyText,
                 }}
                 className="search-users-description"
                 placeholder=""
