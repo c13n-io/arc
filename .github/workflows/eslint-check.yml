@@ -19,6 +19,6 @@ jobs:
           key: npm-${{ hashFiles('package-lock.json') }}
           restore-keys: npm-
       - name: Install modules
-        run: npm ci
+        run: npm install
       - name: Run ESLint
         run: npm run lint
