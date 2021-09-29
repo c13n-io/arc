@@ -13,6 +13,7 @@ jobs:
         with:
           node-version: '16'
       - name: Cache dependencies
+        id: cache-modules
         uses: actions/cache@v2
         with:
           path: '**/node_modules'
@@ -20,6 +21,7 @@ jobs:
       - name: Check node modules
         run: ls node_modules
       - name: Install modules
+        if: steps.cache-modules.outputs.cache-hit != 'true'
         run: npm ci
       - name: Run ESLint
         run: npm run lint
