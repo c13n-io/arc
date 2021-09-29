@@ -18,8 +18,6 @@ jobs:
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
-      - name: Check node modules
-        run: ls node_modules
       - name: Install modules
         if: steps.cache-modules.outputs.cache-hit != 'true'
         run: npm ci
