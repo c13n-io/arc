@@ -277,16 +277,16 @@ const Side = (props) => {
                 >
                   {item.participantsList.length > 1
                     ? generateIdenticon(
-                        concatUserAddresses(props, [
-                          props.selfInfo.address,
-                          ...item.participantsList,
-                        ]),
-                        30
-                      )
+                      concatUserAddresses(props, [
+                        props.selfInfo.address,
+                        ...item.participantsList,
+                      ]),
+                      30
+                    )
                     : generateIdenticon(
-                        concatUserAddresses(props, [item.participantsList]),
-                        30
-                      )}
+                      concatUserAddresses(props, [item.participantsList]),
+                      30
+                    )}
                 </div>
                 <div
                   className="sideContactUserWrapper"
@@ -310,9 +310,9 @@ const Side = (props) => {
                     {item.participantsList.length == 1
                       ? userLookup
                         ? `${userLookup.address.substring(
-                            0,
-                            5
-                          )}...${userLookup.address.substring(61, 66)}`
+                          0,
+                          5
+                        )}...${userLookup.address.substring(61, 66)}`
                         : ""
                       : "Group Discussion"}
                   </div>
