@@ -182,6 +182,10 @@
   font-size: 18px;
 }
 
+.ant-form-item-control-input-content :first-child {
+  margin-right: 1rem;
+}
+
 .accountsFormItemError {
   font-weight: bold;
   color: red;
