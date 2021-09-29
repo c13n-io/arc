@@ -65,7 +65,7 @@ const Accounts = (props) => {
                 let backendMajor = res.version.split(".")[0];
                 let guiMajor = version.split(".")[0];
                 if (backendMajor !== guiMajor) {
-                  props.setSelectedPage("versionError");
+                  props.setSelectedPage("versionError")
                 } else {
                   props.setLoadAccount(1);
                 }
