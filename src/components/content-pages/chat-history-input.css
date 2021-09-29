@@ -125,10 +125,10 @@
   padding: 0;
   width: 45px;
   height: 30px !important;
-  border-bottom-left-radius: 25% 60% !important;
+  /* border-bottom-left-radius: 25% 60% !important;
   border-bottom-right-radius: 25% 60% !important;
   border-top-left-radius: 25% 60% !important;
-  border-top-right-radius: 25% 60% !important;
+  border-top-right-radius: 25% 60% !important; */
   vertical-align: top;
 }
 

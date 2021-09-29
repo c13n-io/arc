@@ -128,7 +128,7 @@
   display: grid;
   padding: 1rem;
   row-gap: 1.5rem;
-  grid-template-rows: repeat(3, auto);
+  grid-template-rows: repeat(4, auto);
   grid-template-columns: 1fr;
   justify-items: start;
   border-bottom: 1px solid #333333;
@@ -154,6 +154,21 @@
   text-align: left;
   position: relative;
   right: 2px;
+}
+
+.side-button-contacts {
+  border: none !important;
+}
+
+.contactsLogo {
+  display: inline;
+  position: relative;
+  right: 26px;
+  height: 35px;
+  padding: 5px;
+  text-align: left;
+  filter: invert(67%) sepia(48%) saturate(259%) hue-rotate(163deg)
+    brightness(99%) contrast(85%);
 }
 
 .side-button-searchUsers {

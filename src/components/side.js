@@ -12,6 +12,7 @@ import { version } from "../config/version";
 import generateIdenticon from "../utils/identicon.js";
 import { findUserByAddress } from "../utils/users-utils.js";
 import c13nLogo from "../media/C13N_Logo.png";
+import contactsLogo from "../media/contacts-icon.jpg";
 
 import { NotificationManager } from "react-notifications";
 
@@ -213,11 +214,20 @@ const Side = (props) => {
         <Button
           className="side-button-homePage"
           onClick={() => {
-            props.changePage("contacts", "hide");
+            props.changePage("homePage", "hide");
           }}
         >
           <img src={c13nLogo} className="c13nLogo" />
           <span className="logoSpan">Home</span>
+        </Button>
+        <Button
+          className="side-button-contacts"
+          onClick={() => {
+            props.changePage("contacts", "hide");
+          }}
+        >
+          <img src={contactsLogo} className="contactsLogo" />
+          <span className="logoSpan">Contacts</span>
         </Button>
         <Button
           className="side-button-searchUsers"
