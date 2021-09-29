@@ -19,9 +19,7 @@ jobs:
           path: ~/.npm
           key: npm-${{ hashFiles('package-lock.json') }}
           restore-keys: npm-
-      - name: Update npm
-        run: npm install npm
       - name: Install modules
-        run: npm install
+        run: npm ci
       - name: Run ESLint
         run: npm run lint
