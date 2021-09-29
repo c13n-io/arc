@@ -35,38 +35,38 @@ const Contents = (props) => {
   const getContentPage = () => {
     let page;
     switch (props.selectedPage) {
-      case "chatHistory":
-        page = <ChatHistory {...props} {...contentsProps} />;
-        break;
-      case "userSettings":
-        page = <UserSettings {...props} />;
-        break;
-      case "searchUsers":
-        page = <SearchUsers {...props} />;
-        break;
-      case "contacts":
-        page = <Contacts {...props} />;
-        break;
-      case "logo":
-        page = <Logo {...props} />;
-        break;
-      case "accounts":
-        page = <Accounts {...props} />;
-        break;
-      case "userFunds":
-        page = <UserFunds {...props} />;
-        break;
-      case "versionError":
-        page = <VersionScreen {...props} />;
-        break;
-      case "connectionScreen":
-        page = <ConnectionScreen />;
-        break;
-      case "groupChat":
-        page = <GroupChat {...props} />;
-        break;
-      case "homePage":
-        page = <HomePage {...props} />;
+    case "chatHistory":
+      page = <ChatHistory {...props} {...contentsProps} />;
+      break;
+    case "userSettings":
+      page = <UserSettings {...props} />;
+      break;
+    case "searchUsers":
+      page = <SearchUsers {...props} />;
+      break;
+    case "contacts":
+      page = <Contacts {...props} />;
+      break;
+    case "logo":
+      page = <Logo {...props} />;
+      break;
+    case "accounts":
+      page = <Accounts {...props} />;
+      break;
+    case "userFunds":
+      page = <UserFunds {...props} />;
+      break;
+    case "versionError":
+      page = <VersionScreen {...props} />;
+      break;
+    case "connectionScreen":
+      page = <ConnectionScreen />;
+      break;
+    case "groupChat":
+      page = <GroupChat {...props} />;
+      break;
+    case "homePage":
+      page = <HomePage {...props} />;
     }
     return page;
   };
