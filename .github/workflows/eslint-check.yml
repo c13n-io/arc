@@ -1,0 +1,16 @@
+name: ESLint Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  pr-lint:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: npm install
+      - name: Run ESLint
+        run: npm run lint
