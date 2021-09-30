@@ -183,17 +183,19 @@ const GroupChat = (props) => {
                     setAliasToSearch(e.target.value);
                   }}
                   onKeyDown={
-                    groupFormIsValid ? (
-                      (e) => {
+                    groupFormIsValid
+                      ? (e) => {
                         return e.key === "Enter"
                           ? e.shiftKey
                             ? undefined
                             : searchUsersByAlias()
                           : undefined;
                       }
-                    ) : (
-                      <p className="error-validation">Minimum 4 characters</p>
-                    )
+                      : () => (
+                        <p className="error-validation">
+                            Minimum 4 characters
+                        </p>
+                      )
                   }
                   className="group-chat-input"
                 />
