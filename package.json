@@ -1,7 +1,7 @@
 {
   "name": "c13n-web",
   "homepage": "./",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "dependencies": {
     "antd": "^4.2.0",
