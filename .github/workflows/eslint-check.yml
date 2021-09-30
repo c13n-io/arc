@@ -12,14 +12,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - name: Cache dependencies
-        id: cache-modules
-        uses: actions/cache@v2
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
-      - name: Install modules
-        if: steps.cache-modules.outputs.cache-hit != 'true'
-        run: npm ci
+      - name: Install eslint
+        run: npm install -g eslint
       - name: Run ESLint
         run: npm run lint
