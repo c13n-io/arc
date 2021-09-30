@@ -182,6 +182,10 @@
   font-size: 18px;
 }
 
+.ant-form-item-control-input-content :first-child {
+  margin-right: 1rem;
+}
+
 .accountsFormItemError {
   font-weight: bold;
   color: red;
@@ -191,7 +195,7 @@
   grid-column: 1/2;
   grid-template-rows: 1/2;
   width: 100%;
-  height: 16vh;
+  height: 20vh;
   display: grid;
   justify-items: center;
   align-items: center;
@@ -200,7 +204,7 @@
 
 .login-page-modal-logo {
   width: 15vh;
-  height: 16vh;
+  height: 20vh;
 }
 
 .accountsInput {
