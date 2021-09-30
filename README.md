@@ -1,4 +1,5 @@
 ![lint](https://github.com/c13n-io/c13n-web/actions/workflows/eslint-check.yml/badge.svg)
+![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)
 # c13n-web
 <img src="public/logo192.png" alt="drawing" width="100"/>
 
