@@ -33,7 +33,8 @@ import {
   payreqToPayload,
 } from "../../payload-protocol/parsers";
 import "./chat-history-input.css";
-import { ReactComponent as SendButton } from "../../media/angle-circle-right.svg";
+// import { ReactComponent as SendButton } from "../../media/angle-circle-right.svg";
+import ChatButton from "../../media/arrow-right.svg";
 
 // import { List } from "antd/lib/form/Form";
 
@@ -356,7 +357,7 @@ const ChatHistoryInput = (props) => {
           }}
           className="chat-history-footer-sendButton"
         >
-          <SendButton className="chat-history-footer-sendButtonSvg" />
+          <img src={ChatButton} className="chat-history-footer-sendButtonSvg" />
         </Button>
       </div>
       <Modal
