@@ -207,6 +207,16 @@
   height: 20vh;
 }
 
+@media screen and (max-width: 618px) {
+  .login-page-modal-logo-container {
+    height: 16vh;
+  }
+  .login-page-modal-logo {
+    width: 12vh !important;
+    height: 17vh !important;
+  }
+}
+
 .accountsInput {
   border-top: none;
   border-left: none;
