@@ -216,8 +216,11 @@ const Side = (props) => {
             props.changePage("contacts", "hide");
           }}
         >
-          <img src={c13nLogo} className="c13nLogo" />
-          <span className="logoSpan">Home</span>
+          <div className="side-button-homePage-c13nLogo-wrapper">
+            <img src={c13nLogo} className="side-button-homePage-c13nLogo" />
+          </div>
+
+          <div className="side-button-homePage-text">Home</div>
         </Button>
         <Button
           className="side-button-searchUsers"
@@ -225,8 +228,12 @@ const Side = (props) => {
             props.changePage("searchUsers", "hide");
           }}
         >
-          <SearchOutlined className="sideSearchOutlined" />
-          <span className="sideSearchOutlinedSpan">Search</span>
+          <div className="side-button-searchUsers-searchLogo-wrapper">
+            {" "}
+            <SearchOutlined className="side-button-searchUsers-searchLogo" />
+          </div>
+
+          <div className="side-button-searchUsers-text">Search</div>
         </Button>
         <Button
           className="side-button-groupChat"
@@ -234,8 +241,10 @@ const Side = (props) => {
             props.changePage("groupChat", "hide");
           }}
         >
-          <PlusOutlined className="sidePlusOutlined" />
-          <span className="sidePlusOutlinedSpan">Group Discussion</span>
+          <div className="side-button-groupChat-groupsearchlogo-wrapper">
+            <PlusOutlined className="side-button-groupChat-groupsearchlogo" />
+          </div>
+          <div className="side-button-groupChat-text">Group Discussion</div>
         </Button>
       </div>
       <div
