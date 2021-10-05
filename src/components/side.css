@@ -160,7 +160,7 @@
 .side-button-homePage-text {
   grid-row: 1/2;
   grid-column: 2/3;
-  width: 120px;
+  width: 180px;
   display: grid;
   justify-content: start;
   padding-left: 1rem;
@@ -192,7 +192,7 @@
 .side-button-searchUsers-text {
   grid-row: 1/2;
   grid-column: 2/3;
-  width: 120px;
+  width: 180px;
   display: grid;
   justify-content: start;
   padding-left: 1rem;
@@ -224,7 +224,7 @@
 .side-button-groupChat-text {
   grid-row: 1/2;
   grid-column: 2/3;
-  width: 120px;
+  width: 180px;
   display: grid;
   justify-content: start;
   padding-left: 1rem;
