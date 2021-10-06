@@ -98,9 +98,10 @@
   border-bottom-right-radius: 25% 60%;
   border-top-left-radius: 25% 60%;
   border-top-right-radius: 25% 60%;
-  width: 45px;
-  height: 30px;
-  bottom: 8px;
+  width: 50px;
+  height: 27px;
+  position: relative;
+  bottom: -4px;
   right: 5px;
 }
 
@@ -116,47 +117,36 @@
   position: absolute;
   text-align: center;
   line-height: 100%;
-  right: 2px;
-  bottom: -31px;
+  right: 7px;
+  bottom: -30.5px;
   height: 50px;
 }
 
 .chat-history-footer-sendButton {
   padding: 0;
-  width: 45px;
-  height: 30px !important;
+  width: 50px;
+  height: 27px !important;
+  position: relative;
+  bottom: 3px;
   border-bottom-left-radius: 25% 60% !important;
   border-bottom-right-radius: 25% 60% !important;
   border-top-left-radius: 25% 60% !important;
   border-top-right-radius: 25% 60% !important;
-  vertical-align: top;
 }
 
 .chat-history-footer-sendButtonSvg {
   display: inline;
   position: absolute;
-  bottom: 1px;
-  right: -1px;
+  bottom: 2px;
+  right: 3.5px;
   font-size: 20px;
-  width: 43px;
-  height: 25px;
+  width: 38px;
+  height: 21px;
   z-index: 99;
-  /* fill: rgba(244, 175, 48, 0.82); */
-  /* background-image: linear-gradient(
-    to bottom,
-    rgba(228, 223, 216, 0.52),
-    rgba(42, 39, 83, 0.73)
-  ); */
   border-bottom-left-radius: 25% 60%;
   border-bottom-right-radius: 25% 60%;
   border-top-left-radius: 25% 60%;
   border-top-right-radius: 25% 60%;
-  filter: invert(67%) sepia(48%) saturate(259%) hue-rotate(163deg)
-    brightness(99%) contrast(85%);
+  filter: invert(98%) sepia(18%) saturate(4683%) hue-rotate(172deg)
+    brightness(104%) contrast(89%);
 }
-
-/* .chat-history-footer-sendButtonSvg:hover {
-  fill: rgba(244, 175, 48, 0.82);
-  background-image: rgba(34, 105, 168, 0.82);
-  border-color: rgba(244, 175, 48, 0.82));
-} */
