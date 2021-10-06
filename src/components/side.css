@@ -126,7 +126,7 @@
 
 .side-buttons-wrapper {
   display: grid;
-  padding: 1rem;
+  padding: 1rem 1rem 1rem 0rem;
   row-gap: 1.5rem;
   grid-template-rows: repeat(3, auto);
   grid-template-columns: 1fr;
@@ -136,54 +136,99 @@
 }
 
 .side-button-homePage {
+  width: 100%;
+  padding: 4px 15px !important;
   border: none !important;
-  margin-left: 0.5rem;
+  display: grid !important;
+  grid-template-rows: 1fr;
+  grid-template-columns: min-content 1fr;
+  justify-content: start;
 }
 
-.c13nLogo {
-  display: inline;
-  position: relative;
-  right: 26px;
-  height: 35px;
-  padding: 5px;
-  text-align: left;
+.side-button-homePage-c13nLogo-wrapper {
+  grid-row: 1/2;
+  grid-column: 1/2;
+  width: 14px;
+  height: 20px;
 }
 
-.logoSpan {
-  width: 120px;
-  text-align: left;
-  position: relative;
-  right: 2px;
+.side-button-homePage-c13nLogo {
+  width: 14px;
+  height: 20px;
+}
+
+.side-button-homePage-text {
+  grid-row: 1/2;
+  grid-column: 2/3;
+  width: 180px;
+  display: grid;
+  justify-content: start;
+  padding-left: 1rem;
+  height: 20px;
 }
 
 .side-button-searchUsers {
+  width: 100%;
+  padding: 4px 15px !important;
   border: none !important;
-  margin-left: 0.5rem;
+  display: grid !important;
+  grid-template-rows: 1fr;
+  grid-template-columns: min-content 1fr;
+  justify-content: start;
 }
 
-.sideSearchOutlined {
-  position: relative;
-  right: 22px;
+.side-button-searchUsers-searchLogo-wrapper {
+  grid-row: 1/2;
+  grid-column: 1/2;
+  width: 14px;
+  height: 20px;
 }
 
-.sideSearchOutlinedSpan {
-  width: 120px;
-  text-align: left;
+.side-button-searchUsers-searchLogo {
+  width: 14px;
+  height: 20px;
+}
+
+.side-button-searchUsers-text {
+  grid-row: 1/2;
+  grid-column: 2/3;
+  width: 180px;
+  display: grid;
+  justify-content: start;
+  padding-left: 1rem;
+  height: 20px;
 }
 
 .side-button-groupChat {
+  width: 100%;
+  padding: 4px 15px !important;
   border: none !important;
-  margin-left: 0.5rem;
+  display: grid !important;
+  grid-template-rows: 1fr;
+  grid-template-columns: min-content 1fr;
+  justify-content: start;
 }
 
-.sidePlusOutlined {
-  position: relative;
-  right: 22px;
+.side-button-groupChat-groupsearchlogo-wrapper {
+  grid-row: 1/2;
+  grid-column: 1/2;
+  width: 14px;
+  height: 20px;
 }
 
-.sidePlusOutlinedSpan {
-  width: 120px;
-  text-align: left;
+.side-button-groupChat-groupsearchlogo {
+  width: 14px;
+  height: 20px;
+}
+
+.side-button-groupChat-text {
+  grid-row: 1/2;
+  grid-column: 2/3;
+  width: 180px;
+  display: grid;
+  justify-content: start;
+  padding-left: 1rem;
+  height: 20px;
 }
 
 .side-contacts-wrapper {
