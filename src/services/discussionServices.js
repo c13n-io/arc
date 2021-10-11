@@ -14,7 +14,7 @@ const {
   UpdateDiscussionResponse,
   RemoveDiscussionRequest,
   RemoveDiscussionResponse,
-  PageOptions,
+  KeySetPageOptions,
   DiscussionInfo,
   DiscussionOptions,
 } = require("../rpc/rpc_pb");
@@ -31,10 +31,11 @@ client.getDiscussions = (req) => {
 
 client.getDiscussionHistoryById = (req) => {
   const request = new GetDiscussionHistoryByIDRequest();
-  const pageOptions = new PageOptions();
-  pageOptions.setSkipRecent(req.pageOptions.skipRecent);
-  pageOptions.setPageSize(req.pageOptions.pageSize);
-  request.setPageOptions(pageOptions);
+  const keySetPageOptions = new KeySetPageOptions();
+  keySetPageOptions.setLastId(req.pageOptions.lastId);
+  keySetPageOptions.setPageSize(req.pageOptions.pageSize);
+  keySetPageOptions.setReverse(req.pageOptions.reverse);
+  request.setPageOptions(keySetPageOptions);
   request.setId(req.id);
   return rpcClient.getDiscussionHistoryByID(request, { ...authCreds() });
 };

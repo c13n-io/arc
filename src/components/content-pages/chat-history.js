@@ -48,13 +48,10 @@ const cryptoUtils = require("../../utils/crypto-utils");
  * @param {*} props The global variables.
  */
 const ChatHistory = (props) => {
-  const messagesPerBlock = 50;
-  const [messagesLoaded, setMessagesLoaded] = useState(messagesPerBlock);
+  const messagesPerBlock = 15;
   const [oldListHeight, setOldListHeight] = useState(0);
   const [lastMessageSeen, setLastMessageSeen] = useState(0);
-  const [firstMessageSeen, setFirstMessageSeen] = useState(0);
   const [noMoreHistory, setNoMoreHistory] = useState(false);
-  const [atBottom, setAtBottom] = useState(true);
 
   const [anonymousActive, setAnonymousActive] = useState(false);
 
@@ -196,15 +193,12 @@ const ChatHistory = (props) => {
       : "none";
   };
 
-  /**
-   * Checks if current chat history view is placed at the bottom.
-   */
-  const atBottomUpdater = () => {
+  const atBottom = () => {
     let elem = document.getElementById("chatHistoryListId");
-    if (elem.scrollHeight - elem.scrollTop > elem.clientHeight + 120) {
-      setAtBottom(false);
+    if (elem?.scrollHeight - elem?.scrollTop > elem?.clientHeight + 120) {
+      return false;
     } else {
-      setAtBottom(true);
+      return true;
     }
   };
 
@@ -214,15 +208,11 @@ const ChatHistory = (props) => {
   useEffect(async () => {
     if (props.selectedDiscussion) {
       props.setChatHistory([]);
-      loadHistory(0, props.selectedDiscussion.id);
+      loadHistory(true, props.selectedDiscussion.id);
       let elem = document.getElementById("chatHistoryListId");
-      elem.addEventListener("scroll", () => {
-        atBottomUpdater();
-      });
       setAnonymousActive(false);
       setPageLoaded(false);
       setNoMoreHistory(false);
-      setAtBottom(true);
       if (props.selectedDiscussion.participantsList[0] === "") {
         props.setAnonymousBucket(true);
       } else {
@@ -237,52 +227,53 @@ const ChatHistory = (props) => {
   useEffect(() => {
     if (props.chatHistory.length !== 0) {
       if (pageLoaded) {
-        if (atBottom) {
+        if (atBottom()) {
           updateChatScroll();
           updateLastMessageSeen(props.chatHistory);
-          atBottomUpdater();
-        } else {
-          if (messagesLoaded > messagesPerBlock) {
-            if (firstMessageSeen !== props.chatHistory[0]) {
-              setFirstMessageSeen(props.chatHistory[0]);
-              let elem = document.getElementById("chatHistoryListId");
-              elem.scroll({
-                top: elem.scrollHeight - oldListHeight,
-                behavior: "auto",
-              });
-            }
-          }
         }
       } else {
         setPageLoaded(true);
         updateLastMessageSeen(props.chatHistory);
-        setFirstMessageSeen(props.chatHistory[0]);
         setChatScroll();
         setTimeout(function () {
           setChatScroll();
         }, 750);
       }
     }
-    setMessagesLoaded(props.chatHistory.length);
   }, [props.chatHistory]);
 
   /**
    * This function fetches the history of the currently selected discussion.
    * It stores the response in the chatHistory variable.
    */
-  async function loadHistory(messagesToSkip, discussionId) {
+  async function loadHistory(fresh, discussionId) {
+    let reverse = true;
+    /**
+     * If lastId == 0 then discussion is either empty, or contains only
+     * one message with id == 0. In case the discussion has only one
+     * message with id == 0, we need to declare reverse = true in order
+     * for backend to normally return the response
+     */
+    if(props.selectedDiscussion.lastMsgId == 0) {
+      reverse = false;
+    }
     let async_selectedDiscusion;
     await props.setSelectedDiscussion((oldValue) => {
       async_selectedDiscusion = oldValue;
       return oldValue;
     });
     let chatHistory = [];
+    let previousId = !fresh ? props.chatHistory[0].id - 1 : 0;
+    if(previousId < 0) {
+      previousId = 0;
+    }
     return await discussionClient()
       .getDiscussionHistoryById({
         id: props.selectedDiscussion.id,
         pageOptions: {
-          skipRecent: messagesToSkip,
-          pageSize: messagesPerBlock,
+          reverse: reverse,
+          lastId: fresh ? props.selectedDiscussion.lastMsgId : previousId,
+          pageSize: fresh ? 50 : messagesPerBlock,
         },
       })
       .on("data", (res) => {
@@ -292,7 +283,6 @@ const ChatHistory = (props) => {
       })
       .on("end", () => {
         if (async_selectedDiscusion.id === discussionId) {
-          chatHistory.reverse();
           if (chatHistory.length === 0) {
             setNoMoreHistory(true);
             setPageLoaded(true);
@@ -306,6 +296,10 @@ const ChatHistory = (props) => {
         }
       })
       .on("error", (e) => {
+        if(e.code == 13) {
+          setNoMoreHistory(true);
+          setPageLoaded(true);
+        }
         console.log("err", e);
       })
       .on("status", () => {});
@@ -321,7 +315,6 @@ const ChatHistory = (props) => {
         top: element.scrollHeight,
         behavior: props.smoothAnimations ? "smooth" : "auto",
       });
-      setAtBottom(true);
     }
   };
 
@@ -335,7 +328,6 @@ const ChatHistory = (props) => {
         top: element.scrollHeight,
         behavior: "auto",
       });
-      setAtBottom(true);
     }
   };
 
@@ -508,8 +500,8 @@ const ChatHistory = (props) => {
                   className="chat-history-arrowMore"
                   style={{
                     left: props.sideSquashed ? "calc(50%)" : "calc(50% + 50px)",
-                    bottom: atBottom ? "-1000px" : "50px",
-                    opacity: atBottom ? "0" : "100",
+                    bottom: atBottom() ? "-1000px" : "50px",
+                    opacity: atBottom() ? "0" : "100",
                   }}
                 >
                   <DownCircleOutlined
@@ -541,8 +533,7 @@ const ChatHistory = (props) => {
                     onClick={() => {
                       let elem = document.getElementById("chatHistoryListId");
                       setOldListHeight(elem.scrollHeight);
-                      loadHistory(messagesLoaded, props.selectedDiscussion.id);
-                      setMessagesLoaded(messagesLoaded + messagesPerBlock);
+                      loadHistory(false, props.selectedDiscussion.id);
                     }}
                   >
                     Load More Messages

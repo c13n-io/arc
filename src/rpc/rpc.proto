@@ -20,6 +20,21 @@ message PageOptions {
 }
 
 /**
+ Corresponds to pagination parameters for requests.
+ Represents a request for page_size elements,
+ terminating with the element with id last_id.
+ If reverse is true, the returned elements end with last_id.
+*/
+message KeySetPageOptions {
+	/** The id of the first element of the requested range. */
+	uint64 last_id = 1;
+	/** The number of elements to return. */
+	int64 page_size = 2;
+	/** Whether the range starts or ends with last_id element. */
+	bool reverse = 3;
+}
+
+/**
  NodeInfoService exposes functionality
  pertaining to queries about node information.
  */
@@ -191,9 +206,9 @@ message OpenChannelRequest {
 	/** The minimum number of confirmations each input
 	 of the channel funding transaction must have.
 
-	 In case of 0, unconfirmed funds can be used.
+	 In case of a negative value being provided, unconfirmed funds can be used.
 	*/
-	uint32 min_input_confs = 4;
+	int32 min_input_confs = 4;
 	/** The number of blocks the funding transaction should confirm by.
 	 This is used for fee estimation.
 	*/
@@ -539,7 +554,7 @@ message GetDiscussionsResponse {
 message GetDiscussionHistoryByIDRequest {
 	/** The discussion id of interest. */
 	uint64 id = 1 [(validator.field) = {msg_exists: true}];
-	PageOptions page_options = 2;
+	KeySetPageOptions page_options = 2;
 }
 
 /**

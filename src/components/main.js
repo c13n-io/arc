@@ -529,7 +529,9 @@ const Main = () => {
         .subscribeMessages({}, { deadline: deadline.getTime() })
         .on("data", (resp) => {
           try {
+            console.log('gotresp');
             const res = SubscribeMessageResponse.toObject(resp, resp);
+            console.log('gotresp');
             setUsers((oldUsers) => {
               mainProps["users"] = oldUsers;
               return oldUsers;
@@ -591,19 +593,25 @@ const Main = () => {
               if (!document.hasFocus()) {
                 let audio = new Audio(notificationAudio);
                 audio.play();
+                let message = {};
+                try{
+                  message = JSON.parse(res.receivedMessage.payload);
+                }catch(e) {
+                  message.content = res.receivedMessage.payload;
+                }
                 new Notification(
                   `${
                     concatUserNames(mainProps, [res.receivedMessage.sender]) ||
                     "Unknown"
                   }: ${
-                    res.receivedMessage.payload === ""
+                    !message.content
                       ? `Sent you ${cryptoUtils.msatToCurrentCryptoUnit(
                         mainProps,
                         res.receivedMessage.amtMsat
                       )}${selectedCryptoUnit}`
-                      : res.receivedMessage.payload.length < 20
-                        ? res.receivedMessage.payload
-                        : res.receivedMessage.payload.substring(0, 15) + "..."
+                      : message.content.length < 30
+                        ? message.content
+                        : message.content.substring(0, 25) + "..."
                   }`,
                   {
                     icon: c13nLogo,
@@ -638,7 +646,7 @@ const Main = () => {
               }
             }
           } catch (err) {
-            console.log("Caught: ", err);
+            console.log("MessageSub err: ", err);
           }
         })
         .on("end", () => {
