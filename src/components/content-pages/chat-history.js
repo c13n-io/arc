@@ -250,7 +250,7 @@ const ChatHistory = (props) => {
     let reverse = true;
     /**
      * If lastId == 0 then discussion is either empty, or contains only
-     * one message with id == 0. In case the discussion has only one 
+     * one message with id == 0. In case the discussion has only one
      * message with id == 0, we need to declare reverse = true in order
      * for backend to normally return the response
      */
