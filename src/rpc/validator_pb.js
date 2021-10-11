@@ -47,12 +47,12 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-  proto.validator.FieldValidator.prototype.toObject = function(opt_includeInstance) {
-    return proto.validator.FieldValidator.toObject(opt_includeInstance, this);
-  };
+proto.validator.FieldValidator.prototype.toObject = function(opt_includeInstance) {
+  return proto.validator.FieldValidator.toObject(opt_includeInstance, this);
+};
 
 
-  /**
+/**
  * Static version of the {@see toObject} method.
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
@@ -61,33 +61,33 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-  proto.validator.FieldValidator.toObject = function(includeInstance, msg) {
-    var f, obj = {
-      regex: jspb.Message.getField(msg, 1),
-      intGt: jspb.Message.getField(msg, 2),
-      intLt: jspb.Message.getField(msg, 3),
-      msgExists: jspb.Message.getField(msg, 4),
-      humanError: jspb.Message.getField(msg, 5),
-      floatGt: jspb.Message.getOptionalFloatingPointField(msg, 6),
-      floatLt: jspb.Message.getOptionalFloatingPointField(msg, 7),
-      floatEpsilon: jspb.Message.getOptionalFloatingPointField(msg, 8),
-      floatGte: jspb.Message.getOptionalFloatingPointField(msg, 9),
-      floatLte: jspb.Message.getOptionalFloatingPointField(msg, 10),
-      stringNotEmpty: jspb.Message.getField(msg, 11),
-      repeatedCountMin: jspb.Message.getField(msg, 12),
-      repeatedCountMax: jspb.Message.getField(msg, 13),
-      lengthGt: jspb.Message.getField(msg, 14),
-      lengthLt: jspb.Message.getField(msg, 15),
-      lengthEq: jspb.Message.getField(msg, 16),
-      isInEnum: jspb.Message.getField(msg, 17),
-      uuidVer: jspb.Message.getField(msg, 18)
-    };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
+proto.validator.FieldValidator.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    regex: jspb.Message.getField(msg, 1),
+    intGt: jspb.Message.getField(msg, 2),
+    intLt: jspb.Message.getField(msg, 3),
+    msgExists: jspb.Message.getField(msg, 4),
+    humanError: jspb.Message.getField(msg, 5),
+    floatGt: jspb.Message.getOptionalFloatingPointField(msg, 6),
+    floatLt: jspb.Message.getOptionalFloatingPointField(msg, 7),
+    floatEpsilon: jspb.Message.getOptionalFloatingPointField(msg, 8),
+    floatGte: jspb.Message.getOptionalFloatingPointField(msg, 9),
+    floatLte: jspb.Message.getOptionalFloatingPointField(msg, 10),
+    stringNotEmpty: jspb.Message.getField(msg, 11),
+    repeatedCountMin: jspb.Message.getField(msg, 12),
+    repeatedCountMax: jspb.Message.getField(msg, 13),
+    lengthGt: jspb.Message.getField(msg, 14),
+    lengthLt: jspb.Message.getField(msg, 15),
+    lengthEq: jspb.Message.getField(msg, 16),
+    isInEnum: jspb.Message.getField(msg, 17),
+    uuidVer: jspb.Message.getField(msg, 18)
   };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
 
 
@@ -118,75 +118,75 @@ proto.validator.FieldValidator.deserializeBinaryFromReader = function(msg, reade
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ reader.readString();
+      var value = /** @type {string} */ (reader.readString());
       msg.setRegex(value);
       break;
     case 2:
-      var value = /** @type {number} */ reader.readInt64();
+      var value = /** @type {number} */ (reader.readInt64());
       msg.setIntGt(value);
       break;
     case 3:
-      var value = /** @type {number} */ reader.readInt64();
+      var value = /** @type {number} */ (reader.readInt64());
       msg.setIntLt(value);
       break;
     case 4:
-      var value = /** @type {boolean} */ reader.readBool();
+      var value = /** @type {boolean} */ (reader.readBool());
       msg.setMsgExists(value);
       break;
     case 5:
-      var value = /** @type {string} */ reader.readString();
+      var value = /** @type {string} */ (reader.readString());
       msg.setHumanError(value);
       break;
     case 6:
-      var value = /** @type {number} */ reader.readDouble();
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setFloatGt(value);
       break;
     case 7:
-      var value = /** @type {number} */ reader.readDouble();
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setFloatLt(value);
       break;
     case 8:
-      var value = /** @type {number} */ reader.readDouble();
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setFloatEpsilon(value);
       break;
     case 9:
-      var value = /** @type {number} */ reader.readDouble();
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setFloatGte(value);
       break;
     case 10:
-      var value = /** @type {number} */ reader.readDouble();
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setFloatLte(value);
       break;
     case 11:
-      var value = /** @type {boolean} */ reader.readBool();
+      var value = /** @type {boolean} */ (reader.readBool());
       msg.setStringNotEmpty(value);
       break;
     case 12:
-      var value = /** @type {number} */ reader.readInt64();
+      var value = /** @type {number} */ (reader.readInt64());
       msg.setRepeatedCountMin(value);
       break;
     case 13:
-      var value = /** @type {number} */ reader.readInt64();
+      var value = /** @type {number} */ (reader.readInt64());
       msg.setRepeatedCountMax(value);
       break;
     case 14:
-      var value = /** @type {number} */ reader.readInt64();
+      var value = /** @type {number} */ (reader.readInt64());
       msg.setLengthGt(value);
       break;
     case 15:
-      var value = /** @type {number} */ reader.readInt64();
+      var value = /** @type {number} */ (reader.readInt64());
       msg.setLengthLt(value);
       break;
     case 16:
-      var value = /** @type {number} */ reader.readInt64();
+      var value = /** @type {number} */ (reader.readInt64());
       msg.setLengthEq(value);
       break;
     case 17:
-      var value = /** @type {boolean} */ reader.readBool();
+      var value = /** @type {boolean} */ (reader.readBool());
       msg.setIsInEnum(value);
       break;
     case 18:
-      var value = /** @type {number} */ reader.readInt32();
+      var value = /** @type {number} */ (reader.readInt32());
       msg.setUuidVer(value);
       break;
     default:
@@ -218,126 +218,126 @@ proto.validator.FieldValidator.prototype.serializeBinary = function() {
  */
 proto.validator.FieldValidator.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = /** @type {string} */ jspb.Message.getField(message, 1);
+  f = /** @type {string} */ (jspb.Message.getField(message, 1));
   if (f != null) {
     writer.writeString(
       1,
       f
     );
   }
-  f = /** @type {number} */ jspb.Message.getField(message, 2);
+  f = /** @type {number} */ (jspb.Message.getField(message, 2));
   if (f != null) {
     writer.writeInt64(
       2,
       f
     );
   }
-  f = /** @type {number} */ jspb.Message.getField(message, 3);
+  f = /** @type {number} */ (jspb.Message.getField(message, 3));
   if (f != null) {
     writer.writeInt64(
       3,
       f
     );
   }
-  f = /** @type {boolean} */ jspb.Message.getField(message, 4);
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 4));
   if (f != null) {
     writer.writeBool(
       4,
       f
     );
   }
-  f = /** @type {string} */ jspb.Message.getField(message, 5);
+  f = /** @type {string} */ (jspb.Message.getField(message, 5));
   if (f != null) {
     writer.writeString(
       5,
       f
     );
   }
-  f = /** @type {number} */ jspb.Message.getField(message, 6);
+  f = /** @type {number} */ (jspb.Message.getField(message, 6));
   if (f != null) {
     writer.writeDouble(
       6,
       f
     );
   }
-  f = /** @type {number} */ jspb.Message.getField(message, 7);
+  f = /** @type {number} */ (jspb.Message.getField(message, 7));
   if (f != null) {
     writer.writeDouble(
       7,
       f
     );
   }
-  f = /** @type {number} */ jspb.Message.getField(message, 8);
+  f = /** @type {number} */ (jspb.Message.getField(message, 8));
   if (f != null) {
     writer.writeDouble(
       8,
       f
     );
   }
-  f = /** @type {number} */ jspb.Message.getField(message, 9);
+  f = /** @type {number} */ (jspb.Message.getField(message, 9));
   if (f != null) {
     writer.writeDouble(
       9,
       f
     );
   }
-  f = /** @type {number} */ jspb.Message.getField(message, 10);
+  f = /** @type {number} */ (jspb.Message.getField(message, 10));
   if (f != null) {
     writer.writeDouble(
       10,
       f
     );
   }
-  f = /** @type {boolean} */ jspb.Message.getField(message, 11);
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 11));
   if (f != null) {
     writer.writeBool(
       11,
       f
     );
   }
-  f = /** @type {number} */ jspb.Message.getField(message, 12);
+  f = /** @type {number} */ (jspb.Message.getField(message, 12));
   if (f != null) {
     writer.writeInt64(
       12,
       f
     );
   }
-  f = /** @type {number} */ jspb.Message.getField(message, 13);
+  f = /** @type {number} */ (jspb.Message.getField(message, 13));
   if (f != null) {
     writer.writeInt64(
       13,
       f
     );
   }
-  f = /** @type {number} */ jspb.Message.getField(message, 14);
+  f = /** @type {number} */ (jspb.Message.getField(message, 14));
   if (f != null) {
     writer.writeInt64(
       14,
       f
     );
   }
-  f = /** @type {number} */ jspb.Message.getField(message, 15);
+  f = /** @type {number} */ (jspb.Message.getField(message, 15));
   if (f != null) {
     writer.writeInt64(
       15,
       f
     );
   }
-  f = /** @type {number} */ jspb.Message.getField(message, 16);
+  f = /** @type {number} */ (jspb.Message.getField(message, 16));
   if (f != null) {
     writer.writeInt64(
       16,
       f
     );
   }
-  f = /** @type {boolean} */ jspb.Message.getField(message, 17);
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 17));
   if (f != null) {
     writer.writeBool(
       17,
       f
     );
   }
-  f = /** @type {number} */ jspb.Message.getField(message, 18);
+  f = /** @type {number} */ (jspb.Message.getField(message, 18));
   if (f != null) {
     writer.writeInt32(
       18,
@@ -352,7 +352,7 @@ proto.validator.FieldValidator.serializeBinaryToWriter = function(message, write
  * @return {string}
  */
 proto.validator.FieldValidator.prototype.getRegex = function() {
-  return /** @type {string} */ jspb.Message.getFieldWithDefault(this, 1, "");
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
@@ -381,7 +381,7 @@ proto.validator.FieldValidator.prototype.hasRegex = function() {
  * @return {number}
  */
 proto.validator.FieldValidator.prototype.getIntGt = function() {
-  return /** @type {number} */ jspb.Message.getFieldWithDefault(this, 2, 0);
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
 
@@ -410,7 +410,7 @@ proto.validator.FieldValidator.prototype.hasIntGt = function() {
  * @return {number}
  */
 proto.validator.FieldValidator.prototype.getIntLt = function() {
-  return /** @type {number} */ jspb.Message.getFieldWithDefault(this, 3, 0);
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
@@ -441,7 +441,7 @@ proto.validator.FieldValidator.prototype.hasIntLt = function() {
  * @return {boolean}
  */
 proto.validator.FieldValidator.prototype.getMsgExists = function() {
-  return /** @type {boolean} */ jspb.Message.getFieldWithDefault(this, 4, false);
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 4, false));
 };
 
 
@@ -470,7 +470,7 @@ proto.validator.FieldValidator.prototype.hasMsgExists = function() {
  * @return {string}
  */
 proto.validator.FieldValidator.prototype.getHumanError = function() {
-  return /** @type {string} */ jspb.Message.getFieldWithDefault(this, 5, "");
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
 
@@ -499,7 +499,7 @@ proto.validator.FieldValidator.prototype.hasHumanError = function() {
  * @return {number}
  */
 proto.validator.FieldValidator.prototype.getFloatGt = function() {
-  return /** @type {number} */ +jspb.Message.getFieldWithDefault(this, 6, 0.0);
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 6, 0.0));
 };
 
 
@@ -528,7 +528,7 @@ proto.validator.FieldValidator.prototype.hasFloatGt = function() {
  * @return {number}
  */
 proto.validator.FieldValidator.prototype.getFloatLt = function() {
-  return /** @type {number} */ +jspb.Message.getFieldWithDefault(this, 7, 0.0);
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 7, 0.0));
 };
 
 
@@ -557,7 +557,7 @@ proto.validator.FieldValidator.prototype.hasFloatLt = function() {
  * @return {number}
  */
 proto.validator.FieldValidator.prototype.getFloatEpsilon = function() {
-  return /** @type {number} */ +jspb.Message.getFieldWithDefault(this, 8, 0.0);
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 8, 0.0));
 };
 
 
@@ -586,7 +586,7 @@ proto.validator.FieldValidator.prototype.hasFloatEpsilon = function() {
  * @return {number}
  */
 proto.validator.FieldValidator.prototype.getFloatGte = function() {
-  return /** @type {number} */ +jspb.Message.getFieldWithDefault(this, 9, 0.0);
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 9, 0.0));
 };
 
 
@@ -615,7 +615,7 @@ proto.validator.FieldValidator.prototype.hasFloatGte = function() {
  * @return {number}
  */
 proto.validator.FieldValidator.prototype.getFloatLte = function() {
-  return /** @type {number} */ +jspb.Message.getFieldWithDefault(this, 10, 0.0);
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 10, 0.0));
 };
 
 
@@ -646,7 +646,7 @@ proto.validator.FieldValidator.prototype.hasFloatLte = function() {
  * @return {boolean}
  */
 proto.validator.FieldValidator.prototype.getStringNotEmpty = function() {
-  return /** @type {boolean} */ jspb.Message.getFieldWithDefault(this, 11, false);
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 11, false));
 };
 
 
@@ -675,7 +675,7 @@ proto.validator.FieldValidator.prototype.hasStringNotEmpty = function() {
  * @return {number}
  */
 proto.validator.FieldValidator.prototype.getRepeatedCountMin = function() {
-  return /** @type {number} */ jspb.Message.getFieldWithDefault(this, 12, 0);
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
 };
 
 
@@ -704,7 +704,7 @@ proto.validator.FieldValidator.prototype.hasRepeatedCountMin = function() {
  * @return {number}
  */
 proto.validator.FieldValidator.prototype.getRepeatedCountMax = function() {
-  return /** @type {number} */ jspb.Message.getFieldWithDefault(this, 13, 0);
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 13, 0));
 };
 
 
@@ -733,7 +733,7 @@ proto.validator.FieldValidator.prototype.hasRepeatedCountMax = function() {
  * @return {number}
  */
 proto.validator.FieldValidator.prototype.getLengthGt = function() {
-  return /** @type {number} */ jspb.Message.getFieldWithDefault(this, 14, 0);
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 14, 0));
 };
 
 
@@ -762,7 +762,7 @@ proto.validator.FieldValidator.prototype.hasLengthGt = function() {
  * @return {number}
  */
 proto.validator.FieldValidator.prototype.getLengthLt = function() {
-  return /** @type {number} */ jspb.Message.getFieldWithDefault(this, 15, 0);
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 15, 0));
 };
 
 
@@ -791,7 +791,7 @@ proto.validator.FieldValidator.prototype.hasLengthLt = function() {
  * @return {number}
  */
 proto.validator.FieldValidator.prototype.getLengthEq = function() {
-  return /** @type {number} */ jspb.Message.getFieldWithDefault(this, 16, 0);
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 16, 0));
 };
 
 
@@ -822,7 +822,7 @@ proto.validator.FieldValidator.prototype.hasLengthEq = function() {
  * @return {boolean}
  */
 proto.validator.FieldValidator.prototype.getIsInEnum = function() {
-  return /** @type {boolean} */ jspb.Message.getFieldWithDefault(this, 17, false);
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 17, false));
 };
 
 
@@ -851,7 +851,7 @@ proto.validator.FieldValidator.prototype.hasIsInEnum = function() {
  * @return {number}
  */
 proto.validator.FieldValidator.prototype.getUuidVer = function() {
-  return /** @type {number} */ jspb.Message.getFieldWithDefault(this, 18, 0);
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 18, 0));
 };
 
 
@@ -873,6 +873,7 @@ proto.validator.FieldValidator.prototype.clearUuidVer = function() {
 proto.validator.FieldValidator.prototype.hasUuidVer = function() {
   return jspb.Message.getField(this, 18) != null;
 };
+
 
 
 /**
@@ -905,12 +906,12 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-  proto.validator.OneofValidator.prototype.toObject = function(opt_includeInstance) {
-    return proto.validator.OneofValidator.toObject(opt_includeInstance, this);
-  };
+proto.validator.OneofValidator.prototype.toObject = function(opt_includeInstance) {
+  return proto.validator.OneofValidator.toObject(opt_includeInstance, this);
+};
 
 
-  /**
+/**
  * Static version of the {@see toObject} method.
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
@@ -919,16 +920,16 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-  proto.validator.OneofValidator.toObject = function(includeInstance, msg) {
-    var f, obj = {
-      required: jspb.Message.getField(msg, 1)
-    };
-
-    if (includeInstance) {
-      obj.$jspbMessageInstance = msg;
-    }
-    return obj;
+proto.validator.OneofValidator.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    required: jspb.Message.getField(msg, 1)
   };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
 }
 
 
@@ -959,7 +960,7 @@ proto.validator.OneofValidator.deserializeBinaryFromReader = function(msg, reade
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {boolean} */ reader.readBool();
+      var value = /** @type {boolean} */ (reader.readBool());
       msg.setRequired(value);
       break;
     default:
@@ -991,7 +992,7 @@ proto.validator.OneofValidator.prototype.serializeBinary = function() {
  */
 proto.validator.OneofValidator.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = /** @type {boolean} */ jspb.Message.getField(message, 1);
+  f = /** @type {boolean} */ (jspb.Message.getField(message, 1));
   if (f != null) {
     writer.writeBool(
       1,
@@ -1008,7 +1009,7 @@ proto.validator.OneofValidator.serializeBinaryToWriter = function(message, write
  * @return {boolean}
  */
 proto.validator.OneofValidator.prototype.getRequired = function() {
-  return /** @type {boolean} */ jspb.Message.getFieldWithDefault(this, 1, false);
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 1, false));
 };
 
 
@@ -1032,26 +1033,27 @@ proto.validator.OneofValidator.prototype.hasRequired = function() {
 };
 
 
+
 /**
  * A tuple of {field number, class constructor} for the extension
  * field named `field`.
  * @type {!jspb.ExtensionFieldInfo<!proto.validator.FieldValidator>}
  */
 proto.validator.field = new jspb.ExtensionFieldInfo(
-  65020,
-  {field: 0},
-  proto.validator.FieldValidator,
-  /** @type {?function((boolean|undefined),!jspb.Message=): !Object} */
-  proto.validator.FieldValidator.toObject,
-  0);
+    65020,
+    {field: 0},
+    proto.validator.FieldValidator,
+     /** @type {?function((boolean|undefined),!jspb.Message=): !Object} */ (
+         proto.validator.FieldValidator.toObject),
+    0);
 
 google_protobuf_descriptor_pb.FieldOptions.extensionsBinary[65020] = new jspb.ExtensionFieldBinaryInfo(
-  proto.validator.field,
-  jspb.BinaryReader.prototype.readMessage,
-  jspb.BinaryWriter.prototype.writeMessage,
-  proto.validator.FieldValidator.serializeBinaryToWriter,
-  proto.validator.FieldValidator.deserializeBinaryFromReader,
-  false);
+    proto.validator.field,
+    jspb.BinaryReader.prototype.readMessage,
+    jspb.BinaryWriter.prototype.writeMessage,
+    proto.validator.FieldValidator.serializeBinaryToWriter,
+    proto.validator.FieldValidator.deserializeBinaryFromReader,
+    false);
 // This registers the extension field with the extended class, so that
 // toObject() will function correctly.
 google_protobuf_descriptor_pb.FieldOptions.extensions[65020] = proto.validator.field;
@@ -1063,20 +1065,20 @@ google_protobuf_descriptor_pb.FieldOptions.extensions[65020] = proto.validator.f
  * @type {!jspb.ExtensionFieldInfo<!proto.validator.OneofValidator>}
  */
 proto.validator.oneof = new jspb.ExtensionFieldInfo(
-  65021,
-  {oneof: 0},
-  proto.validator.OneofValidator,
-  /** @type {?function((boolean|undefined),!jspb.Message=): !Object} */
-  proto.validator.OneofValidator.toObject,
-  0);
+    65021,
+    {oneof: 0},
+    proto.validator.OneofValidator,
+     /** @type {?function((boolean|undefined),!jspb.Message=): !Object} */ (
+         proto.validator.OneofValidator.toObject),
+    0);
 
 google_protobuf_descriptor_pb.OneofOptions.extensionsBinary[65021] = new jspb.ExtensionFieldBinaryInfo(
-  proto.validator.oneof,
-  jspb.BinaryReader.prototype.readMessage,
-  jspb.BinaryWriter.prototype.writeMessage,
-  proto.validator.OneofValidator.serializeBinaryToWriter,
-  proto.validator.OneofValidator.deserializeBinaryFromReader,
-  false);
+    proto.validator.oneof,
+    jspb.BinaryReader.prototype.readMessage,
+    jspb.BinaryWriter.prototype.writeMessage,
+    proto.validator.OneofValidator.serializeBinaryToWriter,
+    proto.validator.OneofValidator.deserializeBinaryFromReader,
+    false);
 // This registers the extension field with the extended class, so that
 // toObject() will function correctly.
 google_protobuf_descriptor_pb.OneofOptions.extensions[65021] = proto.validator.oneof;

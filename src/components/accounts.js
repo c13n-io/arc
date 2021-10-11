@@ -212,7 +212,7 @@ const Accounts = (props) => {
             return e.key === "Enter"
               ? e.shiftKey
                 ? undefined
-                : credentialsModalLogin(selectedAccount)
+                : credentialsModalLogin({ url: urlToAdd, address: "", lastActive: 0 })
               : undefined;
           }}
         />
