@@ -49,11 +49,9 @@ const cryptoUtils = require("../../utils/crypto-utils");
  */
 const ChatHistory = (props) => {
   const messagesPerBlock = 15;
-  // const [messagesLoaded, setMessagesLoaded] = useState(messagesPerBlock);
   const [oldListHeight, setOldListHeight] = useState(0);
   const [lastMessageSeen, setLastMessageSeen] = useState(0);
   const [noMoreHistory, setNoMoreHistory] = useState(false);
-  // const [atBottom, setAtBottom] = useState(true);
 
   const [anonymousActive, setAnonymousActive] = useState(false);
 
@@ -249,7 +247,6 @@ const ChatHistory = (props) => {
    * It stores the response in the chatHistory variable.
    */
   async function loadHistory(fresh, discussionId) {
-    console.log('Calling with: ', fresh, props.selectedDiscussion.lastMsgId);
     let reverse = true;
     /**
      * If lastId == 0 then discussion is either empty, or contains only
