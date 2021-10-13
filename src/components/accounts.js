@@ -47,7 +47,9 @@ const Accounts = (props) => {
           (err, res) => {
             if (err) {
               if (Date.now() < deadline) {
-                NotificationManager.error(err.message);
+                NotificationManager.error(
+                  "Credentials or Certificate failed to validate"
+                );
                 console.log(err);
               } else {
                 NotificationManager.error(err.message);
@@ -212,7 +214,11 @@ const Accounts = (props) => {
             return e.key === "Enter"
               ? e.shiftKey
                 ? undefined
-                : credentialsModalLogin({ url: urlToAdd, address: "", lastActive: 0 })
+                : credentialsModalLogin({
+                    url: urlToAdd,
+                    address: "",
+                    lastActive: 0,
+                  })
               : undefined;
           }}
         />

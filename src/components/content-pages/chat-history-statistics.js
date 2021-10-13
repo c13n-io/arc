@@ -3,6 +3,7 @@ import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
 
 import discussionClient from "../../services/discussionServices";
 import "./chat-history-statistics.css";
+import { NotificationManager } from "react-notifications";
 
 const cryptoUtils = require("../../utils/crypto-utils");
 
@@ -35,6 +36,7 @@ const ChatHistoryStatistics = (props) => {
       },
       (err, res) => {
         if (err) {
+          NotificationManager.error("Statistics failed to be displayed");
           console.log(err);
         }
         if (res) {

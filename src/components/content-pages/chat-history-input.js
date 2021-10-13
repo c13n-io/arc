@@ -61,8 +61,8 @@ const ChatHistoryInput = (props) => {
         amtMsat === ""
           ? 1000
           : parseInt(amtMsat) > 1000
-            ? parseInt(amtMsat)
-            : 1000,
+          ? parseInt(amtMsat)
+          : 1000,
       payload: text,
       options: {
         anonymous: props.anonymousActive,
@@ -103,8 +103,8 @@ const ChatHistoryInput = (props) => {
         amtMsat === ""
           ? 1000
           : parseInt(amtMsat) > 1000
-            ? parseInt(amtMsat)
-            : 1000,
+          ? parseInt(amtMsat)
+          : 1000,
       payload: "fee_calculation",
     };
     messageClient().estimateMessage(msg, (err, res) => {
@@ -361,11 +361,11 @@ const ChatHistoryInput = (props) => {
         onOk={async () => {
           setUploadLoading(true);
           switch (imageURL.length) {
-          case 0:
-            uploadImage(props);
-            break;
-          default:
-            sendMessage(messageToPayload(`![](${imageURL})`));
+            case 0:
+              uploadImage(props);
+              break;
+            default:
+              sendMessage(messageToPayload(`![](${imageURL})`));
           }
           await sleep(1500);
           setImageURL("");
@@ -414,6 +414,7 @@ const ChatHistoryInput = (props) => {
             },
             (err, res) => {
               if (err) {
+                NotificationManager.error("Could not send message");
                 console.log(err);
               }
               if (res) {

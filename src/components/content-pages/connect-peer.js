@@ -37,6 +37,7 @@ const ConnectPeer = (props) => {
               (err, res) => {
                 if (err) {
                   console.log(err);
+                  NotificationManager.error("Could not Connect to Peer");
                 }
                 if (res) {
                   console.log(res);
