@@ -321,7 +321,7 @@ const Main = () => {
     nodeInfoClient().getNodes({}, (err, res) => {
       if (err) {
         console.log(err);
-        NotificationManager.error("Nodes cannot be found");
+        NotificationManager.error("Failed to fetch network");
       }
       if (res) {
         setUsers(res.nodesList);
@@ -337,7 +337,7 @@ const Main = () => {
     contactClient().getContacts({}, (err, res) => {
       if (err) {
         console.log(err);
-        NotificationManager.error("No contacts can be found");
+        NotificationManager.error("Failed to fetch contacts");
       }
       if (res) {
         const parsedContacts = res.contactsList.map((item) => {
@@ -436,9 +436,7 @@ const Main = () => {
         .subscribeMessages({}, { deadline: deadline.getTime() })
         .on("data", (resp) => {
           try {
-            console.log("gotresp");
             const res = SubscribeMessageResponse.toObject(resp, resp);
-            console.log("gotresp");
             setUsers((oldUsers) => {
               mainProps["users"] = oldUsers;
               return oldUsers;

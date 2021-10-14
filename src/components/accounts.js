@@ -46,11 +46,11 @@ const Accounts = (props) => {
           { deadline: deadline.getTime() },
           (err, res) => {
             if (err) {
+              console.log(err);
               if (Date.now() < deadline) {
                 NotificationManager.error(
-                  "Credentials or Certificate failed to validate"
+                  "Could not reach c13n backend"
                 );
-                console.log(err);
               } else {
                 NotificationManager.error(err.message);
               }

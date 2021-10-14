@@ -392,11 +392,11 @@ const Side = (props) => {
             },
             (err, res) => {
               if (err) {
-                NotificationManager.error("Discussion could not be Deleted");
+                NotificationManager.error("Failed to delete discussion");
                 console.log(err);
               }
               if (res) {
-                NotificationManager.success("Discussion Deleted");
+                NotificationManager.success("Deleted discussion");
                 props.setSelectedPage("logo");
                 props.setDiscussions((oldDiscussions) => {
                   let res = oldDiscussions.filter((elem) => {

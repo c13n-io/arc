@@ -36,7 +36,7 @@ const ChatHistoryStatistics = (props) => {
       },
       (err, res) => {
         if (err) {
-          NotificationManager.error("Statistics failed to be displayed");
+          NotificationManager.error("Failed to fetch statistics");
           console.log(err);
         }
         if (res) {
