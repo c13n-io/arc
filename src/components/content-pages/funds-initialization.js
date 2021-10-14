@@ -135,7 +135,7 @@ const FundsInitialization = (props) => {
                 }
                 if (res) {
                   console.log(res);
-                  NotificationManager.success("Connected to Peer");
+                  NotificationManager.success("Connected to peer");
                   openChannel(address);
                 }
               }

@@ -74,6 +74,7 @@ const GroupChat = (props) => {
           }
           if (res) {
             console.log(res);
+            NotificationManager.success("Created group discussion");
             props.setDiscussions((oldDiscussions) => {
               return oldDiscussions.concat(res.discussion);
             });
@@ -84,7 +85,7 @@ const GroupChat = (props) => {
       );
       props.setSelectedParticipants([]);
     } else {
-      NotificationManager.error("Too few participants");
+      NotificationManager.error("Not enough participants");
     }
   };
 

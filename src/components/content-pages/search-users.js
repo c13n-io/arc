@@ -150,7 +150,7 @@ const SearchUsers = (props) => {
           NotificationManager.warning("Failed to remove contact");
         }
         if (res) {
-          NotificationManager.info("Contact Removed");
+          NotificationManager.success("Removed contact");
         }
       }
     );

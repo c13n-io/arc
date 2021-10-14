@@ -50,152 +50,53 @@ const cryptoUtils = require("../utils/crypto-utils");
 
 const Main = () => {
   // Connection Variables
-  const [
-    initialConnection,
-    setInitialConnection
-  ] = useState(true);
-  const [
-    backendStatus,
-    setBackendStatus
-  ] = useState(false);
-  const [
-    msgRxUp,
-    setMsgRxUp
-  ] = useState(0);
-  const [
-    msgStreamActive,
-    setMsgStreamActive
-  ] = useState(false);
-  const [
-    backendVersion,
-    setBackendVersion
-  ] = useState("");
+  const [initialConnection, setInitialConnection] = useState(true);
+  const [backendStatus, setBackendStatus] = useState(false);
+  const [msgRxUp, setMsgRxUp] = useState(0);
+  const [msgStreamActive, setMsgStreamActive] = useState(false);
+  const [backendVersion, setBackendVersion] = useState("");
 
   // Node Variables
-  const [
-    selfInfo,
-    setSelfInfo
-  ] = useState();
-  const [
-    chainInfo,
-    setChainInfo
-  ] = useState();
-  const [
-    contacts,
-    setContacts
-  ] = useState();
-  const [
-    users,
-    setUsers
-  ] = useState([]);
-  const [
-    currentFunds,
-    setCurrentFunds
-  ] = useState(-1);
-  const [
-    lastFundChange,
-    setLastFundChange
-  ] = useState(0);
+  const [selfInfo, setSelfInfo] = useState();
+  const [chainInfo, setChainInfo] = useState();
+  const [contacts, setContacts] = useState();
+  const [users, setUsers] = useState([]);
+  const [currentFunds, setCurrentFunds] = useState(-1);
+  const [lastFundChange, setLastFundChange] = useState(0);
 
   // Discussion Variables
-  const [
-    discussions,
-    setDiscussions
-  ] = useState([]);
-  const [
-    selectedDiscussion,
-    setSelectedDiscussion
-  ] = useState();
-  const [
-    chatHistory,
-    setChatHistory
-  ] = useState([]);
-  const [
-    selectedParticipants,
-    setSelectedParticipants
-  ] = useState([]);
+  const [discussions, setDiscussions] = useState([]);
+  const [selectedDiscussion, setSelectedDiscussion] = useState();
+  const [chatHistory, setChatHistory] = useState([]);
+  const [selectedParticipants, setSelectedParticipants] = useState([]);
 
   // Account Variables
-  const [
-    accounts,
-    setAccounts
-  ] = useState([]);
-  const [
-    loadAccount,
-    setLoadAccount
-  ] = useState(0);
+  const [accounts, setAccounts] = useState([]);
+  const [loadAccount, setLoadAccount] = useState(0);
 
   // View Variables
-  const [
-    selectedPage,
-    setSelectedPage
-  ] = useState("accounts");
-  const [
-    sideSquashed,
-    setSideSquashed
-  ] = useState(false);
-  const [
-    sideActivated,
-    setSideActivated
-  ] = useState(false);
+  const [selectedPage, setSelectedPage] = useState("accounts");
+  const [sideSquashed, setSideSquashed] = useState(false);
+  const [sideActivated, setSideActivated] = useState(false);
 
   // Settings Variables
-  const [
-    automaticImageLoading,
-    setAutomaticImageLoading
-  ] = useState(false);
-  const [
-    smoothAnimations,
-    setSmoothAnimations
-  ] = useState(false);
-  const [
-    selectedCryptoUnit,
-    setSelectedCryptoUnit
-  ] = useState();
-  const [
-    selectedFiatUnit,
-    setSelectedFiatUnit
-  ] = useState();
-  const [
-    chatLayout,
-    setChatLayout
-  ] = useState();
-  const [
-    chatIdenticons,
-    setChatIdenticons
-  ] = useState();
-  const [
-    myMessageColor,
-    setMyMessageColor
-  ] = useState();
-  const [
-    otherMessageColor,
-    setOtherMessageColor
-  ] = useState();
-  const [
-    developerLogs,
-    setDeveloperLogs
-  ] = useState();
+  const [automaticImageLoading, setAutomaticImageLoading] = useState(false);
+  const [smoothAnimations, setSmoothAnimations] = useState(false);
+  const [selectedCryptoUnit, setSelectedCryptoUnit] = useState();
+  const [selectedFiatUnit, setSelectedFiatUnit] = useState();
+  const [chatLayout, setChatLayout] = useState();
+  const [chatIdenticons, setChatIdenticons] = useState();
+  const [myMessageColor, setMyMessageColor] = useState();
+  const [otherMessageColor, setOtherMessageColor] = useState();
+  const [developerLogs, setDeveloperLogs] = useState();
 
   // Crypto Variables
-  const [
-    exchangeRates,
-    setExchangeRates
-  ] = useState();
+  const [exchangeRates, setExchangeRates] = useState();
 
   // Funds Initialization Variables
-  const [
-    fundsInitVisible,
-    setFundsInitVisible
-  ] = useState(false);
-  const [
-    fundsInitDisabled,
-    setFundsInitDisabled
-  ] = useState(false);
-  const [
-    balance,
-    setBalance
-  ] = useState();
+  const [fundsInitVisible, setFundsInitVisible] = useState(false);
+  const [fundsInitDisabled, setFundsInitDisabled] = useState(false);
+  const [balance, setBalance] = useState();
 
   /**
    * This function loads the static data of the currently active account.
@@ -392,7 +293,11 @@ const Main = () => {
             if (initial) {
               setChainInfo(res.chainsList[0]);
               setSelfInfo(res.info);
-              addToAccounts(mainProps, {url: localStorage.getItem('url'), address: res.info.address, lastActive: Date.now()});
+              addToAccounts(mainProps, {
+                url: localStorage.getItem("url"),
+                address: res.info.address,
+                lastActive: Date.now(),
+              });
               setBackendStatus(true);
             } else {
               if (oldStatus === false) {
@@ -416,6 +321,7 @@ const Main = () => {
     nodeInfoClient().getNodes({}, (err, res) => {
       if (err) {
         console.log(err);
+        NotificationManager.error("Failed to fetch network");
       }
       if (res) {
         setUsers(res.nodesList);
@@ -431,6 +337,7 @@ const Main = () => {
     contactClient().getContacts({}, (err, res) => {
       if (err) {
         console.log(err);
+        NotificationManager.error("Failed to fetch contacts");
       }
       if (res) {
         const parsedContacts = res.contactsList.map((item) => {
@@ -529,9 +436,7 @@ const Main = () => {
         .subscribeMessages({}, { deadline: deadline.getTime() })
         .on("data", (resp) => {
           try {
-            console.log('gotresp');
             const res = SubscribeMessageResponse.toObject(resp, resp);
-            console.log('gotresp');
             setUsers((oldUsers) => {
               mainProps["users"] = oldUsers;
               return oldUsers;
@@ -594,9 +499,9 @@ const Main = () => {
                 let audio = new Audio(notificationAudio);
                 audio.play();
                 let message = {};
-                try{
+                try {
                   message = JSON.parse(res.receivedMessage.payload);
-                }catch(e) {
+                } catch (e) {
                   message.content = res.receivedMessage.payload;
                 }
                 new Notification(
@@ -680,10 +585,10 @@ const Main = () => {
         //   Notification.requestPermission();
         // }}
       >
-        {/* <NotificationContainer
+        <NotificationContainer
           enterTimeout={smoothAnimations ? 200 : 0}
           leaveTimeout={smoothAnimations ? 200 : 0}
-        /> */}
+        />
         <WindowSizeListener
           onResize={(size) => {
             let width = size.windowWidth;

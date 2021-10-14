@@ -37,10 +37,11 @@ const ConnectPeer = (props) => {
               (err, res) => {
                 if (err) {
                   console.log(err);
+                  NotificationManager.error("Failed to connect to peer");
                 }
                 if (res) {
                   console.log(res);
-                  NotificationManager.success("Connected to Peer");
+                  NotificationManager.success("Connected to peer");
                   props.setVisible(false);
                   setLightningAddress("");
                 }

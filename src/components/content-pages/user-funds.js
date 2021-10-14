@@ -31,6 +31,7 @@ const UserFunds = (props) => {
     nodeInfoClient().getSelfBalance({}, (err, res) => {
       if (err) {
         console.log(err);
+        NotificationManager.error(err.message);
       }
       if (res) {
         if (res.walletConfirmedSat) {

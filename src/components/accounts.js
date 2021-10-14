@@ -46,9 +46,11 @@ const Accounts = (props) => {
           { deadline: deadline.getTime() },
           (err, res) => {
             if (err) {
+              console.log(err);
               if (Date.now() < deadline) {
-                NotificationManager.error(err.message);
-                console.log(err);
+                NotificationManager.error(
+                  "Could not reach c13n backend"
+                );
               } else {
                 NotificationManager.error(err.message);
               }
@@ -212,7 +214,11 @@ const Accounts = (props) => {
             return e.key === "Enter"
               ? e.shiftKey
                 ? undefined
-                : credentialsModalLogin({ url: urlToAdd, address: "", lastActive: 0 })
+                : credentialsModalLogin({
+                  url: urlToAdd,
+                  address: "",
+                  lastActive: 0,
+                })
               : undefined;
           }}
         />

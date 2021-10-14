@@ -414,6 +414,7 @@ const ChatHistoryInput = (props) => {
             },
             (err, res) => {
               if (err) {
+                NotificationManager.error("Could not send message");
                 console.log(err);
               }
               if (res) {

@@ -285,7 +285,6 @@ const ChatHistory = (props) => {
         if (async_selectedDiscusion.id === discussionId) {
           if (chatHistory.length === 0) {
             setNoMoreHistory(true);
-            setPageLoaded(true);
           }
           props.setChatHistory((oldHistory) => {
             let res = [...oldHistory];
@@ -298,7 +297,6 @@ const ChatHistory = (props) => {
       .on("error", (e) => {
         if(e.code == 13) {
           setNoMoreHistory(true);
-          setPageLoaded(true);
         }
         console.log("err", e);
       })
