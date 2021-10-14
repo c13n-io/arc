@@ -186,17 +186,17 @@ const GroupChat = (props) => {
                   onKeyDown={
                     groupFormIsValid
                       ? (e) => {
-                          return e.key === "Enter"
-                            ? e.shiftKey
-                              ? undefined
-                              : searchUsersByAlias()
-                            : undefined;
-                        }
+                        return e.key === "Enter"
+                          ? e.shiftKey
+                            ? undefined
+                            : searchUsersByAlias()
+                          : undefined;
+                      }
                       : () => (
-                          <p className="error-validation">
+                        <p className="error-validation">
                             Minimum 4 characters
-                          </p>
-                        )
+                        </p>
+                      )
                   }
                   className="group-chat-input"
                 />
@@ -235,8 +235,8 @@ const GroupChat = (props) => {
                   let inDiscussion =
                     props.discussions.length !== 0
                       ? props.discussions.find((elem) => {
-                          return elem.participantsList.includes(item.address);
-                        })
+                        return elem.participantsList.includes(item.address);
+                      })
                       : false;
                   return (
                     <List.Item className="userSearchContainer">

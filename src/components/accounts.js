@@ -215,10 +215,10 @@ const Accounts = (props) => {
               ? e.shiftKey
                 ? undefined
                 : credentialsModalLogin({
-                    url: urlToAdd,
-                    address: "",
-                    lastActive: 0,
-                  })
+                  url: urlToAdd,
+                  address: "",
+                  lastActive: 0,
+                })
               : undefined;
           }}
         />

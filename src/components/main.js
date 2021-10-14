@@ -513,12 +513,12 @@ const Main = () => {
                   }: ${
                     !message.content
                       ? `Sent you ${cryptoUtils.msatToCurrentCryptoUnit(
-                          mainProps,
-                          res.receivedMessage.amtMsat
-                        )}${selectedCryptoUnit}`
+                        mainProps,
+                        res.receivedMessage.amtMsat
+                      )}${selectedCryptoUnit}`
                       : message.content.length < 30
-                      ? message.content
-                      : message.content.substring(0, 25) + "..."
+                        ? message.content
+                        : message.content.substring(0, 25) + "..."
                   }`,
                   {
                     icon: c13nLogo,
@@ -533,12 +533,12 @@ const Main = () => {
                     `${
                       res.receivedMessage.payload === ""
                         ? `Sent you ${cryptoUtils.msatToCurrentCryptoUnit(
-                            mainProps,
-                            res.receivedMessage.amtMsat
-                          )}${selectedCryptoUnit}`
+                          mainProps,
+                          res.receivedMessage.amtMsat
+                        )}${selectedCryptoUnit}`
                         : res.receivedMessage.payload.length < 20
-                        ? res.receivedMessage.payload
-                        : res.receivedMessage.payload.substring(0, 15) + "..."
+                          ? res.receivedMessage.payload
+                          : res.receivedMessage.payload.substring(0, 15) + "..."
                     }`,
                     `${alias || "Unknown"}:`,
                     4000,
