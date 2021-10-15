@@ -184,6 +184,7 @@ const Side = (props) => {
             >
               {props.selfInfo ? props.selfInfo.alias : "You"}
             </span>
+            <span className="side-user-info-name-navigationDots">...</span>
           </span>
           <div id="currentFundsWrapper" className="currentFundsWrapper">
             <span id="currentFundsWrapperChange">
