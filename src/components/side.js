@@ -110,7 +110,7 @@ const Side = (props) => {
       } `}
     >
       <Dropdown
-        trigger="click"
+        trigger="hover"
         overlay={
           <Menu>
             <Menu.Item
