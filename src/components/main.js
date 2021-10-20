@@ -581,9 +581,9 @@ const Main = () => {
     <>
       <div
         className="main-page"
-        // onClick={() => {
-        //   Notification.requestPermission();
-        // }}
+        onClick={() => {
+          Notification.requestPermission();
+        }}
       >
         <NotificationContainer
           enterTimeout={smoothAnimations ? 200 : 0}
