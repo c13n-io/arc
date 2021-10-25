@@ -574,6 +574,11 @@ const Main = () => {
     }
   }, [msgRxUp]);
 
+  // This funciton is used in order to test that the notifications are working as expected.
+  const showTestNotification = () => {
+    NotificationManager.success("copied", "", 1000);
+  };
+
   /**
    * The main page JSX.
    */
@@ -581,9 +586,13 @@ const Main = () => {
     <>
       <div
         className="main-page"
-        onClick={() => {
-          Notification.requestPermission();
-        }}
+        onClick={
+          !("Notification" in window)
+            ? console.log("This browser does not support notifications.")
+            : () => {
+              Notification.requestPermission();
+            }
+        }
       >
         <NotificationContainer
           enterTimeout={smoothAnimations ? 200 : 0}
