@@ -589,13 +589,7 @@ const Main = () => {
         onClick={
           !("Notification" in window)
             ? console.log("This browser does not support notifications.")
-            : // : () => {
-          //     Notification.requestPermission().then(function (result) {
-          //       console.log(
-          //         `the access to the browser notifications has been ${result}`
-          //       );
-          //     });
-            () => {
+            : () => {
               Notification.requestPermission();
             }
         }
