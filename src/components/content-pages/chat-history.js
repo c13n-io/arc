@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import {
   List,
   Divider,
@@ -38,6 +38,7 @@ import {
 } from "../../utils/discussion-utils";
 import theme from "../../style/theme";
 import "./chat-history.css";
+import { JsonToTable } from "react-json-to-table";
 
 const { GetDiscussionHistoryResponse } = require("../../rpc/rpc_pb");
 const cryptoUtils = require("../../utils/crypto-utils");
@@ -57,6 +58,7 @@ const ChatHistory = (props) => {
 
   const [feeModalVisible, setFeeModalVisible] = useState(false);
   const [statisticsModalVisible, setStatisticsModalVisible] = useState(false);
+  const [messageInfoModalVisible, setMessageInfoModalVisible] = useState(false);
   const [userPreviewVisible, setUserPreviewVisible] = useState(false);
   const [userPreviewUser, setUserPreviewUser] = useState();
 
@@ -65,6 +67,19 @@ const ChatHistory = (props) => {
   const [pageLoaded, setPageLoaded] = useState(false);
 
   const [anonymousBucket, setAnonymousBucket] = useState(false);
+
+  const selectedMessageInfoData = [
+    { id: "", type: "", amtMsat: "", description: "", content: "", v: "" },
+  ];
+
+  const [selectedMessageInfo, setSelectedMessageInfo] = useState(
+    selectedMessageInfoData
+  );
+
+  // this function calculates store the payload of the selectedMessage in order to be displayed
+  const selectedMessageInfoHandler = () => {
+    setSelectedMessageInfo(JSON.parse(selectedMessage.payload));
+  };
 
   const chatHistoryHeaderProps = {
     anonymousBucket,
@@ -75,18 +90,18 @@ const ChatHistory = (props) => {
     <>
       {props.selectedDiscussion.participantsList.length > 1
         ? generateIdenticon(
-          concatUserAddresses(props, [
-            props.selfInfo.address,
-            ...props.selectedDiscussion.participantsList,
-          ]),
-          50
-        )
+            concatUserAddresses(props, [
+              props.selfInfo.address,
+              ...props.selectedDiscussion.participantsList,
+            ]),
+            50
+          )
         : generateIdenticon(
-          concatUserAddresses(props, [
-            props.selectedDiscussion.participantsList,
-          ]),
-          50
-        )}
+            concatUserAddresses(props, [
+              props.selectedDiscussion.participantsList,
+            ]),
+            50
+          )}
     </>
   );
 
@@ -124,6 +139,8 @@ const ChatHistory = (props) => {
     );
   };
 
+  let kati = {};
+
   /**
    * Calculates alignment for message text based on the current loaded chatLayout setting.
    * @param {*} item The chat history message object.
@@ -131,12 +148,12 @@ const ChatHistory = (props) => {
    */
   const calculateTextAlign = (item) => {
     switch (props.chatLayout) {
-    case "normal":
-      return findSenderName(item) === props.selfInfo.alias ? "right" : "left";
-    case "left":
-      return "left";
-    case "right":
-      return "right";
+      case "normal":
+        return findSenderName(item) === props.selfInfo.alias ? "right" : "left";
+      case "left":
+        return "left";
+      case "right":
+        return "right";
     }
   };
 
@@ -147,14 +164,14 @@ const ChatHistory = (props) => {
    */
   const calculateFlexRowDirection = (item) => {
     switch (props.chatLayout) {
-    case "normal":
-      return findSenderName(item) === props.selfInfo.alias
-        ? "row-reverse"
-        : "row";
-    case "left":
-      return "row";
-    case "right":
-      return "row-reverse";
+      case "normal":
+        return findSenderName(item) === props.selfInfo.alias
+          ? "row-reverse"
+          : "row";
+      case "left":
+        return "row";
+      case "right":
+        return "row-reverse";
     }
     return findSenderName(item) === props.selfInfo.alias
       ? "row-reverse"
@@ -254,7 +271,7 @@ const ChatHistory = (props) => {
      * message with id == 0, we need to declare reverse = true in order
      * for backend to normally return the response
      */
-    if(props.selectedDiscussion.lastMsgId == 0) {
+    if (props.selectedDiscussion.lastMsgId == 0) {
       reverse = false;
     }
     let async_selectedDiscusion;
@@ -264,7 +281,7 @@ const ChatHistory = (props) => {
     });
     let chatHistory = [];
     let previousId = !fresh ? props.chatHistory[0].id - 1 : 0;
-    if(previousId < 0) {
+    if (previousId < 0) {
       previousId = 0;
     }
     return await discussionClient()
@@ -295,7 +312,7 @@ const ChatHistory = (props) => {
         }
       })
       .on("error", (e) => {
-        if(e.code == 13) {
+        if (e.code == 13) {
           setNoMoreHistory(true);
         }
         console.log("err", e);
@@ -674,9 +691,9 @@ const ChatHistory = (props) => {
                                           ? findSenderName(item)
                                           : "everyone"
                                         : concatUserNames(props, [
-                                          props.selectedDiscussion
-                                            .participantsList[0],
-                                        ])}
+                                            props.selectedDiscussion
+                                              .participantsList[0],
+                                          ])}
                                     </span>
                                   </span>
                                 </span>
@@ -776,15 +793,43 @@ const ChatHistory = (props) => {
               />
             </footer>
           </Layout>
+
           <Modal
             visible={!!feeModalVisible}
             title={
-              selectedMessage?.sender == props.selfInfo.address
-                ? `Received by ${concatUserNames(
-                  props,
-                  routesToAddresses(selectedMessage?.paymentRoutesList)
-                )}`
-                : "Received by you"
+              selectedMessage?.sender == props.selfInfo.address ? (
+                <div className="chat-history-feeModal">
+                  <p className="chat-history-feeModal-text">
+                    Received by{" "}
+                    {concatUserNames(
+                      props,
+                      routesToAddresses(selectedMessage?.paymentRoutesList)
+                    )}
+                  </p>
+                  <Button
+                    className="chat-history-feeModal-button"
+                    onClick={() => {
+                      setMessageInfoModalVisible(true),
+                        selectedMessageInfoHandler();
+                    }}
+                  >
+                    Info
+                  </Button>
+                </div>
+              ) : (
+                <div className="chat-history-feeModal">
+                  <p className="chat-history-feeModal-text">Received by you</p>
+                  <Button
+                    className="chat-history-feeModal-button"
+                    onClick={() => {
+                      setMessageInfoModalVisible(true),
+                        selectedMessageInfoHandler();
+                    }}
+                  >
+                    Info
+                  </Button>
+                </div>
+              )
             }
             footer={[
               <span key="" className="chat-history-footer-span">
@@ -836,6 +881,18 @@ const ChatHistory = (props) => {
             ) : (
               "You can not retrieve payment information for received messages"
             )}
+          </Modal>
+          <Modal
+            title={"Message information"}
+            visible={messageInfoModalVisible}
+            onOk={() => {
+              setMessageInfoModalVisible(false);
+            }}
+            onCancel={() => {
+              setMessageInfoModalVisible(false);
+            }}
+          >
+            <JsonToTable json={selectedMessageInfo} />
           </Modal>
           <UserPreview
             {...props}
