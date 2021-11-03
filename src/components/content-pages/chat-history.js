@@ -68,13 +68,7 @@ const ChatHistory = (props) => {
 
   const [anonymousBucket, setAnonymousBucket] = useState(false);
 
-  const selectedMessageInfoData = [
-    { id: "", type: "", amtMsat: "", description: "", content: "", v: "" },
-  ];
-
-  const [selectedMessageInfo, setSelectedMessageInfo] = useState(
-    selectedMessageInfoData
-  );
+  const [selectedMessageInfo, setSelectedMessageInfo] = useState();
 
   // this function calculates store the payload of the selectedMessage in order to be displayed
   const selectedMessageInfoHandler = () => {
@@ -138,8 +132,6 @@ const ChatHistory = (props) => {
       }
     );
   };
-
-  let kati = {};
 
   /**
    * Calculates alignment for message text based on the current loaded chatLayout setting.
@@ -813,7 +805,7 @@ const ChatHistory = (props) => {
                       selectedMessageInfoHandler();
                     }}
                   >
-                    Info
+                    Raw Message
                   </Button>
                 </div>
               ) : (
@@ -826,7 +818,7 @@ const ChatHistory = (props) => {
                       selectedMessageInfoHandler();
                     }}
                   >
-                    Info
+                    Raw Message
                   </Button>
                 </div>
               )
