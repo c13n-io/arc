@@ -90,18 +90,18 @@ const ChatHistory = (props) => {
     <>
       {props.selectedDiscussion.participantsList.length > 1
         ? generateIdenticon(
-            concatUserAddresses(props, [
-              props.selfInfo.address,
-              ...props.selectedDiscussion.participantsList,
-            ]),
-            50
-          )
+          concatUserAddresses(props, [
+            props.selfInfo.address,
+            ...props.selectedDiscussion.participantsList,
+          ]),
+          50
+        )
         : generateIdenticon(
-            concatUserAddresses(props, [
-              props.selectedDiscussion.participantsList,
-            ]),
-            50
-          )}
+          concatUserAddresses(props, [
+            props.selectedDiscussion.participantsList,
+          ]),
+          50
+        )}
     </>
   );
 
@@ -148,12 +148,12 @@ const ChatHistory = (props) => {
    */
   const calculateTextAlign = (item) => {
     switch (props.chatLayout) {
-      case "normal":
-        return findSenderName(item) === props.selfInfo.alias ? "right" : "left";
-      case "left":
-        return "left";
-      case "right":
-        return "right";
+    case "normal":
+      return findSenderName(item) === props.selfInfo.alias ? "right" : "left";
+    case "left":
+      return "left";
+    case "right":
+      return "right";
     }
   };
 
@@ -164,14 +164,14 @@ const ChatHistory = (props) => {
    */
   const calculateFlexRowDirection = (item) => {
     switch (props.chatLayout) {
-      case "normal":
-        return findSenderName(item) === props.selfInfo.alias
-          ? "row-reverse"
-          : "row";
-      case "left":
-        return "row";
-      case "right":
-        return "row-reverse";
+    case "normal":
+      return findSenderName(item) === props.selfInfo.alias
+        ? "row-reverse"
+        : "row";
+    case "left":
+      return "row";
+    case "right":
+      return "row-reverse";
     }
     return findSenderName(item) === props.selfInfo.alias
       ? "row-reverse"
@@ -691,9 +691,9 @@ const ChatHistory = (props) => {
                                           ? findSenderName(item)
                                           : "everyone"
                                         : concatUserNames(props, [
-                                            props.selectedDiscussion
-                                              .participantsList[0],
-                                          ])}
+                                          props.selectedDiscussion
+                                            .participantsList[0],
+                                        ])}
                                     </span>
                                   </span>
                                 </span>
@@ -810,7 +810,7 @@ const ChatHistory = (props) => {
                     className="chat-history-feeModal-button"
                     onClick={() => {
                       setMessageInfoModalVisible(true),
-                        selectedMessageInfoHandler();
+                      selectedMessageInfoHandler();
                     }}
                   >
                     Info
@@ -823,7 +823,7 @@ const ChatHistory = (props) => {
                     className="chat-history-feeModal-button"
                     onClick={() => {
                       setMessageInfoModalVisible(true),
-                        selectedMessageInfoHandler();
+                      selectedMessageInfoHandler();
                     }}
                   >
                     Info
