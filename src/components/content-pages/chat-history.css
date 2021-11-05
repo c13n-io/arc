@@ -139,6 +139,22 @@
   line-height: 120%;
 }
 
+.chat-history-feeModal {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  align-content: center;
+}
+
+.chat-history-feeModal-text {
+  margin: 0 2rem 0 0;
+  display: grid;
+  align-content: center;
+}
+
+.chat-history-feeModal-button {
+  background-color: rgb(85, 85, 207) !important;
+}
+
 .chat-history-padding {
   padding-left: 4px;
 }
@@ -157,4 +173,8 @@
   margin-left: 5px;
   color: yello;
   cursor: pointer;
+}
+
+.json-to-table tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0) !important;
 }
