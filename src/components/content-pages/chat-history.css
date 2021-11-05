@@ -176,5 +176,5 @@
 }
 
 .json-to-table tr:nth-child(even) {
-  background-color: none;
+  background-color: rgba(0, 0, 0, 0) !important;
 }

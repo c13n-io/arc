@@ -884,7 +884,9 @@ const ChatHistory = (props) => {
               setMessageInfoModalVisible(false);
             }}
           >
-            <JsonToTable json={selectedMessageInfo} />
+            <JsonToTable
+              json={selectedMessageInfo}
+            />
           </Modal>
           <UserPreview
             {...props}
