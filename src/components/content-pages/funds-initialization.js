@@ -49,12 +49,12 @@ const FundsInitialization = (props) => {
    */
   const getAddress = () => {
     switch (mode) {
-    case "auto":
-      return props.chainInfo?.network === "testnet" ? testnetURI : mainnetURI;
-    case "basic":
-      return lightningAddress;
-    case "advanced":
-      return lightningAddress;
+      case "auto":
+        return props.chainInfo?.network === "testnet" ? testnetURI : mainnetURI;
+      case "basic":
+        return lightningAddress;
+      case "advanced":
+        return lightningAddress;
     }
   };
 
@@ -247,12 +247,12 @@ const FundsInitialization = (props) => {
               defaultActiveKey="1"
               onChange={(e) => {
                 switch (e) {
-                case "1":
-                  setMode("basic");
-                  break;
-                case "2":
-                  setMode("advanced");
-                  break;
+                  case "1":
+                    setMode("basic");
+                    break;
+                  case "2":
+                    setMode("advanced");
+                    break;
                 }
               }}
             >
