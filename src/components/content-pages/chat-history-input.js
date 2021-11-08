@@ -203,7 +203,6 @@ const ChatHistoryInput = (props) => {
               props.updateLastMessageSeen(props.chatHistory);
               props.updateChatScroll();
               setSelectedInput("text");
-              setEmojiPickerActive(false);
             }
           }}
           onChange={(e) => {
@@ -247,6 +246,9 @@ const ChatHistoryInput = (props) => {
               onClick={() => {
                 setEmojiPickerActive(!emojiPickerActive);
               }}
+              onBlur={() => {
+                setEmojiPickerActive(false);
+              }}
             />
           </div>
         </div>
@@ -289,7 +291,6 @@ const ChatHistoryInput = (props) => {
               onFocus={() => {
                 setSelectedInput("crypto");
                 selectAmountInputText();
-                setEmojiPickerActive(false);
               }}
               className="chat-history-footer-input-addAmount-amount"
               style={{
