@@ -3,15 +3,58 @@
   border: none !important;
 }
 
-.funds-initialization-input {
-  border: none !important;
-  border-bottom: 1px solid gray;
-}
-
 .funds-initialization-suggested {
   line-height: 0px;
   left: 400px;
   bottom: 275px;
   position: relative;
-  color: gray;
+  color: rgb(122, 113, 113);
+}
+
+.funds-initialization-amount {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr repeat(2, min-content);
+  width: 100%;
+}
+
+.funds-initialization-amount-divider {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.funds-initialization-amount-slider {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+
+.funds-initialization-amount-input {
+  grid-column: 1/2;
+  grid-row: 3/4;
+  border: none !important;
+  border-bottom: 1px solid rgb(70, 64, 64) !important;
+}
+
+.funds-initialization-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr min-content;
+  width: 100%;
+}
+
+.funds-initialization-info-divider {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.funds-initialization-info-input {
+  grid-column: 1/2;
+  grid-row: 2/3;
+  border: none !important;
+  border-bottom: 1px solid rgb(70, 64, 64) !important;
+}
+
+.ant-divider-horizontal.ant-divider-with-text:after,
+.ant-divider-horizontal.ant-divider-with-text:before {
+  transform: translateY(0%) !important;
 }
