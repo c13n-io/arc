@@ -246,6 +246,9 @@ const ChatHistoryInput = (props) => {
               onClick={() => {
                 setEmojiPickerActive(!emojiPickerActive);
               }}
+              onBlur={() => {
+                setEmojiPickerActive(false);
+              }}
             />
           </div>
         </div>
