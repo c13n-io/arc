@@ -103,96 +103,139 @@ const OpenChannel = (props) => {
           defaultActiveKey="1"
           onChange={(e) => {
             switch (e) {
-            case "1":
-              setMode("basic");
-              break;
-            case "2":
-              setMode("advanced");
-              break;
+              case "1":
+                setMode("basic");
+                break;
+              case "2":
+                setMode("advanced");
+                break;
             }
           }}
         >
           <Tabs.TabPane key="1" tab="Basic">
             <Form layout="vertical">
               <Form.Item>
-                <Divider orientation="left">Node URI</Divider>
-                <Input
-                  value={lightningAddress}
-                  onChange={(e) => {
-                    setLightningAddress(e.target.value);
-                  }}
-                  className="open-channel-input"
-                />
+                <div className="open-channel-item">
+                  <Divider
+                    orientation="left"
+                    className="open-channel-item-text"
+                  >
+                    Node URI
+                  </Divider>
+                  <Input
+                    value={lightningAddress}
+                    onChange={(e) => {
+                      setLightningAddress(e.target.value);
+                    }}
+                    className="open-channel-item-input"
+                  />
+                </div>
               </Form.Item>
               <Form.Item>
-                <Divider orientation="left">
-                  Amount ({props.selectedCryptoUnit})
-                </Divider>
-                <Input
-                  value={amount.toString()}
-                  onChange={(e) => {
-                    setAmount(parseFloat(e.target.value));
-                  }}
-                  className="open-channel-input"
-                />
+                <div className="open-channel-item">
+                  <Divider
+                    orientation="left"
+                    className="open-channel-item-text"
+                  >
+                    Amount ({props.selectedCryptoUnit})
+                  </Divider>
+                  <Input
+                    value={amount.toString()}
+                    onChange={(e) => {
+                      setAmount(parseFloat(e.target.value));
+                    }}
+                    className="open-channel-item-input"
+                  />
+                </div>
               </Form.Item>
             </Form>
           </Tabs.TabPane>
           <Tabs.TabPane key="2" tab="Advanced">
             <Form layout="vertical">
               <Form.Item>
-                <Divider orientation="left">Node URI</Divider>
-                <Input
-                  value={lightningAddress}
-                  onChange={(e) => {
-                    setLightningAddress(e.target.value);
-                  }}
-                  className="open-channel-input"
-                />
+                <div className="open-channel-item">
+                  <Divider
+                    orientation="left"
+                    className="open-channel-item-text"
+                  >
+                    Node URI
+                  </Divider>
+                  <Input
+                    value={lightningAddress}
+                    onChange={(e) => {
+                      setLightningAddress(e.target.value);
+                    }}
+                    className="open-channel-item-input"
+                  />
+                </div>
               </Form.Item>
               <Form.Item>
-                <Divider orientation="left">
-                  Amount ({props.selectedCryptoUnit})
-                </Divider>
-                <Input
-                  value={amount.toString()}
-                  onChange={(e) => {
-                    setAmount(parseFloat(e.target.value));
-                  }}
-                  className="open-channel-input"
-                />
+                <div className="open-channel-item">
+                  <Divider
+                    orientation="left"
+                    className="open-channel-item-text"
+                  >
+                    Amount ({props.selectedCryptoUnit})
+                  </Divider>
+                  <Input
+                    value={amount.toString()}
+                    onChange={(e) => {
+                      setAmount(parseFloat(e.target.value));
+                    }}
+                    className="open-channel-item-input"
+                  />
+                </div>
               </Form.Item>
               <Form.Item>
-                <Divider orientation="left">Push Amount</Divider>
-                <Input
-                  value={pushAmount.toString()}
-                  onChange={(e) => {
-                    setPushAmount(parseFloat(e.target.value));
-                  }}
-                  className="open-channel-input"
-                />
+                <div className="open-channel-item">
+                  <Divider
+                    orientation="left"
+                    className="open-channel-item-text"
+                  >
+                    Push Amount
+                  </Divider>
+                  <Input
+                    value={pushAmount.toString()}
+                    onChange={(e) => {
+                      setPushAmount(parseFloat(e.target.value));
+                    }}
+                    className="open-channel-item-input"
+                  />
+                </div>
               </Form.Item>
               <Form.Item>
-                <Divider orientation="left">
-                  Minimum Input Confirmations
-                </Divider>
-                <Input
-                  value={minimumInputConfirmations.toString()}
-                  onChange={(e) => {
-                    setMinimumInputConfirmations(parseFloat(e.target.value));
-                  }}
-                  className="open-channel-input"
-                />
+                <div className="open-channel-item">
+                  <Divider
+                    orientation="left"
+                    className="open-channel-item-text"
+                  >
+                    Minimum Input Confirmations
+                  </Divider>
+                  <Input
+                    value={minimumInputConfirmations.toString()}
+                    onChange={(e) => {
+                      setMinimumInputConfirmations(parseFloat(e.target.value));
+                    }}
+                    className="open-channel-item-input"
+                  />
+                </div>
               </Form.Item>
               <Form.Item>
-                <Divider orientation="left">Target Confirmation Blocks</Divider>
-                <Input
-                  value={targetConfirmationBlocks.toString()}
-                  onChange={(e) => {
-                    setTargetConfirmationBlocks(parseFloat(e.target.value));
-                  }}
-                  className="open-channel-input"
-                />
+                <div className="open-channel-item">
+                  <Divider
+                    orientation="left"
+                    className="open-channel-item-text"
+                  >
+                    Target Confirmation Blocks
+                  </Divider>
+                  <Input
+                    value={targetConfirmationBlocks.toString()}
+                    onChange={(e) => {
+                      setTargetConfirmationBlocks(parseFloat(e.target.value));
+                    }}
+                    className="open-channel-item-input"
+                  />
+                </div>
               </Form.Item>
             </Form>
           </Tabs.TabPane>
