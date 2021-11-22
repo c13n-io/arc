@@ -103,12 +103,12 @@ const OpenChannel = (props) => {
           defaultActiveKey="1"
           onChange={(e) => {
             switch (e) {
-              case "1":
-                setMode("basic");
-                break;
-              case "2":
-                setMode("advanced");
-                break;
+            case "1":
+              setMode("basic");
+              break;
+            case "2":
+              setMode("advanced");
+              break;
             }
           }}
         >
