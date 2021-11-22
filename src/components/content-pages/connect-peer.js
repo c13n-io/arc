@@ -8,6 +8,7 @@ import nodeInfoClient from "../../services/nodeInfoServices";
 import { NotificationManager } from "react-notifications";
 
 import "./chat-history.css";
+import "./open-channel.css";
 
 /**
  * This component represents the modal responsible for connecting to other peers on the network.
@@ -54,14 +55,18 @@ const ConnectPeer = (props) => {
       >
         <Form layout="vertical">
           <Form.Item>
-            <Divider orientation="left">Node URI</Divider>
-            <Input
-              value={lightningAddress}
-              onChange={(e) => {
-                setLightningAddress(e.target.value);
-              }}
-              className="connect-peer-input"
-            />
+            <div className="open-channel-item">
+              <Divider orientation="left" className="open-channel-item-text">
+                Node URI
+              </Divider>
+              <Input
+                value={lightningAddress}
+                onChange={(e) => {
+                  setLightningAddress(e.target.value);
+                }}
+                className="open-channel-item-input"
+              />
+            </div>
           </Form.Item>
         </Form>
       </Modal>

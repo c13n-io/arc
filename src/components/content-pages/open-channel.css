@@ -1,4 +1,23 @@
-.open-channel-input {
+/* .open-channel-input {
   border: none;
   border-bottom: 1px solid gray;
+} */
+
+.open-channel-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr min-content;
+  width: 100%;
+}
+
+.open-channel-item-text {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+.open-channel-item-input {
+  grid-column: 1/2;
+  grid-row: 2/3;
+  border: none !important;
+  border-bottom: 1px solid rgb(70, 64, 64) !important;
 }

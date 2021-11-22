@@ -270,76 +270,112 @@ const FundsInitialization = (props) => {
                   display: mode !== "auto" ? "inherit" : "none",
                 }}
               >
-                <Divider orientation="left">Node URI</Divider>
-                <Input
-                  value={lightningAddress}
-                  onChange={(e) => {
-                    setLightningAddress(e.target.value);
-                  }}
-                  className="funds-initialization-input"
-                />
+                <div className="funds-initialization-info">
+                  <Divider
+                    className="funds-initialization-info-divider"
+                    orientation="left"
+                  >
+                    Node URI
+                  </Divider>
+                  <Input
+                    className="funds-initialization-info-input"
+                    value={lightningAddress}
+                    onChange={(e) => {
+                      setLightningAddress(e.target.value);
+                    }}
+                    className="funds-initialization-info-input"
+                  />
+                </div>
               </Form.Item>
+
               <Form.Item>
-                <Divider orientation="left">Amount (sat)</Divider>
-                <Slider
-                  min={minChannelAmount}
-                  max={props.balance?.walletConfirmedSat}
-                  defaultValue={defaultAmount}
-                  onChange={(e) => {
-                    setAmount(e);
-                  }}
-                />
-                <Input
-                  value={amount}
-                  onChange={(e) => {
-                    setAmount(parseFloat(e.target.value));
-                  }}
-                  className="funds-initialization-input"
-                />
+                <div className="funds-initialization-amount">
+                  <Divider
+                    className="funds-initialization-amount-divider"
+                    orientation="left"
+                  >
+                    Amount (sat)
+                  </Divider>
+                  <Slider
+                    className="funds-initialization-amount-slider"
+                    min={minChannelAmount}
+                    max={props.balance?.walletConfirmedSat}
+                    defaultValue={defaultAmount}
+                    onChange={(e) => {
+                      setAmount(e);
+                    }}
+                  />
+                  <Input
+                    value={amount}
+                    onChange={(e) => {
+                      setAmount(parseFloat(e.target.value));
+                    }}
+                    className="funds-initialization-amount-input"
+                  />
+                </div>
               </Form.Item>
               <Form.Item
                 style={{
                   display: mode === "advanced" ? "inherit" : "none",
                 }}
               >
-                <Divider orientation="left">Push Amount (sat)</Divider>
-                <Input
-                  value={pushAmount.toString()}
-                  onChange={(e) => {
-                    setPushAmount(parseFloat(e.target.value));
-                  }}
-                  className="funds-initialization-input"
-                />
+                <div className="funds-initialization-info">
+                  <Divider
+                    className="funds-initialization-info-divider"
+                    orientation="left"
+                  >
+                    Push Amount (sat)
+                  </Divider>
+                  <Input
+                    value={pushAmount.toString()}
+                    onChange={(e) => {
+                      setPushAmount(parseFloat(e.target.value));
+                    }}
+                    className="funds-initialization-info-input"
+                  />
+                </div>
               </Form.Item>
               <Form.Item
                 style={{
                   display: mode === "advanced" ? "inherit" : "none",
                 }}
               >
-                <Divider orientation="left">
-                  Minimum Input Confirmations
-                </Divider>
-                <Input
-                  value={minimumInputConfirmations.toString()}
-                  onChange={(e) => {
-                    setMinimumInputConfirmations(parseFloat(e.target.value));
-                  }}
-                  className="funds-initialization-input"
-                />
+                <div className="funds-initialization-info">
+                  <Divider
+                    className="funds-initialization-info-divider"
+                    orientation="left"
+                  >
+                    Minimum Input Confirmations
+                  </Divider>
+                  <Input
+                    value={minimumInputConfirmations.toString()}
+                    onChange={(e) => {
+                      setMinimumInputConfirmations(parseFloat(e.target.value));
+                    }}
+                    className="funds-initialization-info-input"
+                  />
+                </div>
               </Form.Item>
               <Form.Item
                 style={{
                   display: mode === "advanced" ? "inherit" : "none",
                 }}
               >
-                <Divider orientation="left">Target Confirmation Blocks</Divider>
-                <Input
-                  value={targetConfirmationBlocks.toString()}
-                  onChange={(e) => {
-                    setTargetConfirmationBlocks(parseFloat(e.target.value));
-                  }}
-                  className="funds-initialization-input"
-                />
+                <div className="funds-initialization-info">
+                  <Divider
+                    className="funds-initialization-info-divider"
+                    orientation="left"
+                  >
+                    Target Confirmation Blocks
+                  </Divider>
+                  <Input
+                    value={targetConfirmationBlocks.toString()}
+                    onChange={(e) => {
+                      setTargetConfirmationBlocks(parseFloat(e.target.value));
+                    }}
+                    className="funds-initialization-info-input"
+                  />
+                </div>
               </Form.Item>
             </Form>
           </Tabs.TabPane>
