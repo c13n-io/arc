@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/arc/static/css/main.67b4cadd.chunk.css",
+    "main.js": "/arc/static/js/main.be44787a.chunk.js",
+    "main.js.map": "/arc/static/js/main.be44787a.chunk.js.map",
+    "runtime-main.js": "/arc/static/js/runtime-main.793cdf02.js",
+    "runtime-main.js.map": "/arc/static/js/runtime-main.793cdf02.js.map",
+    "static/css/2.1e2a0535.chunk.css": "/arc/static/css/2.1e2a0535.chunk.css",
+    "static/js/2.08ac8f30.chunk.js": "/arc/static/js/2.08ac8f30.chunk.js",
+    "static/js/2.08ac8f30.chunk.js.map": "/arc/static/js/2.08ac8f30.chunk.js.map",
+    "index.html": "/arc/index.html",
+    "static/css/2.1e2a0535.chunk.css.map": "/arc/static/css/2.1e2a0535.chunk.css.map",
+    "static/css/main.67b4cadd.chunk.css.map": "/arc/static/css/main.67b4cadd.chunk.css.map",
+    "static/js/2.08ac8f30.chunk.js.LICENSE.txt": "/arc/static/js/2.08ac8f30.chunk.js.LICENSE.txt",
+    "static/media/arc-logo.b26a22a5.png": "/arc/static/media/arc-logo.b26a22a5.png",
+    "static/media/arrow-right.e10cfb42.svg": "/arc/static/media/arrow-right.e10cfb42.svg",
+    "static/media/notification.1187a1b6.mp3": "/arc/static/media/notification.1187a1b6.mp3",
+    "static/media/react-notifications.css": "/arc/static/media/notification.c5d9251e.ttf",
+    "static/media/programize_logo.8a1b915d.png": "/arc/static/media/programize_logo.8a1b915d.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.793cdf02.js",
+    "static/css/2.1e2a0535.chunk.css",
+    "static/js/2.08ac8f30.chunk.js",
+    "static/css/main.67b4cadd.chunk.css",
+    "static/js/main.be44787a.chunk.js"
+  ]
+}
