@@ -11,7 +11,7 @@ import discussionClient from "../services/discussionServices";
 import { version } from "../config/version";
 import generateIdenticon from "../utils/identicon.js";
 import { findUserByAddress } from "../utils/users-utils.js";
-import c13nLogo from "../media/C13N_Logo.png";
+import c13nLogo from "../media/arc-logo.png";
 
 import { NotificationManager } from "react-notifications";
 

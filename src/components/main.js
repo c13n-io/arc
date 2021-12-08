@@ -31,7 +31,7 @@ import {
 
 import { appendToChatHistory } from "../utils/discussion-utils";
 
-import c13nLogo from "../media/C13N_Logo.png";
+import c13nLogo from "../media/arc-logo.png";
 import notificationAudio from "../media/notification.mp3";
 
 import { concatUserNames } from "../utils/discussion-utils";

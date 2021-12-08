@@ -1,6 +1,6 @@
 import React from "react";
 
-import c13nLogo from "../../media/C13N_Logo.png";
+import c13nLogo from "../../media/arc-logo.png";
 import programizeLogo from "../../media/programize_logo.png";
 import "./logo.css";
 import theme from "../../style/theme";

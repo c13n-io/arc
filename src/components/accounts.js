@@ -9,7 +9,7 @@ import { version } from "../config/version";
 import { addToAccounts, removeFromAccounts } from "../utils/accounts-utils";
 
 import "./accounts.css";
-import c13nLogo from "../media/C13N_Logo.png";
+import c13nLogo from "../media/arc-logo.png";
 import generateIdenticon from "../utils/identicon";
 
 const { Version } = require("../rpc/rpc_pb.js");
