@@ -1,7 +1,7 @@
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Contents](#contents)
-  - [Contributing with code to c13n-web](#contributing-with-code-to-c13n-web)
+  - [Contributing with code to arc](#contributing-with-code-to-arc)
     - [We Develop on Github](#we-develop-on-github)
     - [We Use Github Flow model](#we-use-github-flow-model)
     - [Making good commits](#making-good-commits)
@@ -13,7 +13,7 @@
 
 # Contents
 
-## Contributing with code to c13n-web
+## Contributing with code to arc
 
 Any input by the community is welcome, so we want to make the process of contributing as easy as possible. Your contributions may include any of the following:
 
@@ -31,7 +31,7 @@ The desired format & flow for this procedure is as follows:
 
 1. Fork the repo under your namespace (user or organisation). Then clone locally:
 ```
-git clone github.com/<my_namespace>/c13n-web
+git clone github.com/<my_namespace>/arc
 ```
 2. Create a branch from `develop`.
 ```

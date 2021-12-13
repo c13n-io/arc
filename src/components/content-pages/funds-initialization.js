@@ -97,7 +97,7 @@ const FundsInitialization = (props) => {
   return (
     <div>
       <Modal
-        title="Welcome to c13n"
+        title="Welcome to arc"
         visible={props.visible}
         okText={key === "1" ? "Next" : "Open Channel"}
         cancelText={"Don't show again"}

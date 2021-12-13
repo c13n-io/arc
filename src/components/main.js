@@ -31,7 +31,7 @@ import {
 
 import { appendToChatHistory } from "../utils/discussion-utils";
 
-import c13nLogo from "../media/arc-logo.png";
+import arcLogo from "../media/arc-logo.png";
 import notificationAudio from "../media/notification.mp3";
 
 import { concatUserNames } from "../utils/discussion-utils";
@@ -519,7 +519,7 @@ const Main = () => {
                         : message.content.substring(0, 25) + "..."
                   }`,
                   {
-                    icon: c13nLogo,
+                    icon: arcLogo,
                   }
                 );
               }
