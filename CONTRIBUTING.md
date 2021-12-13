@@ -76,7 +76,7 @@ If the commit fixes a reported issue, refer to that bug entry by issue number.
 
 ### gRPC
 
-This app utilizes gRPC to communicate with `c13n-backend`. Currently, the generated `.js` client code for the API's protobuf file is included in the git source code.
+This app utilizes gRPC to communicate with `c13n-go`. Currently, the generated `.js` client code for the API's protobuf file is included in the git source code.
 
 To generate new protobuf javascript client code, you need to have [protoc](https://grpc.io/docs/protoc-installation/) and [grpc-web](https://github.com/grpc/grpc-web/tags) plugin installed.
 
@@ -85,7 +85,7 @@ You can use `make protofile` inside the `src/rpc/` directory to invoke the proto
 ## Reporting Bugs
 
 ### Report bugs using Github's issues
-We use GitHub issues to track public bugs. Report a bug by opening a new [issue]().
+We use GitHub issues to track public bugs. Report a bug by opening a [new issue](https://github.com/c13n-io/arc/issues/new/choose).
 
 ### Write bug reports with detail, background, and sample code
 
