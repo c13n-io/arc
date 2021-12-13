@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   List,
   Divider,
@@ -18,6 +18,8 @@ import {
   CheckOutlined,
   EllipsisOutlined,
 } from "@ant-design/icons";
+import JSONPretty from 'react-json-pretty';
+import 'react-json-pretty/themes/monikai.css';
 
 import MessageInfo from "./message-info";
 import ChatHistoryInput from "./chat-history-input";
@@ -38,7 +40,6 @@ import {
 } from "../../utils/discussion-utils";
 import theme from "../../style/theme";
 import "./chat-history.css";
-import { JsonToTable } from "react-json-to-table";
 
 const { GetDiscussionHistoryResponse } = require("../../rpc/rpc_pb");
 const cryptoUtils = require("../../utils/crypto-utils");
@@ -59,6 +60,7 @@ const ChatHistory = (props) => {
   const [feeModalVisible, setFeeModalVisible] = useState(false);
   const [statisticsModalVisible, setStatisticsModalVisible] = useState(false);
   const [messageInfoModalVisible, setMessageInfoModalVisible] = useState(false);
+  const [rawMessageInfoModalVisible, setRawMessageInfoModalVisible] = useState(false);
   const [userPreviewVisible, setUserPreviewVisible] = useState(false);
   const [userPreviewUser, setUserPreviewUser] = useState();
 
@@ -67,13 +69,6 @@ const ChatHistory = (props) => {
   const [pageLoaded, setPageLoaded] = useState(false);
 
   const [anonymousBucket, setAnonymousBucket] = useState(false);
-
-  const [selectedMessageInfo, setSelectedMessageInfo] = useState();
-
-  // this function calculates store the payload of the selectedMessage in order to be displayed
-  const selectedMessageInfoHandler = () => {
-    setSelectedMessageInfo(JSON.parse(selectedMessage.payload));
-  };
 
   const chatHistoryHeaderProps = {
     anonymousBucket,
@@ -800,9 +795,9 @@ const ChatHistory = (props) => {
                   </p>
                   <Button
                     className="chat-history-feeModal-button"
+                    type="default"
                     onClick={() => {
-                      setMessageInfoModalVisible(true),
-                      selectedMessageInfoHandler();
+                      setRawMessageInfoModalVisible(true);
                     }}
                   >
                     Raw Message
@@ -813,9 +808,9 @@ const ChatHistory = (props) => {
                   <p className="chat-history-feeModal-text">Received by you</p>
                   <Button
                     className="chat-history-feeModal-button"
+                    type="default"
                     onClick={() => {
-                      setMessageInfoModalVisible(true),
-                      selectedMessageInfoHandler();
+                      setRawMessageInfoModalVisible(true);
                     }}
                   >
                     Raw Message
@@ -876,17 +871,16 @@ const ChatHistory = (props) => {
           </Modal>
           <Modal
             title={"Message information"}
-            visible={messageInfoModalVisible}
+            visible={rawMessageInfoModalVisible}
             onOk={() => {
-              setMessageInfoModalVisible(false);
+              setRawMessageInfoModalVisible(false);
             }}
             onCancel={() => {
-              setMessageInfoModalVisible(false);
+              setRawMessageInfoModalVisible(false);
             }}
           >
-            <JsonToTable
-              json={selectedMessageInfo}
-            />
+            Raw data of the arc message
+            <JSONPretty id="json-pretty" data={selectedMessage ? JSON.parse(selectedMessage.payload) : {}}></JSONPretty>
           </Modal>
           <UserPreview
             {...props}
