@@ -9,7 +9,7 @@ import { version } from "../config/version";
 import { addToAccounts, removeFromAccounts } from "../utils/accounts-utils";
 
 import "./accounts.css";
-import c13nLogo from "../media/C13N_Logo.png";
+import arcLogo from "../media/arc-logo.png";
 import generateIdenticon from "../utils/identicon";
 
 const { Version } = require("../rpc/rpc_pb.js");
@@ -106,7 +106,7 @@ const Accounts = (props) => {
   return (
     <div className="login-page">
       <div className="login-page-logo-container">
-        <img src={c13nLogo} className="login-page-logo" />
+        <img src={arcLogo} className="login-page-logo" />
       </div>
       <h3 className="login-page-select">Select a c13n Node</h3>
       <List
@@ -184,7 +184,7 @@ const Accounts = (props) => {
         okButtonProps={{ type: "default" }}
       >
         <div className="login-page-modal-logo-container">
-          <img src={c13nLogo} className="login-page-modal-logo" />
+          <img src={arcLogo} className="login-page-modal-logo" />
         </div>
         <Input
           placeholder="Node Address"
@@ -248,7 +248,7 @@ const Accounts = (props) => {
         cancelButtonProps={{ style: { display: "none" } }}
       >
         <div className="login-page-modal-logo-container">
-          <img src={c13nLogo} className="login-page-modal-logo" />
+          <img src={arcLogo} className="login-page-modal-logo" />
         </div>
         <Input
           placeholder="Username"

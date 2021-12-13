@@ -1,8 +1,8 @@
-![lint](https://github.com/c13n-io/c13n-web/actions/workflows/eslint-check.yml/badge.svg)
+![lint](https://github.com/c13n-io/arc/actions/workflows/eslint-check.yml/badge.svg)
 ![MIT License](https://img.shields.io/badge/license-MIT-%2333BB33)
 ![Version](https://img.shields.io/badge/version-0.0.2-%233333BB)
 
-<h1 align="center">c13n-web</h1>
+<h1 align="center">arc</h1>
 <p align="center">
   <img src="public/logo192.png" alt="drawing" width="100"/>
 </p>
@@ -12,6 +12,7 @@ A web client for messaging and managing money over Bitcoin's Lightning Network b
 </p>
 
 # Contents
+- [Contents](#contents)
 - [Overview](#overview)
 - [Installation](#installation)
   - [Requirements](#requirements)
@@ -22,7 +23,7 @@ A web client for messaging and managing money over Bitcoin's Lightning Network b
 
 # Overview
 
-`c13n-web` is a web client for messaging and managing money over Lightning. It is using the [c13n-go](https://github.com/c13n-io/c13n-go/) API.
+`Arc` is a web client for messaging and managing money over Lightning. It is using the [c13n-go](https://github.com/c13n-io/c13n-go/) API.
 
 # Installation
 ## Requirements
@@ -32,8 +33,8 @@ A web client for messaging and managing money over Bitcoin's Lightning Network b
 ## Steps
 - Clone the source code:
   ```bash
-  git clone https://github.com/c13n-io/c13n-web.git
-  cd c13n-web
+  git clone https://github.com/c13n-io/arc.git
+  cd arc
   ```
 - Fetch and install dependencies:
   ```bash
@@ -41,11 +42,11 @@ A web client for messaging and managing money over Bitcoin's Lightning Network b
   ```
 
 # Usage
-- Start the c13n-web local server:
+- Start the arc local server:
   ```bash
   npm start
   ```
-  c13n-web will be served at http://localhost:3000
+  arc will be served at http://localhost:3000
 # Contributing
 
 If you want to contribute to this project, either by **authoring code** or by **reporting bugs & issues**, make sure to read the [Contribution Guidelines](CONTRIBUTING.md).

@@ -1,13 +1,13 @@
 import React from "react";
 
-import c13nLogo from "../../media/C13N_Logo.png";
+import arcLogo from "../../media/arc-logo.png";
 import programizeLogo from "../../media/programize_logo.png";
 import "./logo.css";
 import theme from "../../style/theme";
 import { DoubleRightOutlined } from "@ant-design/icons";
 
 /**
- * This component represents the static C13N logo page.
+ * This component represents the static arc logo page.
  * It is the default page when application starts up, or the default page in case of erroneous page selection.
  */
 const Logo = (props) => {
@@ -38,7 +38,7 @@ const Logo = (props) => {
           </div>
         </div>
         <div className="welcomePage-logo">
-          <img src={c13nLogo} className="interactiveLogoC13n" />
+          <img src={arcLogo} className="interactiveLogoC13n" />
           <img src={programizeLogo} className="interactiveLogoProgramize" />
         </div>
       </div>

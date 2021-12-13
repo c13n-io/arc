@@ -11,7 +11,7 @@ import discussionClient from "../services/discussionServices";
 import { version } from "../config/version";
 import generateIdenticon from "../utils/identicon.js";
 import { findUserByAddress } from "../utils/users-utils.js";
-import c13nLogo from "../media/C13N_Logo.png";
+import arcLogo from "../media/arc-logo-short.png";
 
 import { NotificationManager } from "react-notifications";
 
@@ -62,9 +62,9 @@ const Side = (props) => {
         }
       });
       if (messageCounter == 0) {
-        document.title = "c13n";
+        document.title = "arc";
       } else {
-        document.title = `*(${messageCounter}) c13n`;
+        document.title = `*(${messageCounter}) arc`;
       }
     }
   };
@@ -218,7 +218,7 @@ const Side = (props) => {
           }}
         >
           <div className="side-button-homePage-c13nLogo-wrapper">
-            <img src={c13nLogo} className="side-button-homePage-c13nLogo" />
+            <img src={arcLogo} className="side-button-homePage-c13nLogo" />
           </div>
 
           <div className="side-button-homePage-text">Home</div>
