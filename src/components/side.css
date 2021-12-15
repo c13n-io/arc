@@ -257,13 +257,10 @@
 }
 
 .discussionsList {
-  max-height: 30vh;
+  max-height: calc(100vh - 500px);
   gap: 2rem;
   overflow-y: scroll;
   --scrollbar-width: 0.5rem;
-  --mask-height: 2rem;
-  padding-bottom: var(--mask-height);
-  padding-top: var(--mask-height);
   padding-right: 1.25rem;
   --mask-image-content: linear-gradient(
     to bottom,

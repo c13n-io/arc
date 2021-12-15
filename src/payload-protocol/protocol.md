@@ -12,7 +12,7 @@
     # payreq_pay: description of payment request fulfillment
     c: "",
     # (optional -- only for payreq) The invoice of the payment request
-    invoice: 0,
+    invoice: "",
     # (optional -- only for message) File / Media attachments
     att: [{
         # Type of attachment

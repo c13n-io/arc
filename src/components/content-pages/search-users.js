@@ -47,7 +47,7 @@ const SearchUsers = (props) => {
 
 
   const enteredAliasIsValid = () => {
-    return enteredAlias.length >= 4;
+    return enteredAlias.length >= 3;
   };
   const aliasInputIsInvalid = () => {
     return !enteredAliasIsValid() && searchAliasTouched;
@@ -229,11 +229,10 @@ const SearchUsers = (props) => {
 
     setSearchAliasTouched(true);
 
-    if (enteredAlias.length < 4) {
+    if (enteredAlias.length < 3) {
       return;
     }
 
-    setEnteredAlias("");
     setSearchAliasTouched(false);
   };
 
@@ -251,11 +250,6 @@ const SearchUsers = (props) => {
 
     setSearchAddressTouched(true);
 
-    if (enteredAddress.length < 4) {
-      return;
-    }
-
-    setEnteredAddress("");
     setSearchAddressTouched(false);
   };
 
@@ -311,7 +305,7 @@ const SearchUsers = (props) => {
                           : undefined;
                       }
                     ) : () => (
-                      <p className="error-validation">Minimum 4 characters</p>
+                      <p className="error-validation">Minimum 3 characters</p>
                     )
                   }
                 />
@@ -330,7 +324,7 @@ const SearchUsers = (props) => {
                 </Button>
               </div>
               {aliasInputIsInvalid() && (
-                <p className="error-validation">Minimum 4 characters</p>
+                <p className="error-validation">Minimum 3 characters</p>
               )}
               <List
                 locale={{
