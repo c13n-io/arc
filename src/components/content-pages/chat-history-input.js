@@ -33,6 +33,7 @@ import {
 } from "../../payload-protocol/parsers";
 import "./chat-history-input.css";
 import ChatButton from "../../media/arrow-right.svg";
+import { createAttachment } from "../../payload-protocol/utils";
 
 const cryptoUtils = require("../../utils/crypto-utils");
 
@@ -53,7 +54,7 @@ const ChatHistoryInput = (props) => {
    * This function sends a payload and the currently entered payload to the current discussion.
    * @param {string} text The payload to send.
    */
-  const sendMessage = async (text) => {
+  const sendMessage = async (text, attachmentList) => {
     const amtMsat = cryptoUtils.currentCryptoAmtToMsat(props, amount);
     const msg = {
       discussionId: props.selectedDiscussion.id,
@@ -63,7 +64,7 @@ const ChatHistoryInput = (props) => {
           : parseInt(amtMsat) > 1000
             ? parseInt(amtMsat)
             : 1000,
-      payload: text,
+      payload: messageToPayload(text, attachmentList),
       options: {
         anonymous: props.anonymousActive,
       },
@@ -215,7 +216,7 @@ const ChatHistoryInput = (props) => {
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
-              sendMessage(messageToPayload(e.target.value));
+              sendMessage(e.target.value);
             }
           }}
           placeholder={`Enter ${
@@ -352,7 +353,7 @@ const ChatHistoryInput = (props) => {
             e.preventDefault();
           }}
           onClick={() => {
-            sendMessage(messageToPayload(messageToSend));
+            sendMessage(messageToSend);
           }}
           className="chat-history-footer-sendButton"
         >
@@ -368,7 +369,7 @@ const ChatHistoryInput = (props) => {
             uploadImage(props);
             break;
           default:
-            sendMessage(messageToPayload(`![](${imageURL})`));
+            sendMessage("", [createAttachment("image", imageURL)]);
           }
           await sleep(1500);
           setImageURL("");
