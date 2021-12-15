@@ -243,7 +243,7 @@ const messageToPayload = (message, attachmentList) => {
 const payreqToPayload = (amtMsat, description) => {
   let messageObj = {
     ...messageCore(),
-    type: "payreq",
+    t: "payreq",
     amtMsat: amtMsat,
     description: description,
     id: Date.now()
@@ -258,7 +258,7 @@ const payreqToPayload = (amtMsat, description) => {
 const payreqPayToPayload = (id) => {
   let messageObj = {
     ...messageCore(),
-    type: "payreq_pay",
+    t: "payreq_pay",
     id: id
   };
   try {
