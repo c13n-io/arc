@@ -1,22 +1,24 @@
 ```js
 {
+    # Name of protocol
+    n: "c13n-cp"
     # Version of protocol
-    version: "0.0.1b",
-    # Type of message
-    type: "{ \
-      message \
-      payreq \
-      payreq_pay \
-      jitsi
-    }",
-    # Content related to object
-    content: "",
-    # File / Media attachments
-    attachments: [{
-        # \Type of attachment
-        type: "image | file",
-        # Location
-        uri: "",
+    v: "0.0.1c",
+    # Type of payload
+    t: "message" | "payreq" | "payreq_pay",
+    # Content related to payload type
+    # message: the message text
+    # payreq: description of payment request
+    # payreq_pay: description of payment request fulfillment
+    c: "",
+    # (optional -- only for payreq) The invoice of the payment request
+    invoice: 0,
+    # (optional -- only for message) File / Media attachments
+    att: [{
+        # Type of attachment
+        t: "image | file",
+        # Location / URL
+        u: "",
         # Metadata
         tags: "lsat",
         # Visibility flag for chat
