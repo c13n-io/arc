@@ -1,7 +1,7 @@
 const createAttachment = (type, uri, tags, show) => {
   return {
-    type: type,
-    uri: uri,
+    t: type,
+    u: uri,
     tags: tags ? tags : '',
     show: show ? show : false
   };

@@ -38,6 +38,13 @@ const renderers = (props) => {
   };
 };
 
+const messageCore = () => {
+  return {
+    n: "c13n-cp",
+    v: version
+  };
+};
+
 /**
  * This function generates the JSX to represent the message inside the chat bubble.
  * @param {} props The global variables.
@@ -53,101 +60,69 @@ const payloadToDom = (props, payload, myMessage, amtMsat) => {
   } catch (err) {
     payloadObj = payload;
   }
-  if (payloadObj.type === undefined) {
+  if (payloadObj.t === undefined) {
     return payload;
   }
-  switch (payloadObj.type) {
+  switch (payloadObj.t) {
   case "message":
-    return payloadObj.content ?
-      <div>
-        <ReactMarkdown
-          source={payloadObj.content}
-          renderers={renderers(props)}
-          disallowedTypes={["paragraph"]}
-          unwrapDisallowed={!!true}
-        />
-        <List
+    return [
+      (payloadObj.c ?
+        <div>
+          <ReactMarkdown
+            source={payloadObj.c}
+            renderers={renderers(props)}
+            disallowedTypes={["paragraph"]}
+            unwrapDisallowed={!!true}
+          />
+        </div>
+        :
+        <div
           style={{
-            display: payloadObj.attachmentList ? 'inherit' : 'none'
-          }}
-          dataSource={payloadObj.attachmentList}
-          renderItem={(item) => {
-            return (
-              <div>
-                <span
-                  style={{
-                    display: cachedImages[item.uri] ? "none" : "inherit",
-                  }}
-                >
-                  <h4>
-                    <b>LSAT Image</b>
-                  </h4>
-                  <Button
-                    type="primary"
-                    onClick={() => {
-                      downloadImage(props, item.uri);
-                    }}
-                  >
-                      Pay & Show
-                  </Button>
-                  <br />
-                  <a>{item.uri}</a>
-                </span>
-                <ChatHistoryImage {...props} src={cachedImages[item.uri]} />
-              </div>
-            );
-          }}
-        />
-      </div>
-      :
-      <div
-        style={{
-          fontSize: '20px',
-          border: '2px solid gray',
-          borderRadius: '5px',
-          padding: '15px'
-        }}
-      >
-        {
-          `You ${myMessage ? 'sent' : 'received'} `
-        }
-        <span
-          style={{
-            color: myMessage ? 'red' : 'green'
+            fontSize: '20px',
+            border: '2px solid gray',
+            borderRadius: '5px',
+            padding: '15px'
           }}
         >
-          {`${cryptoUtils.msatToCurrentCryptoUnit(props, amtMsat)}`}
-        </span>
-        <span>
-          {`${props.selectedCryptoUnit}`}
-        </span>
-      </div>
-    ;
-  case "image":
-    return (
-      <div>
-        <span
-          style={{
-            display: cachedImages[payloadObj.content] ? "none" : "inherit",
-          }}
-        >
-          <h3>
-            <b>LSAT Image</b>
-          </h3>
-          <Button
-            type="primary"
-            onClick={() => {
-              downloadImage(props, payloadObj.content);
+          {
+            `You ${myMessage ? 'sent' : 'received'} `
+          }
+          <span
+            style={{
+              color: myMessage ? 'red' : 'green'
             }}
           >
-              Pay & Show
-          </Button>
-          <br />
-          <a>{payloadObj.content}</a>
-        </span>
-        <ChatHistoryImage {...props} src={cachedImages[payloadObj.content]} />
-      </div>
-    );
+            {`${cryptoUtils.msatToCurrentCryptoUnit(props, amtMsat)}`}
+          </span>
+          <span>
+            {`${props.selectedCryptoUnit}`}
+          </span>
+        </div>),
+      (<div>
+        <List
+          style={{
+            display: payloadObj.attL ? 'inherit' : 'none'
+          }}
+          dataSource={payloadObj.attL}
+          renderItem={(item) => {
+            switch(item.t){
+            case 'image':
+              return (
+                <ReactMarkdown
+                  source={`![](${item.u})`}
+                  renderers={renderers(props)}
+                  disallowedTypes={["paragraph"]}
+                  unwrapDisallowed={!!true}
+                />
+              );
+            case 'file':
+              return(
+                <a href={item.u}>File</a>
+              );
+            }
+          }}
+        />
+      </div>)];
   case "payreq":
     issuePayreq(payloadObj.id);
     return (
@@ -253,10 +228,10 @@ const payloadToDom = (props, payload, myMessage, amtMsat) => {
  */
 const messageToPayload = (message, attachmentList) => {
   let messageObj = {
-    v: version,
-    type: "message",
-    content: message,
-    attachmentList: attachmentList
+    ...messageCore(),
+    t: "message",
+    c: message,
+    attL: attachmentList
   };
   try {
     return JSON.stringify(messageObj);
@@ -267,7 +242,7 @@ const messageToPayload = (message, attachmentList) => {
 
 const payreqToPayload = (amtMsat, description) => {
   let messageObj = {
-    v: version,
+    ...messageCore(),
     type: "payreq",
     amtMsat: amtMsat,
     description: description,
@@ -282,7 +257,7 @@ const payreqToPayload = (amtMsat, description) => {
 
 const payreqPayToPayload = (id) => {
   let messageObj = {
-    v: version,
+    ...messageCore(),
     type: "payreq_pay",
     id: id
   };
