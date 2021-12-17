@@ -34,12 +34,7 @@
   border: none;
 }
 
-.user-settings-logout {
-  font-size: 20px;
-}
-
 .user-settings-form {
-  /* width: calc(100% - 150px); */
   overflow-wrap: break-word;
 }
 
@@ -49,7 +44,7 @@
 
 .user-settings-formSelect {
   margin-right: 5px;
-  width: 120px;
+  max-width: 200px;
 }
 
 .user-settings-github {
