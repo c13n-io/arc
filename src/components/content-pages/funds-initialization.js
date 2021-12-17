@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Button, Modal, Tabs, Slider, Input, Form, Divider, Dropdown, Select } from "antd";
+import { Button, Modal, Tabs, Slider, Input, Form, Divider, Select } from "antd";
 
 import { splitURI } from "../../utils/users-utils";
 
@@ -9,8 +9,6 @@ import nodeInfoClient from "../../services/nodeInfoServices";
 
 import { NotificationManager } from "react-notifications";
 import "./funds-initialization.css";
-
-const axios = require('axios').default;
 
 /**
  * This component represents the modal responsible for showing the dialog to help you bootstrap your wallet and lightning channels.
@@ -372,7 +370,7 @@ const FundsInitialization = (props) => {
                       fontSize: "13px"
                     }}
                   >
-                    Not enough funds, minimum required 20000 sat, you have {props.balance?.walletConfirmedSat} sat on-chain
+                    Not enough funds, minimum required 20000sat, you have {props.balance?.walletConfirmedSat}sat on-chain
                   </span>
                   <Slider
                     className="funds-initialization-amount-slider"
