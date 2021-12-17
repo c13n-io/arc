@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Button, Modal, Tabs, Slider, Input, Form, Divider } from "antd";
+import { Button, Modal, Tabs, Slider, Input, Form, Divider, Select } from "antd";
 
 import { splitURI } from "../../utils/users-utils";
 
@@ -16,17 +16,53 @@ import "./funds-initialization.css";
  * @returns The Modal JSX.
  */
 const FundsInitialization = (props) => {
-  const [key, setKey] = useState("1");
-  const url = window.localStorage.getItem("url");
-  const rtl_link = `https://${url}/rtl/lnd/onchain/receive/utxos`;
-  const mainnetURI =
-    "028cdd87b6f8f38d98c8a6b9bafedcd2907f68943991a4a3e7b9877887252cb692@62.38.75.208:9735";
-  const testnetURI =
-    "0355e471ad1cd9f9df398a47f18a5bf2f4548f4086d50c7e0ceb7b81ba931fb7ad@62.38.75.208:19735";
+
+  const mainnetNodes = [
+    {
+      value: "WalletOfSatoshi.com",
+      address: "035e4ff418fc8b5554c5d9eea66396c227bd429a3251c8cbc711002ba215bfc226",
+      uri: "035e4ff418fc8b5554c5d9eea66396c227bd429a3251c8cbc711002ba215bfc226@170.75.163.209:9735"
+    },
+    {
+      value: "ACINQ",
+      address: "03864ef025fde8fb587d989186ce6a4a186895ee44a926bfc370e2c366597a3f8f",
+      uri: "03864ef025fde8fb587d989186ce6a4a186895ee44a926bfc370e2c366597a3f8f@3.33.236.230:9735"
+    },
+    {
+      value: "LNBIG.com",
+      address: "034ea80f8b148c750463546bd999bf7321a0e6dfc60aaf84bd0400a2e8d376c0d5",
+      uri: "034ea80f8b148c750463546bd999bf7321a0e6dfc60aaf84bd0400a2e8d376c0d5@46.229.165.151:9735"
+    },
+    {
+      value: "CoinGate",
+      address: "0242a4ae0c5bef18048fbecf995094b74bfb0f7391418d71ed394784373f41e4f3",
+      uri: "0242a4ae0c5bef18048fbecf995094b74bfb0f7391418d71ed394784373f41e4f3@3.124.63.44:9735"
+    },
+    {
+      value: "Boltz",
+      address: "026165850492521f4ac8abd9bd8088123446d126f648ca35e60f88177dc149ceb2",
+      uri: "026165850492521f4ac8abd9bd8088123446d126f648ca35e60f88177dc149ceb2@104.196.200.39:9735"
+    }
+  ];
+
+  const testnetNodes = [
+    {
+      value: "aranguren.org",
+      address: "038863cf8ab91046230f561cd5b386cbff8309fa02e3f0c3ed161a3aeb64a643b9",
+      uri: "038863cf8ab91046230f561cd5b386cbff8309fa02e3f0c3ed161a3aeb64a643b9@203.132.94.196:9735"
+    },
+    {
+      value: "Coingate",
+      address: "0277622bf4c497475960bf91bd3c673a4cb4e9b589cebfde9700c197b3989cc1b8",
+      uri: "0277622bf4c497475960bf91bd3c673a4cb4e9b589cebfde9700c197b3989cc1b8@35.158.243.90:9735"
+    }
+  ];
+
   const defaultAmount = 50000;
   const defaultPushAmount = Math.floor(50000 * 0.03);
   const minChannelAmount = 20000;
 
+  const [key, setKey] = useState("1");
   const [loading, setLoading] = useState(false);
 
   const [mode, setMode] = useState("auto");
@@ -50,7 +86,7 @@ const FundsInitialization = (props) => {
   const getAddress = () => {
     switch (mode) {
     case "auto":
-      return props.chainInfo?.network === "testnet" ? testnetURI : mainnetURI;
+      return props.chainInfo?.network === "testnet" ? lightningAddress : lightningAddress;
     case "basic":
       return lightningAddress;
     case "advanced":
@@ -63,6 +99,7 @@ const FundsInitialization = (props) => {
    * @param {*} address The address to open a channel with.
    */
   const openChannel = (address) => {
+    console.log("Openning channel to", address, ", with selected amount ", amount);
     const amtMsat = amount * 1000;
     const pushAmtMsat = pushAmount * 1000;
     channelClient().openChannel(
@@ -122,6 +159,7 @@ const FundsInitialization = (props) => {
             const split = splitURI(addr);
             const address = split.address;
             const hostport = split.hostport;
+            console.log("Connecting to peer ", address, ":", hostport);
             nodeInfoClient().connectNode(
               {
                 address: address,
@@ -156,17 +194,13 @@ const FundsInitialization = (props) => {
             <br />
             <b>Step 1: Generate a receiving address</b>
             <br />
-            Login to your{" "}
-            <a href={rtl_link} target="_blank">
-              RTL wallet
-            </a>
-            , select <b>On-Chain</b>, click <b>Generate Address</b> and copy it.
+            Login to your{" "} wallet, go to the <b>On-chain</b> section and generate a wallet address.
             <br />
             <br />
             <b>Step 2: Get some bitcoin.</b>
             <br />
-            Use the copied address in one of the following services to buy
-            bitcoin.
+            You can use the generated address to receive money from the bitcoin network.
+            If you want to buy bitcoin, use your address in one of the following services.
             <br />
             {props.chainInfo?.network === "mainnet" ? (
               <span>
@@ -197,11 +231,10 @@ const FundsInitialization = (props) => {
 
           <Tabs.TabPane tab="Open Channel" key="2">
             To enable instant messages and low-fee transactions you need to use
-            some of your funds to open a Lightning Payment Channel.
+            some of your funds to open a <b>Lightning Payment Channel</b>.
             <br />
             <br />
-            This is your financial relationship with another node on the
-            Lightning Network. It is implemented using multi-signature Bitcoin
+            It is implemented using multi-signature Bitcoin
             transactions that share control over the commited bitcoin between
             you and that node. This relationship offers everyone security and
             privacy for both messages and payments.
@@ -223,7 +256,7 @@ const FundsInitialization = (props) => {
                 setMode("auto");
               }}
             >
-              Connect to c13n
+              Connect to famous node
             </Button>
             <Button
               type="secondary"
@@ -287,6 +320,36 @@ const FundsInitialization = (props) => {
                   />
                 </div>
               </Form.Item>
+              <Form.Item
+                style={{
+                  display: (mode == "auto") ? "inherit" : "none",
+                }}
+              >
+                <div className="funds-initialization-info">
+                  <Divider
+                    className="funds-initialization-info-divider"
+                    orientation="left"
+                  >
+                    Node
+                  </Divider>
+                  <Select
+                    options={props.chainInfo?.network === "testnet" ? testnetNodes : mainnetNodes }
+                    onChange={(value) => {
+                      let node;
+                      switch(props.chainInfo?.network){
+                      case "testnet":
+                        node = testnetNodes.find((e) => e.value == value);
+                        setLightningAddress(node.uri);
+                        break;
+                      case "mainnet":
+                        node = mainnetNodes.find((e) => e.value == value);
+                        setLightningAddress(node.uri);
+                        break;
+                      }
+                    }}
+                  />
+                </div>
+              </Form.Item>
 
               <Form.Item>
                 <div className="funds-initialization-amount">
@@ -296,6 +359,19 @@ const FundsInitialization = (props) => {
                   >
                     Amount (sat)
                   </Divider>
+                  <span
+                    style={{
+                      display: props.balance?.walletConfirmedSat
+                        ? props.balance?.walletConfirmedSat < minChannelAmount
+                          ? "inherit"
+                          : "none"
+                        : "none",
+                      color: "red",
+                      fontSize: "13px"
+                    }}
+                  >
+                    Not enough funds, minimum required 20000sat, you have {props.balance?.walletConfirmedSat}sat on-chain
+                  </span>
                   <Slider
                     className="funds-initialization-amount-slider"
                     min={minChannelAmount}

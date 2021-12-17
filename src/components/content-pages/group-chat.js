@@ -27,7 +27,7 @@ const GroupChat = (props) => {
 
   const [searchGroupTouched, setSearchGroupTouched] = useState(false);
 
-  const enteredGroupIsValid = aliasToSearch.length >= 4;
+  const enteredGroupIsValid = aliasToSearch.length >= 3;
   const groupInputIsInvalid = !enteredGroupIsValid && searchGroupTouched;
 
   const [groupModalVisible, setGroupModalVisible] = useState(false);
@@ -126,7 +126,7 @@ const GroupChat = (props) => {
 
     setSearchGroupTouched(true);
 
-    if (aliasToSearch.length < 4) {
+    if (aliasToSearch.length < 3) {
       return;
     }
 
@@ -194,7 +194,7 @@ const GroupChat = (props) => {
                       }
                       : () => (
                         <p className="error-validation">
-                            Minimum 4 characters
+                            Minimum 3 characters
                         </p>
                       )
                   }
@@ -215,7 +215,7 @@ const GroupChat = (props) => {
                 </Button>
               </div>
               {groupInputIsInvalid && (
-                <p className="error-validation">Minimum 4 characters</p>
+                <p className="error-validation">Minimum 3 characters</p>
               )}
               <List
                 locale={{

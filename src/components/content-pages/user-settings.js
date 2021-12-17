@@ -21,6 +21,9 @@ const messageColorsArray = [
   "teal",
   "steelblue",
   "seagreen",
+  "#232425",
+  "#245559",
+  "#552424"
 ];
 
 /**
@@ -118,8 +121,9 @@ const UserSettings = (props) => {
                   </Select>
                   Messages Layout
                 </Form.Item>
+
+                My Messages Color:
                 <Form.Item>
-                  My Messages Color:
                   <GithubPicker
                     triangle="hide"
                     colors={messageColorsArray}
@@ -144,8 +148,8 @@ const UserSettings = (props) => {
                     Transparent
                   </Button>
                 </Form.Item>
+                Other Messages Color:
                 <Form.Item>
-                  Other Messages Color:
                   <GithubPicker
                     className="user-settings-github"
                     triangle="hide"
