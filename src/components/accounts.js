@@ -8,6 +8,8 @@ import { version } from "../config/version";
 
 import { addToAccounts, removeFromAccounts } from "../utils/accounts-utils";
 
+import sleep from "../utils/system";
+
 import "./accounts.css";
 import arcLogo from "../media/arc-logo.png";
 import generateIdenticon from "../utils/identicon";
@@ -95,8 +97,26 @@ const Accounts = (props) => {
       window.localStorage.setItem("httpUsername", usernameToUse);
       window.localStorage.setItem("httpPassword", passwordToUse);
       window.localStorage.setItem("url", account.url);
-      window.location.reload(true);
+      setTimeout(
+        () => {
+          window.location.reload(true);
+        },
+        500);
       setCredentialsModalVisible(false);
+    }
+  };
+
+  const addAccountHandler = () => {
+    if ((urlToAdd !== "") && (!!usernameToUse)) {
+      addToAccounts(props, { url: urlToAdd, username: usernameToUse, address: "", lastActive: 0 });
+      setSelectedAccount({ url: urlToAdd, address: "", lastActive: 0 });
+      setUrlToAdd("");
+      setAddAccountModalVisible(false);
+      credentialsModalLogin({
+        url: urlToAdd,
+        address: "",
+        lastActive: 0,
+      });
     }
   };
 
@@ -126,7 +146,14 @@ const Accounts = (props) => {
                   onClick={() => {
                     if (item.url !== "") {
                       setSelectedAccount(item);
+                      setUsernameToUse(item.username);
                       setCredentialsModalVisible(true);
+                      setTimeout(
+                        () => {
+                          document.getElementById("credentialsPasswordInput").focus();
+                        },
+                        500
+                      );
                     }
                   }}
                 >
@@ -159,25 +186,20 @@ const Accounts = (props) => {
         className="login-page-addButton"
         onClick={() => {
           setAddAccountModalVisible(true);
+          setUsernameToUse("");
+          setTimeout(
+            () => {
+              document.getElementById("addAccountNodeInput").focus();
+            },
+            500
+          );
         }}
       >
         <div className="login-page-addButton-Text">+ Add New Node</div>
       </Button>
       <Modal
         visible={!!addAccountModalVisible}
-        onOk={() => {
-          if (urlToAdd !== "") {
-            addToAccounts(props, { url: urlToAdd, address: "", lastActive: 0 });
-            setSelectedAccount({ url: urlToAdd, address: "", lastActive: 0 });
-            setUrlToAdd("");
-            setAddAccountModalVisible(false);
-            credentialsModalLogin({
-              url: urlToAdd,
-              address: "",
-              lastActive: 0,
-            });
-          }
-        }}
+        onOk={addAccountHandler}
         onCancel={() => {
           setAddAccountModalVisible(false);
         }}
@@ -187,6 +209,7 @@ const Accounts = (props) => {
           <img src={arcLogo} className="login-page-modal-logo" />
         </div>
         <Input
+          id="addAccountNodeInput"
           placeholder="Node Address"
           value={urlToAdd}
           className="accountsInput"
@@ -214,11 +237,7 @@ const Accounts = (props) => {
             return e.key === "Enter"
               ? e.shiftKey
                 ? undefined
-                : credentialsModalLogin({
-                  url: urlToAdd,
-                  address: "",
-                  lastActive: 0,
-                })
+                : addAccountHandler()
               : undefined;
           }}
         />
@@ -259,6 +278,7 @@ const Accounts = (props) => {
           }}
         />
         <Input
+          id="credentialsPasswordInput"
           placeholder="Password"
           className="accountsInputCred"
           type="password"

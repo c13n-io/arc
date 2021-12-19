@@ -257,7 +257,7 @@
 }
 
 .discussionsList {
-  max-height: calc(100vh - 500px);
+  max-height: calc(100vh - 475px);
   gap: 2rem;
   overflow-y: scroll;
   --scrollbar-width: 0.5rem;
