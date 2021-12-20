@@ -10,7 +10,7 @@ const url = () => {
  * @returns The string representing the API URL.
  */
 const apiUrl = () => {
-  return `https://${url()}/c13n-grpc`;
+  return `${url()}/c13n-grpc`;
 };
 
 export default apiUrl;

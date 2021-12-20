@@ -295,6 +295,7 @@ const Main = () => {
               setSelfInfo(res.info);
               addToAccounts(mainProps, {
                 url: localStorage.getItem("url"),
+                username: localStorage.getItem("httpUsername"),
                 address: res.info.address,
                 lastActive: Date.now(),
               });

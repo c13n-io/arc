@@ -40,6 +40,7 @@ const loadAccounts = (props) => {
    * @param {*} accountsArray The accounts array.
    */
 const saveAccounts = (accountsArray) => {
+  console.log("Savving to accounts", accountsArray);
   window.localStorage.setItem('accounts', JSON.stringify(accountsArray));
 };
 
