@@ -6,14 +6,11 @@ import c13nLinkRef from "../components/content-pages/markdown/c13n-link-ref";
 import c13nText from "../components/content-pages/markdown/c13n-text";
 import c13nInlineCode from "../components/content-pages/markdown/c13n-inline-code";
 
-import ChatHistoryImage from "../components/content-pages/chat-history-image";
-
 import { issuePayreq, checkPayreq, satisfyPayreq } from "../utils/payreq/payreq-tracker";
 
 import { Button, List } from "antd";
 import { CheckOutlined } from "@ant-design/icons";
 
-import { downloadImage, cachedImages } from "../utils/lsat/download-image";
 import React from "react";
 import { sendPayreqPay } from "../utils/payreq/utils";
 
