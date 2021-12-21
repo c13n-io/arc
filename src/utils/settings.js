@@ -113,7 +113,6 @@ const saveDeveloperLogsSetting = (setDeveloperLogs, value) => {
 };
 
 
-
 export {
   loadAutomaticImageLoadingSetting,
   loadSmoothAnimationsSetting,
