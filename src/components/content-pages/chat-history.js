@@ -808,7 +808,7 @@ const ChatHistory = (props) => {
                   <p className="chat-history-feeModal-text">Received by you</p>
                   <Button
                     className="chat-history-feeModal-button"
-                    type="default"
+                    type="secondary"
                     onClick={() => {
                       setRawMessageInfoModalVisible(true);
                     }}

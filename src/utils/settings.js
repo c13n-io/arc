@@ -3,9 +3,19 @@ const loadAutomaticImageLoadingSetting = (setAutomaticImageLoading) => {
   setAutomaticImageLoading(res !== 'false');
 };
 
+const saveAutomaticImageLoadingSetting = (setAutomaticImageLoading, value) => {
+  window.localStorage.setItem('automaticImageLoadingSetting', value);
+  setAutomaticImageLoading(value);
+};
+
 const loadSmoothAnimationsSetting = (setSmoothAnimations) => {
   let res = window.localStorage.getItem('smoothAnimationsSetting');
   setSmoothAnimations(res !== 'false');
+};
+
+const saveSmoothAnimationsSetting = (setSmoothAnimations, value) => {
+  window.localStorage.setItem('smoothAnimationsSetting', value);
+  setSmoothAnimations(value);
 };
 
 const loadSelectedCryptoUnit = (setSelectedCryptoUnit) => {
@@ -17,6 +27,11 @@ const loadSelectedCryptoUnit = (setSelectedCryptoUnit) => {
   }
 };
 
+const saveSelectedCryptoUnit = (setSelectedCryptoUnit, value) => {
+  window.localStorage.setItem('selectedCryptoUnitSetting', value);
+  setSelectedCryptoUnit(value);
+};
+
 const loadSelectedFiatUnit = (setSelectedFiatUnit) => {
   let res = window.localStorage.getItem('selectedFiatUnitSetting');
   if (res === 'EUR' || res === 'USD') {
@@ -26,9 +41,19 @@ const loadSelectedFiatUnit = (setSelectedFiatUnit) => {
   }
 };
 
+const saveSelectedFiatUnit = (setSelectedFiatUnit, value) => {
+  window.localStorage.setItem('selectedFiatUnitSetting', value);
+  setSelectedFiatUnit(value);
+};
+
 const loadChatIdenticonsSetting = (setChatIdenticons) => {
   let res = window.localStorage.getItem('chatIdenticonsSetting');
   setChatIdenticons(res !== 'false');
+};
+
+const saveChatIdenticonsSetting = (setChatIdenticons, value) => {
+  window.localStorage.setItem('chatIdenticonsSetting', value);
+  setChatIdenticons(value);
 };
 
 const loadChatLayoutSetting = (setChatLayout) => {
@@ -40,6 +65,11 @@ const loadChatLayoutSetting = (setChatLayout) => {
   }
 };
 
+const saveChatLayoutSetting = (setChatLayout, value) => {
+  window.localStorage.setItem('chatLayoutSetting', value);
+  setChatLayout(value);
+};
+
 const loadMyMessageColor = (setMyMessageColor) => {
   let res = window.localStorage.getItem('myMessageColorSetting');
   if(res !== 'undefined' && res !== undefined && res !== null) {
@@ -47,6 +77,11 @@ const loadMyMessageColor = (setMyMessageColor) => {
   } else {
     setMyMessageColor('darkslategrey');
   }
+};
+
+const saveMyMessageColor = (setMyMessageColor, value) => {
+  window.localStorage.setItem('myMessageColorSetting', value);
+  setMyMessageColor(value);
 };
 
 const loadOtherMessageColor = (setOtherMessageColor) => {
@@ -58,6 +93,11 @@ const loadOtherMessageColor = (setOtherMessageColor) => {
   }
 };
 
+const saveOtherMessageColor = (setOtherMessageColor, value) => {
+  window.localStorage.setItem('otherMessageColorSetting', value);
+  setOtherMessageColor(value);
+};
+
 const loadDeveloperLogsSetting = (setDeveloperLogs) => {
   let res = window.localStorage.getItem('developerLogsSetting');
   setDeveloperLogs(res === 'true');
@@ -66,6 +106,12 @@ const loadDeveloperLogsSetting = (setDeveloperLogs) => {
     console.log = function() {};
   }
 };
+
+const saveDeveloperLogsSetting = (setDeveloperLogs, value) => {
+  window.localStorage.setItem('developerLogsSetting', value);
+  setDeveloperLogs(value);
+};
+
 
 export {
   loadAutomaticImageLoadingSetting,
@@ -76,5 +122,14 @@ export {
   loadChatLayoutSetting,
   loadMyMessageColor,
   loadOtherMessageColor,
-  loadDeveloperLogsSetting
+  loadDeveloperLogsSetting,
+  saveAutomaticImageLoadingSetting,
+  saveSmoothAnimationsSetting,
+  saveSelectedCryptoUnit,
+  saveSelectedFiatUnit,
+  saveChatIdenticonsSetting,
+  saveChatLayoutSetting,
+  saveMyMessageColor,
+  saveOtherMessageColor,
+  saveDeveloperLogsSetting
 };

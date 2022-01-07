@@ -1,10 +1,21 @@
 import React, { useState } from "react";
 import { Button, Form, Divider, Switch, Select, Collapse } from "antd";
-import { LogoutOutlined } from "@ant-design/icons";
 import { GithubPicker } from "react-color";
 import "./user-settings.css";
 import theme from "../../style/theme";
 import { DoubleRightOutlined } from "@ant-design/icons";
+
+import {
+  saveAutomaticImageLoadingSetting,
+  saveSmoothAnimationsSetting,
+  saveSelectedCryptoUnit,
+  saveSelectedFiatUnit,
+  saveChatIdenticonsSetting,
+  saveChatLayoutSetting,
+  saveMyMessageColor,
+  saveOtherMessageColor,
+  saveDeveloperLogsSetting,
+} from "../../utils/settings";
 
 const messageColorsArray = [
   "black",
@@ -69,11 +80,7 @@ const UserSettings = (props) => {
                     checked={!!props.automaticImageLoading}
                     className="user-settings-collapse"
                     onChange={(value) => {
-                      props.setAutomaticImageLoading(value);
-                      window.localStorage.setItem(
-                        "automaticImageLoadingSetting",
-                        value
-                      );
+                      saveAutomaticImageLoadingSetting(props.setAutomaticImageLoading, value);
                     }}
                   />
                   Allow automatic loading of externally linked images
@@ -83,11 +90,7 @@ const UserSettings = (props) => {
                     checked={!!props.smoothAnimations}
                     className="user-settings-collapse"
                     onChange={(value) => {
-                      props.setSmoothAnimations(value);
-                      window.localStorage.setItem(
-                        "smoothAnimationsSetting",
-                        value
-                      );
+                      saveSmoothAnimationsSetting(props.setSmoothAnimations, value);
                     }}
                   />
                   Enable smooth animations and transitions
@@ -97,11 +100,7 @@ const UserSettings = (props) => {
                     checked={!!props.chatIdenticons}
                     className="user-settings-collapse"
                     onChange={(value) => {
-                      props.setChatIdenticons(value);
-                      window.localStorage.setItem(
-                        "chatIdenticonsSetting",
-                        value
-                      );
+                      saveChatIdenticonsSetting(props.setChatIdenticons, value);
                     }}
                   />
                   Show user icons in chat messages
@@ -111,8 +110,7 @@ const UserSettings = (props) => {
                     defaultValue={`${props.chatLayout}`}
                     className="user-settings-formSelect"
                     onChange={(e) => {
-                      props.setChatLayout(e);
-                      window.localStorage.setItem("chatLayoutSetting", e);
+                      saveChatLayoutSetting(props.setChatLayout, e);
                     }}
                   >
                     <Select.Option value="normal">Normal</Select.Option>
@@ -129,20 +127,12 @@ const UserSettings = (props) => {
                     colors={messageColorsArray}
                     color={props.myMessageColor}
                     onChangeComplete={(color) => {
-                      props.setMyMessageColor(color.hex);
-                      window.localStorage.setItem(
-                        "myMessageColorSetting",
-                        color.hex
-                      );
+                      saveMyMessageColor(props.setMyMessageColor, color.hex);
                     }}
                   />
                   <Button
                     onClick={() => {
-                      props.setMyMessageColor("rgba(0, 0, 0, 0.0)");
-                      window.localStorage.setItem(
-                        "myMessageColorSetting",
-                        "rgba(0, 0, 0, 0.0)"
-                      );
+                      saveMyMessageColor(props.setMyMessageColor, "rgba(0, 0, 0, 0.0)");
                     }}
                   >
                     Transparent
@@ -156,20 +146,12 @@ const UserSettings = (props) => {
                     colors={messageColorsArray}
                     color={props.myMessageColor}
                     onChangeComplete={(color) => {
-                      props.setOtherMessageColor(color.hex);
-                      window.localStorage.setItem(
-                        "otherMessageColorSetting",
-                        color.hex
-                      );
+                      saveOtherMessageColor(props.setOtherMessageColor, color.hex);
                     }}
                   />
                   <Button
                     onClick={() => {
-                      props.setOtherMessageColor("rgba(0, 0, 0, 0.0)");
-                      window.localStorage.setItem(
-                        "otherMessageColorSetting",
-                        "rgba(0, 0, 0, 0.0)"
-                      );
+                      saveOtherMessageColor(props.setOtherMessageColor, "rgba(0, 0, 0, 0.0)");
                     }}
                   >
                     Transparent
@@ -180,11 +162,7 @@ const UserSettings = (props) => {
                     checked={!!props.developerLogs}
                     className="user-settings-collapse"
                     onChange={(value) => {
-                      props.setDeveloperLogs(value);
-                      window.localStorage.setItem(
-                        "developerLogsSetting",
-                        value
-                      );
+                      saveDeveloperLogsSetting(props.setDeveloperLogs, value);
                     }}
                   />
                   Developer Logs (Page refresh required)
@@ -196,11 +174,7 @@ const UserSettings = (props) => {
                     defaultValue={`${props.selectedCryptoUnit}`}
                     className="user-settings-formSelect"
                     onChange={(e) => {
-                      props.setSelectedCryptoUnit(e);
-                      window.localStorage.setItem(
-                        "selectedCryptoUnitSetting",
-                        e
-                      );
+                      saveSelectedCryptoUnit(props.setSelectedCryptoUnit, e);
                     }}
                   >
                     <Select.Option value="mBTC">mBTC</Select.Option>
@@ -214,8 +188,7 @@ const UserSettings = (props) => {
                     defaultValue={`${props.selectedFiatUnit}`}
                     className="user-settings-formSelect"
                     onChange={(e) => {
-                      props.setSelectedFiatUnit(e);
-                      window.localStorage.setItem("selectedFiatUnitSetting", e);
+                      setSelectedFiatUnit(props.setSelectedFiatUnit, e);
                     }}
                   >
                     <Select.Option value="EUR">EUR</Select.Option>
