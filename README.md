@@ -11,6 +11,8 @@
 A web client for messaging and managing money over Bitcoin's Lightning Network based on <a href="https://github.com/c13n-io/c13n-go/">c13n-go</a>.
 </p>
 
+
+
 # Contents
 - [Contents](#contents)
 - [Overview](#overview)
@@ -47,6 +49,10 @@ A web client for messaging and managing money over Bitcoin's Lightning Network b
   npm start
   ```
   arc will be served at http://localhost:3000
+  
+- (Alternative) Use our ready made Arc client:
+  Browse to https://c13n-io.github.io/arc/
+  
 # Contributing
 
 If you want to contribute to this project, either by **authoring code** or by **reporting bugs & issues**, make sure to read the [Contribution Guidelines](CONTRIBUTING.md).
