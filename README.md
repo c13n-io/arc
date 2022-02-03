@@ -8,10 +8,10 @@
 </p>
 
 <p align="center">
-A web client for messaging and managing money over Bitcoin's Lightning Network based on <a href="https://github.com/c13n-io/c13n-go/">c13n-go</a>.
-</p>
+Arc is a social wallet.</p> 
 
-
+A progressive web app that natively combines messages with micropayments based on Lightning Network and <a href="https://github.com/c13n-io/c13n-go/">c13n-go</a>.
+If you have a c13n node up and running, you can immediately start using Arc here: https://c13n-io.github.io/arc/
 
 # Contents
 - [Contents](#contents)
@@ -20,12 +20,13 @@ A web client for messaging and managing money over Bitcoin's Lightning Network b
   - [Requirements](#requirements)
   - [Steps](#steps)
 - [Usage](#usage)
+- [c13n-go](#c13n-go)
 - [Contributing](#contributing)
 
 
 # Overview
 
-`Arc` is a web client for messaging and managing money over Lightning. It is using the [c13n-go](https://github.com/c13n-io/c13n-go/) API.
+`Arc` is a web client for messaging and managing money over Lightning. The app runs completely in-browser and is using the [c13n-go](https://github.com/c13n-io/c13n-go/) API. It is written in React and communicates with the c13n node natively via grpcweb.
 
 # Installation
 ## Requirements
@@ -50,8 +51,11 @@ A web client for messaging and managing money over Bitcoin's Lightning Network b
   ```
   arc will be served at http://localhost:3000
   
-- (Alternative) Use our ready made Arc client:
-  Browse to https://c13n-io.github.io/arc/
+- (Alternative) Use our ready made Arc client. Browse to https://c13n-io.github.io/arc/.
+  
+# c13n-go
+
+c13n-go is a deployable open-source component for LND that encapsulates and manages payload and message transfers within Lightning payments. For more information browse to [c13n-go](https://github.com/c13n-io/c13n-go/).
   
 # Contributing
 
