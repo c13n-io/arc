@@ -1,0 +1,22 @@
+name: arc Main Pipeline
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  release-latest-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - uses: pmorelli92/github-container-registry-build-push@2.0.0
+        name: Build and Publish arc:latest
+        with:
+          github-push-secret: ${{secrets.GITHUB_TOKEN}}
+          docker-image-name: arc
+          docker-image-tag: latest
+          dockerfile-path: ./Dockerfile
+          build-context: ./
