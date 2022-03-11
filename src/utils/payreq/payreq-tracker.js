@@ -1,25 +1,38 @@
-let payreqs = {};
+import paymentClient from "../../services/paymentServices";
 
-const issuePayreq = (id) => {
-  if(!(id in payreqs)) {
-    payreqs[id] = false;
-  }
+let paidPayreqs = {};
+let myPaidPayreqs = {};
+
+const registerPaidPayreq = (payreq) => {
+  paidPayreqs[payreq] = true;
 };
 
-const satisfyPayreq = (id) => {
-  payreqs[id] = true;
+const checkPayreq = (payreq) => {
+  return paidPayreqs[payreq] == true;
 };
 
-const checkPayreq = (id) => {
-  if(id in payreqs) {
-    return payreqs[id];
-  } else {
-    return false;
+const checkMyPayreq = async (payreq) => {
+  if(myPaidPayreqs[payreq] == true) {
+    return true;
   }
+  paymentClient().lookupInvoice(
+    {
+      payReq: payreq
+    },
+    (err, res) => {
+      if(err) {
+        console.log(err);
+      }
+      if(res) {
+        console.log(res);
+      }
+    }
+  );
+
 };
 
 export {
-  issuePayreq,
-  satisfyPayreq,
-  checkPayreq
+  registerPaidPayreq,
+  checkPayreq,
+  checkMyPayreq
 };

@@ -1,4 +1,3 @@
-import version from "./version";
 import ReactMarkdown from "react-markdown";
 import C13nImage from "../components/content-pages/markdown/c13n-image";
 import c13nLink from "../components/content-pages/markdown/c13n-link";
@@ -6,7 +5,8 @@ import c13nLinkRef from "../components/content-pages/markdown/c13n-link-ref";
 import c13nText from "../components/content-pages/markdown/c13n-text";
 import c13nInlineCode from "../components/content-pages/markdown/c13n-inline-code";
 
-import { checkPayreq } from "../utils/payreq/payreq-tracker";
+import { checkPayreq, registerPaidPayreq } from "../utils/payreq/payreq-tracker";
+import { appendToChatHistory } from "../utils/discussion-utils";
 
 import { NotificationManager } from "react-notifications";
 
@@ -18,7 +18,7 @@ import messageClient from "../services/messageServices";
 import React from "react";
 
 const cryptoUtils = require("../utils/crypto-utils");
-var lightningPayReq = require('bolt11');
+const lightningPayReq = require('bolt11');
 
 /**
  * The markdown renderers.
@@ -162,7 +162,7 @@ const c13nPpToDom = (props, payloadObj, myMessage) => {
             myMessage ? ' receive' : ' pay'
           } <b>{cryptoUtils.msatToCurrentCryptoUnit(props, invoiceObj?.millisatoshis)} {props.selectedCryptoUnit}</b></h3>
         {
-          myMessage ? checkPayreq(payloadObj.c)
+          myMessage ? checkMyPayreq(payloadObj.c)
             ?
             <h2 style={{ color: 'green' }}><b>Paid <CheckOutlined /></b></h2>
             :
@@ -191,6 +191,9 @@ const c13nPpToDom = (props, payloadObj, myMessage) => {
                         }
                         if(res) {
                           console.log(res);
+                          props.selectedDiscussion.lastMsgId = res.sentMessage.id;
+                          props.selectedDiscussion.lastReadMsgId = res.sentMessage.id;
+                          appendToChatHistory(props, res.sentMessage);
                         }
                       }
                     );
@@ -276,24 +279,30 @@ const c13nPpToDom = (props, payloadObj, myMessage) => {
       </div>
     );
   case "payreq_pay":
+    registerPaidPayreq(payloadObj.c);
     return(
       <div
         style={{
-          fontSize: '20px',
+          fontSize: '16px',
           border: '2px solid gray',
           borderRadius: '5px',
           padding: '15px'
         }}
       >
         Paid
-        <b>
+        <b
+          style={{
+            paddingLeft: "5px",
+            fontSize: "14px"
+          }}
+        >
           {`${payloadObj?.c?.substring(
             0,
             5
           )}...${payloadObj?.c?.substring(
             payloadObj?.c?.length - 5,
             payloadObj?.c?.length
-          )}:  `}
+          )}`}
         </b>
       </div>
     );
