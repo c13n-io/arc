@@ -6,14 +6,17 @@ import c13nLinkRef from "../components/content-pages/markdown/c13n-link-ref";
 import c13nText from "../components/content-pages/markdown/c13n-text";
 import c13nInlineCode from "../components/content-pages/markdown/c13n-inline-code";
 
-import { issuePayreq, checkPayreq, satisfyPayreq } from "../utils/payreq/payreq-tracker";
+import { checkPayreq } from "../utils/payreq/payreq-tracker";
+
+import { NotificationManager } from "react-notifications";
 
 import { Button, List } from "antd";
-import { CheckOutlined } from "@ant-design/icons";
+import { CheckOutlined, CopyOutlined } from "@ant-design/icons";
 
 import React from "react";
 
 const cryptoUtils = require("../utils/crypto-utils");
+var lightningPayReq = require('bolt11');
 
 /**
  * The markdown renderers.
@@ -34,18 +37,11 @@ const renderers = (props) => {
   };
 };
 
-const messageCore = () => {
-  return {
-    n: "c13n-cp",
-    v: version
-  };
-};
-
 /**
  * This function generates the JSX to represent the message inside the chat bubble.
  * @param {} props The global variables.
  * @param {string} payload The message data.
- * @param {boolean} myMessage Flag indicating if message was send by this wallet.
+ * @param {boolean} myMessage Flag indicating if message was sent by this wallet.
  * @param {number} amtMsat The msat amount delivered by the message.
  * @returns The JSX representing the message.
  */
@@ -56,9 +52,23 @@ const payloadToDom = (props, payload, myMessage, amtMsat) => {
   } catch (err) {
     payloadObj = payload;
   }
+  if (payloadObj.n === undefined) {
+    return payload;
+  }
   if (payloadObj.t === undefined) {
     return payload;
   }
+  switch (payloadObj.n) {
+  case "c13n-mp":
+    return c13nMpToDom(props, payloadObj, myMessage, amtMsat);
+  case "c13n-pp":
+    return c13nPpToDom(props, payloadObj, myMessage);
+  default:
+  }
+};
+
+
+const c13nMpToDom = (props, payloadObj, myMessage, amtMsat) => {
   switch (payloadObj.t) {
   case "message":
     return [
@@ -101,7 +111,7 @@ const payloadToDom = (props, payload, myMessage, amtMsat) => {
           }}
           dataSource={payloadObj.attL}
           renderItem={(item) => {
-            switch(item.t){
+            switch (item.t) {
             case 'image':
               return (
                 <ReactMarkdown
@@ -112,15 +122,29 @@ const payloadToDom = (props, payload, myMessage, amtMsat) => {
                 />
               );
             case 'file':
-              return(
+              return (
                 <a href={item.u}>File</a>
               );
             }
           }}
         />
       </div>)];
+  default:
+    break;
+  }
+};
+
+
+const c13nPpToDom = (props, payloadObj, myMessage) => {
+  switch (payloadObj.t) {
   case "payreq":
-    issuePayreq(payloadObj.id);
+    let invoiceObj = {};
+    if (payloadObj.c) {
+      try{
+        invoiceObj = lightningPayReq.decode(payloadObj?.c);
+      } catch (e) {}
+    }
+    let invoiceTimeLeft = (invoiceObj?.timeExpireDate - Math.round(Date.now() / 1000));
     return (
       <div
         style={{
@@ -132,17 +156,14 @@ const payloadToDom = (props, payload, myMessage, amtMsat) => {
         <h3> Request to
           {
             myMessage ? ' receive' : ' pay'
-          } <b>{cryptoUtils.msatToCurrentCryptoUnit(props, payloadObj.amtMsat)} {props.selectedCryptoUnit}</b></h3>
+          } <b>{cryptoUtils.msatToCurrentCryptoUnit(props, invoiceObj?.millisatoshis)} {props.selectedCryptoUnit}</b></h3>
         {
-          myMessage ? checkPayreq(payloadObj.id)
+          myMessage ? checkPayreq(payloadObj.c)
             ?
             <h2 style={{ color: 'green' }}><b>Paid <CheckOutlined /></b></h2>
-
             :
             <h2><b>Pending</b></h2>
-
-
-            : checkPayreq(payloadObj.id) ?
+            : checkPayreq(payloadObj.c) ?
               <div>
                 <h2 style={{ color: 'green' }}><b>Paid <CheckOutlined /></b></h2>
               </div>
@@ -160,11 +181,10 @@ const payloadToDom = (props, payload, myMessage, amtMsat) => {
                     height: '75%'
                   }}
                 >
-                      Pay
+                  Pay
                 </Button>
                 <br />
               </div>
-
         }
         <span
           style={{
@@ -182,36 +202,44 @@ const payloadToDom = (props, payload, myMessage, amtMsat) => {
             fontSize: '10px'
           }}
         >
-          <b>ID</b>
-          <span>{payloadObj.id}</span>
+          <b>Payreq: </b>
+          <b>
+            {`${payloadObj?.c?.substring(
+              0,
+              5
+            )}...${payloadObj?.c?.substring(
+              payloadObj?.c?.length - 5,
+              payloadObj?.c?.length
+            )}:  `}
+          </b>
+          <CopyOutlined
+            className="message-info-routeHopsList-Outilined"
+            onClick={() => {
+              let copyText = document.getElementById(
+                "payreq" + payloadObj.c
+              );
+              copyText.select();
+              copyText.setSelectionRange(0, 99999);
+              document.execCommand("copy");
+              NotificationManager.info("Copied to clipboard");
+            }}
+          />
+          <input
+            id={"payreq" + payloadObj.c}
+            className="message-info-routeHopsList-input"
+            value={payloadObj.c}
+            onChange={() => {}}
+          />
         </span>
-      </div>
-    );
-  case "payreq_pay":
-    satisfyPayreq(payloadObj.id);
-    return (
-      <div
-        style={{
-          border: '2px solid green',
-          borderRadius: '5px',
-          padding: '10px',
-        }}
-      >
+        <br />
         <span
           style={{
-            fontSize: '25px',
-            color: 'green'
+            fontSize: '10px'
           }}
         >
-
+          <b>Expiry in: </b>
+          {secondsToDhms(invoiceTimeLeft)}
         </span>
-          Paid request {payloadObj.id}
-        <CheckOutlined
-          style={{
-            fontSize: '30px',
-            color: 'green'
-          }}
-        />
       </div>
     );
   }
@@ -224,7 +252,8 @@ const payloadToDom = (props, payload, myMessage, amtMsat) => {
  */
 const createC13nMpMessage = (message, attachmentList) => {
   let messageObj = {
-    ...messageCore(),
+    n: "c13n-mp",
+    v: "0.0.1c",
     t: "message",
     c: message,
     attL: attachmentList
@@ -234,6 +263,18 @@ const createC13nMpMessage = (message, attachmentList) => {
   } catch (err) {
     return message;
   }
+};
+
+const secondsToDhms = (seconds) => {
+  seconds = Number(seconds);
+  var d = Math.floor(seconds / (3600*24));
+  var h = Math.floor(seconds % (3600*24) / 3600);
+  var m = Math.floor(seconds % 3600 / 60);
+  var s = Math.floor(seconds % 60);
+  var dDisplay = d > 0 ?  d + "d " : "";
+  var hDisplay = h > 0 ? h + "h " : "";
+  var mDisplay = m > 0 ? m + "m " : "";
+  return dDisplay + hDisplay + mDisplay;
 };
 
 const createC13nPpMessage = (payreq, description) => {
