@@ -24,12 +24,11 @@ import { NotificationManager } from "react-notifications";
 import messageClient from "../../services/messageServices";
 import { appendToChatHistory } from "../../utils/discussion-utils";
 import theme from "../../style/theme";
-import uploadImage from "../../utils/lsat/upload-image";
 import sleep from "../../utils/system";
 
 import {
-  messageToPayload,
-  payreqToPayload,
+  createC13nMpMessage,
+  createC13nPpMessage
 } from "../../payload-protocol/parsers";
 import "./chat-history-input.css";
 import ChatButton from "../../media/arrow-right.svg";
@@ -64,7 +63,7 @@ const ChatHistoryInput = (props) => {
           : parseInt(amtMsat) > 1000
             ? parseInt(amtMsat)
             : 1000,
-      payload: messageToPayload(text, attachmentList),
+      payload: createC13nMpMessage(text, attachmentList),
       options: {
         anonymous: props.anonymousActive,
       },
@@ -365,9 +364,6 @@ const ChatHistoryInput = (props) => {
         onOk={async () => {
           setUploadLoading(true);
           switch (imageURL.length) {
-          case 0:
-            uploadImage(props);
-            break;
           default:
             sendMessage("", [createAttachment("image", imageURL)]);
           }
@@ -410,8 +406,8 @@ const ChatHistoryInput = (props) => {
           messageClient().sendMessage(
             {
               discussionId: props.selectedDiscussion.id,
-              payload: payreqToPayload(
-                cryptoUtils.currentCryptoAmtToMsat(props, payreqAmount),
+              payload: createC13nPpMessage(
+                //TODO ask c13n-go for invoice
                 payreqDescription
               ),
               amtMsat: 1000,

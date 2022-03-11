@@ -12,7 +12,6 @@ import { Button, List } from "antd";
 import { CheckOutlined } from "@ant-design/icons";
 
 import React from "react";
-import { sendPayreqPay } from "../utils/payreq/utils";
 
 const cryptoUtils = require("../utils/crypto-utils");
 
@@ -152,7 +151,7 @@ const payloadToDom = (props, payload, myMessage, amtMsat) => {
                 <Button
                   type="primary"
                   onClick={() => {
-                    sendPayreqPay(props, payloadObj);
+                    //TODO tell c13n-go to pay invoice
                   }}
                   style={{
                     margin: "15px",
@@ -223,7 +222,7 @@ const payloadToDom = (props, payload, myMessage, amtMsat) => {
  * @param {*} message The entered message string.
  * @returns The message object.
  */
-const messageToPayload = (message, attachmentList) => {
+const createC13nMpMessage = (message, attachmentList) => {
   let messageObj = {
     ...messageCore(),
     t: "message",
@@ -237,26 +236,13 @@ const messageToPayload = (message, attachmentList) => {
   }
 };
 
-const payreqToPayload = (amtMsat, description) => {
+const createC13nPpMessage = (payreq, description) => {
   let messageObj = {
-    ...messageCore(),
+    n: "c13n-pp",
+    v: "0.0.1a",
     t: "payreq",
-    amtMsat: amtMsat,
-    description: description,
-    id: Date.now()
-  };
-  try {
-    return JSON.stringify(messageObj);
-  } catch (err) {
-    return '';
-  }
-};
-
-const payreqPayToPayload = (id) => {
-  let messageObj = {
-    ...messageCore(),
-    t: "payreq_pay",
-    id: id
+    c: payreq,
+    description: description
   };
   try {
     return JSON.stringify(messageObj);
@@ -267,7 +253,6 @@ const payreqPayToPayload = (id) => {
 
 export {
   payloadToDom,
-  messageToPayload,
-  payreqToPayload,
-  payreqPayToPayload
+  createC13nMpMessage,
+  createC13nPpMessage
 };
