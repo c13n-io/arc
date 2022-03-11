@@ -5,7 +5,7 @@ import c13nLinkRef from "../components/content-pages/markdown/c13n-link-ref";
 import c13nText from "../components/content-pages/markdown/c13n-text";
 import c13nInlineCode from "../components/content-pages/markdown/c13n-inline-code";
 
-import { checkPayreq, registerPaidPayreq } from "../utils/payreq/payreq-tracker";
+import { checkMyPayreq, checkPayreq, registerPaidPayreq } from "../utils/payreq/payreq-tracker";
 import { appendToChatHistory } from "../utils/discussion-utils";
 
 import { NotificationManager } from "react-notifications";
