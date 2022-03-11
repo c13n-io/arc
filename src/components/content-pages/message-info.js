@@ -109,7 +109,7 @@ const MessageInfo = (props) => {
             <List
               dataSource={props.selectedMessage.paymentRoutesList}
               renderItem={(item) => {
-                return <div>{routeHopsList(item)}</div>;
+                return <div key={`${Date.now()}${Math.random()}`}>{routeHopsList(item)}</div>;
               }}
             />
           </div>

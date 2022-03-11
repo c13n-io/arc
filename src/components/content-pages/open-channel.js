@@ -71,12 +71,6 @@ const OpenChannel = (props) => {
           props.setVisible(false);
         }}
         onOk={async () => {
-          console.log(mode);
-          console.log(lightningAddress);
-          console.log(amount);
-          console.log(pushAmount);
-          console.log(minimumInputConfirmations);
-          console.log(targetConfirmationBlocks);
           const split = splitURI(lightningAddress);
           const address = split.address;
           const hostport = split.hostport;

@@ -10,8 +10,10 @@ import { checkPayreq } from "../utils/payreq/payreq-tracker";
 
 import { NotificationManager } from "react-notifications";
 
-import { Button, List } from "antd";
+import { Button, List, Popconfirm } from "antd";
 import { CheckOutlined, CopyOutlined } from "@ant-design/icons";
+
+import messageClient from "../services/messageServices";
 
 import React from "react";
 
@@ -45,7 +47,7 @@ const renderers = (props) => {
  * @param {number} amtMsat The msat amount delivered by the message.
  * @returns The JSX representing the message.
  */
-const payloadToDom = (props, payload, myMessage, amtMsat) => {
+const payloadToDom = (props, payload, myMessage, amtMsat, discussionId) => {
   let payloadObj;
   try {
     payloadObj = JSON.parse(payload);
@@ -62,8 +64,9 @@ const payloadToDom = (props, payload, myMessage, amtMsat) => {
   case "c13n-mp":
     return c13nMpToDom(props, payloadObj, myMessage, amtMsat);
   case "c13n-pp":
-    return c13nPpToDom(props, payloadObj, myMessage);
+    return c13nPpToDom(props, payloadObj, myMessage, discussionId);
   default:
+    return payload;
   }
 };
 
@@ -119,6 +122,7 @@ const c13nMpToDom = (props, payloadObj, myMessage, amtMsat) => {
                   renderers={renderers(props)}
                   disallowedTypes={["paragraph"]}
                   unwrapDisallowed={!!true}
+                  key={`${Date.now()}${Math.random()}`}
                 />
               );
             case 'file':
@@ -169,20 +173,49 @@ const c13nPpToDom = (props, payloadObj, myMessage) => {
               </div>
               :
               <div>
-                <Button
-                  type="primary"
-                  onClick={() => {
-                    //TODO tell c13n-go to pay invoice
+                <Popconfirm
+                  placement="topLeft"
+                  title={"Send payment?"}
+                  onConfirm={() => {
+                    messageClient().sendMessage(
+                      {
+                        payload: createC13nPpMessage(
+                          "payreq_pay",
+                          payloadObj.c
+                        ),
+                        payReq: payloadObj.c
+                      },
+                      (err, res) => {
+                        if(err) {
+                          console.log(err);
+                        }
+                        if(res) {
+                          console.log(res);
+                        }
+                      }
+                    );
                   }}
                   style={{
-                    margin: "15px",
-                    fontSize: '20px',
-                    width: '90%',
-                    height: '75%'
+                    fontSize: "15px",
+                    border: "5px solid red"
                   }}
+                  okText="Yes"
+                  cancelText="No"
                 >
-                  Pay
-                </Button>
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                    }}
+                    style={{
+                      margin: "15px",
+                      fontSize: '20px',
+                      width: '90%',
+                      height: '75%'
+                    }}
+                  >
+                    Pay
+                  </Button>
+                </Popconfirm>
                 <br />
               </div>
         }
@@ -242,6 +275,28 @@ const c13nPpToDom = (props, payloadObj, myMessage) => {
         </span>
       </div>
     );
+  case "payreq_pay":
+    return(
+      <div
+        style={{
+          fontSize: '20px',
+          border: '2px solid gray',
+          borderRadius: '5px',
+          padding: '15px'
+        }}
+      >
+        Paid
+        <b>
+          {`${payloadObj?.c?.substring(
+            0,
+            5
+          )}...${payloadObj?.c?.substring(
+            payloadObj?.c?.length - 5,
+            payloadObj?.c?.length
+          )}:  `}
+        </b>
+      </div>
+    );
   }
 };
 
@@ -277,11 +332,11 @@ const secondsToDhms = (seconds) => {
   return dDisplay + hDisplay + mDisplay;
 };
 
-const createC13nPpMessage = (payreq, description) => {
+const createC13nPpMessage = (type, payreq, description) => {
   let messageObj = {
     n: "c13n-pp",
     v: "0.0.1a",
-    t: "payreq",
+    t: type,
     c: payreq,
     description: description
   };

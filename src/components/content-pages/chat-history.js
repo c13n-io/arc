@@ -244,6 +244,9 @@ const ChatHistory = (props) => {
         }, 750);
       }
     }
+    if(props.chatHistory.length == 0) {
+      setPageLoaded(true);
+    }
   }, [props.chatHistory]);
 
   /**
@@ -566,7 +569,9 @@ const ChatHistory = (props) => {
                     }}
                     renderItem={(item) => {
                       return (
-                        <List.Item className="chat-history-listItem">
+                        <List.Item
+                          className="chat-history-listItem"
+                        >
                           <div
                             className="chatHistoryFlexWrapper"
                             style={{
@@ -749,7 +754,8 @@ const ChatHistory = (props) => {
                                   props,
                                   item.payload,
                                   item.sender === props.selfInfo.address,
-                                  item.amtMsat
+                                  item.amtMsat,
+                                  item.discussionId
                                 )}
                               </div>
                             </div>

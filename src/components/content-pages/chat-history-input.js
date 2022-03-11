@@ -8,6 +8,7 @@ import {
   Dropdown,
   Menu,
   Divider,
+  Select
 } from "antd";
 import {
   PlusOutlined,
@@ -22,6 +23,7 @@ import Picker from "emoji-picker-react";
 import { NotificationManager } from "react-notifications";
 
 import messageClient from "../../services/messageServices";
+import paymentClient from "../../services/paymentServices";
 import { appendToChatHistory } from "../../utils/discussion-utils";
 import theme from "../../style/theme";
 import sleep from "../../utils/system";
@@ -48,6 +50,8 @@ const ChatHistoryInput = (props) => {
   const [payreqModalActive, setPayreqModalActive] = useState(false);
   const [payreqAmount, setPayreqAmount] = useState(0);
   const [payreqDescription, setPayreqDescription] = useState("");
+  const [payreqExpiry, setPayreqExpiry] = useState(0);
+  const [payreqPrivate, setPayreqPrivate] = useState(false);
 
   /**
    * This function sends a payload and the currently entered payload to the current discussion.
@@ -403,37 +407,56 @@ const ChatHistoryInput = (props) => {
             cryptoUtils.currentCryptoAmtToMsat(props, payreqAmount),
             "msat"
           );
-          messageClient().sendMessage(
+          paymentClient().createInvoice(
             {
-              discussionId: props.selectedDiscussion.id,
-              payload: createC13nPpMessage(
-                //TODO ask c13n-go for invoice
-                payreqDescription
-              ),
-              amtMsat: 1000,
+              amtMsat: (payreqAmount*1000),
+              description: payreqDescription,
+              expiry: payreqExpiry,
+              private: payreqPrivate
             },
-            (err, res) => {
-              if (err) {
-                NotificationManager.error("Could not send message");
-                console.log(err);
+            (err, ress) => {
+              if(err) {
+                NotificationManager.error("Could not create invoice");
               }
-              if (res) {
-                setPayreqAmount(0);
-                setPayreqDescription("");
-                setPayreqModalActive(false);
-                props.selectedDiscussion.lastMsgId = res.sentMessage.id;
-                props.selectedDiscussion.lastReadMsgId = res.sentMessage.id;
-                appendToChatHistory(props, res.sentMessage);
-                props.updateCurrentFunds();
-                props.setLastFundChange(
-                  `-${Number(
-                    res.sentMessage.amtMsat / 1000 +
-                      res.sentMessage.totalFeesMsat / 1000
-                  )}`
+              if(ress) {
+                messageClient().sendMessage(
+                  {
+                    discussionId: props.selectedDiscussion.id,
+                    payload: createC13nPpMessage(
+                      "payreq",
+                      ress.invoice.paymentRequest,
+                      ress.invoice.memo
+                    ),
+                    amtMsat: 1000,
+                  },
+                  (err, res) => {
+                    if (err) {
+                      NotificationManager.error("Could not send message");
+                      console.log(err);
+                    }
+                    if (res) {
+                      setPayreqAmount(0);
+                      setPayreqDescription("");
+                      setPayreqExpiry(-1);
+                      setPayreqPrivate(false);
+                      setPayreqModalActive(false);
+                      props.selectedDiscussion.lastMsgId = res.sentMessage.id;
+                      props.selectedDiscussion.lastReadMsgId = res.sentMessage.id;
+                      appendToChatHistory(props, res.sentMessage);
+                      props.updateCurrentFunds();
+                      props.setLastFundChange(
+                        `-${Number(
+                          res.sentMessage.amtMsat / 1000 +
+                            res.sentMessage.totalFeesMsat / 1000
+                        )}`
+                      );
+                    }
+                  }
                 );
               }
             }
           );
+          console.log("Calling sendMessage");
         }}
         onCancel={() => {
           setPayreqModalActive(false);
@@ -463,8 +486,8 @@ const ChatHistoryInput = (props) => {
                 parseFloat(cryptoUtils.retrieveDefaultCryptoAmount(props))
               );
             }
-            if (amount > 1000000) {
-              setAmount(1000000);
+            if (amount > 10000000) {
+              setAmount(10000000);
             }
           }}
           onFocus={() => {
@@ -482,7 +505,32 @@ const ChatHistoryInput = (props) => {
             }
           }}
         />
+        <br />
+        Expiry:
+        <br />
+        <Select
+          defaultValue={-1}
+          onChange={(value) => {
+            setPayreqExpiry(value);
+          }}
+        >
+          <Select.Option value={3600}>1 hour</Select.Option>
+          <Select.Option value={3600*24}>24 hours</Select.Option>
+          <Select.Option value={3600*24*7}>7 days</Select.Option>
+          <Select.Option value={3600*24*30}>30 days</Select.Option>
+          <Select.Option value={-1}>Never</Select.Option>
+        </Select>
+        <br />
+        Private:
+        <br />
+        <Switch
+          defaultChecked={false}
+          onChange={(value) => {
+            setPayreqPrivate(value);
+          }}
+        />
       </Modal>
+
     </div>
   );
 };
