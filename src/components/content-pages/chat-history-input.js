@@ -443,6 +443,7 @@ const ChatHistoryInput = (props) => {
                       props.selectedDiscussion.lastMsgId = res.sentMessage.id;
                       props.selectedDiscussion.lastReadMsgId = res.sentMessage.id;
                       appendToChatHistory(props, res.sentMessage);
+                      props.updateChatScroll();
                       props.updateCurrentFunds();
                       props.setLastFundChange(
                         `-${Number(
@@ -509,7 +510,7 @@ const ChatHistoryInput = (props) => {
         Expiry:
         <br />
         <Select
-          defaultValue={-1}
+          defaultValue={3600*24}
           onChange={(value) => {
             setPayreqExpiry(value);
           }}
@@ -518,7 +519,6 @@ const ChatHistoryInput = (props) => {
           <Select.Option value={3600*24}>24 hours</Select.Option>
           <Select.Option value={3600*24*7}>7 days</Select.Option>
           <Select.Option value={3600*24*30}>30 days</Select.Option>
-          <Select.Option value={-1}>Never</Select.Option>
         </Select>
         <br />
         Private:

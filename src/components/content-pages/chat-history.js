@@ -244,9 +244,6 @@ const ChatHistory = (props) => {
         }, 750);
       }
     }
-    if(props.chatHistory.length == 0) {
-      setPageLoaded(true);
-    }
   }, [props.chatHistory]);
 
   /**

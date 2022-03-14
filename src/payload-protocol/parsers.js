@@ -149,6 +149,7 @@ const c13nPpToDom = (props, payloadObj, myMessage) => {
       } catch (e) {}
     }
     let invoiceTimeLeft = (invoiceObj?.timeExpireDate - Math.round(Date.now() / 1000));
+    let invoicePaid = myMessage ? checkMyPayreq(payloadObj.c) : checkPayreq(payloadObj.c);
     return (
       <div
         style={{
@@ -270,11 +271,12 @@ const c13nPpToDom = (props, payloadObj, myMessage) => {
         <br />
         <span
           style={{
-            fontSize: '10px'
+            fontSize: '10px',
+            display: invoicePaid ? 'none' : 'inherit'
           }}
         >
           <b>Expiry in: </b>
-          {secondsToDhms(invoiceTimeLeft)}
+          {invoiceTimeLeft > 0 ? secondsToDhms(invoiceTimeLeft) : (<b style={{fontSize: "12px", color: "red"}}>EXPIRED</b>)}
         </span>
       </div>
     );
