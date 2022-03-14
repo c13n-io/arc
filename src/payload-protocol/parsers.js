@@ -194,6 +194,13 @@ const c13nPpToDom = (props, payloadObj, myMessage) => {
                           console.log(res);
                           props.selectedDiscussion.lastMsgId = res.sentMessage.id;
                           props.selectedDiscussion.lastReadMsgId = res.sentMessage.id;
+                          props.updateCurrentFunds();
+                          props.setLastFundChange(
+                            `-${Number(
+                              res.sentMessage.amtMsat / 1000 +
+                                res.sentMessage.totalFeesMsat / 1000
+                            )}`
+                          );
                           appendToChatHistory(props, res.sentMessage);
                         }
                       }
