@@ -37,6 +37,7 @@ import notificationAudio from "../media/notification.mp3";
 import { concatUserNames } from "../utils/discussion-utils";
 import channelClient from "../services/channelServices";
 import "./main.css";
+import { exportTextMessage } from "../payload-protocol/utils";
 
 const { GetDiscussionsResponse } = require("../rpc/rpc_pb");
 const { SubscribeMessageResponse } = require("../rpc/rpc_pb");
@@ -496,28 +497,23 @@ const Main = () => {
                 appendToChatHistory(mainProps, res.receivedMessage);
               }
 
+              let messageText = exportTextMessage(res.receivedMessage.payload);
               if (!document.hasFocus()) {
                 let audio = new Audio(notificationAudio);
                 audio.play();
-                let message = {};
-                try {
-                  message = JSON.parse(res.receivedMessage.payload);
-                } catch (e) {
-                  message.content = res.receivedMessage.payload;
-                }
                 new Notification(
                   `${
                     concatUserNames(mainProps, [res.receivedMessage.sender]) ||
                     "Unknown"
                   }: ${
-                    !message.content
+                    !messageText
                       ? `Sent you ${cryptoUtils.msatToCurrentCryptoUnit(
                         mainProps,
                         res.receivedMessage.amtMsat
                       )}${selectedCryptoUnit}`
-                      : message.content.length < 30
-                        ? message.content
-                        : message.content.substring(0, 25) + "..."
+                      : messageText.length < 32
+                        ? messageText
+                        : messageText.substring(0, 32) + "..."
                   }`,
                   {
                     icon: arcLogo,
@@ -530,14 +526,14 @@ const Main = () => {
                 if (!directlyToRoom) {
                   NotificationManager.info(
                     `${
-                      res.receivedMessage.payload === ""
+                      !messageText
                         ? `Sent you ${cryptoUtils.msatToCurrentCryptoUnit(
                           mainProps,
                           res.receivedMessage.amtMsat
                         )}${selectedCryptoUnit}`
-                        : res.receivedMessage.payload.length < 20
-                          ? res.receivedMessage.payload
-                          : res.receivedMessage.payload.substring(0, 15) + "..."
+                        : messageText < 25
+                          ? messageText
+                          : messageText.substring(0, 25) + "..."
                     }`,
                     `${alias || "Unknown"}:`,
                     4000,

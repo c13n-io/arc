@@ -24,7 +24,6 @@ const checkMyPayreq = (payreq) => {
           console.log(err);
         }
         if(res) {
-          console.log(res);
           if(res?.invoice?.state == 2) {
             myPaidPayreqs[payreq] = true;
           }
