@@ -48,7 +48,7 @@ const ChatHistoryInput = (props) => {
   const [imageURL, setImageURL] = useState("");
   const [uploadLoading, setUploadLoading] = useState(false);
   const [payreqModalActive, setPayreqModalActive] = useState(false);
-  const [payreqAmount, setPayreqAmount] = useState(0);
+  const [payreqAmount, setPayreqAmount] = useState(1);
   const [payreqDescription, setPayreqDescription] = useState("");
   const [payreqExpiry, setPayreqExpiry] = useState(0);
   const [payreqPrivate, setPayreqPrivate] = useState(false);
@@ -409,7 +409,7 @@ const ChatHistoryInput = (props) => {
           );
           paymentClient().createInvoice(
             {
-              amtMsat: (payreqAmount*1000),
+              amtMsat: cryptoUtils.currentCryptoAmtToMsat(props, payreqAmount),
               description: payreqDescription,
               expiry: payreqExpiry,
               private: payreqPrivate
@@ -483,12 +483,12 @@ const ChatHistoryInput = (props) => {
               amount <
               parseFloat(cryptoUtils.retrieveDefaultCryptoAmount(props))
             ) {
-              setAmount(
+              setPayreqAmount(
                 parseFloat(cryptoUtils.retrieveDefaultCryptoAmount(props))
               );
             }
             if (amount > 10000000) {
-              setAmount(10000000);
+              setPayreqAmount(10000000);
             }
           }}
           onFocus={() => {
