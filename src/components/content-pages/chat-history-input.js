@@ -8,6 +8,7 @@ import {
   Dropdown,
   Menu,
   Divider,
+  Select
 } from "antd";
 import {
   PlusOutlined,
@@ -22,14 +23,14 @@ import Picker from "emoji-picker-react";
 import { NotificationManager } from "react-notifications";
 
 import messageClient from "../../services/messageServices";
+import paymentClient from "../../services/paymentServices";
 import { appendToChatHistory } from "../../utils/discussion-utils";
 import theme from "../../style/theme";
-import uploadImage from "../../utils/lsat/upload-image";
 import sleep from "../../utils/system";
 
 import {
-  messageToPayload,
-  payreqToPayload,
+  createC13nMpMessage,
+  createC13nPpMessage
 } from "../../payload-protocol/parsers";
 import "./chat-history-input.css";
 import ChatButton from "../../media/arrow-right.svg";
@@ -47,8 +48,10 @@ const ChatHistoryInput = (props) => {
   const [imageURL, setImageURL] = useState("");
   const [uploadLoading, setUploadLoading] = useState(false);
   const [payreqModalActive, setPayreqModalActive] = useState(false);
-  const [payreqAmount, setPayreqAmount] = useState(0);
+  const [payreqAmount, setPayreqAmount] = useState(1);
   const [payreqDescription, setPayreqDescription] = useState("");
+  const [payreqExpiry, setPayreqExpiry] = useState(0);
+  const [payreqPrivate, setPayreqPrivate] = useState(false);
 
   /**
    * This function sends a payload and the currently entered payload to the current discussion.
@@ -64,7 +67,7 @@ const ChatHistoryInput = (props) => {
           : parseInt(amtMsat) > 1000
             ? parseInt(amtMsat)
             : 1000,
-      payload: messageToPayload(text, attachmentList),
+      payload: createC13nMpMessage(text, attachmentList),
       options: {
         anonymous: props.anonymousActive,
       },
@@ -365,9 +368,6 @@ const ChatHistoryInput = (props) => {
         onOk={async () => {
           setUploadLoading(true);
           switch (imageURL.length) {
-          case 0:
-            uploadImage(props);
-            break;
           default:
             sendMessage("", [createAttachment("image", imageURL)]);
           }
@@ -407,37 +407,57 @@ const ChatHistoryInput = (props) => {
             cryptoUtils.currentCryptoAmtToMsat(props, payreqAmount),
             "msat"
           );
-          messageClient().sendMessage(
+          paymentClient().createInvoice(
             {
-              discussionId: props.selectedDiscussion.id,
-              payload: payreqToPayload(
-                cryptoUtils.currentCryptoAmtToMsat(props, payreqAmount),
-                payreqDescription
-              ),
-              amtMsat: 1000,
+              amtMsat: cryptoUtils.currentCryptoAmtToMsat(props, payreqAmount),
+              description: payreqDescription,
+              expiry: payreqExpiry,
+              private: payreqPrivate
             },
-            (err, res) => {
-              if (err) {
-                NotificationManager.error("Could not send message");
-                console.log(err);
+            (err, ress) => {
+              if(err) {
+                NotificationManager.error("Could not create invoice");
               }
-              if (res) {
-                setPayreqAmount(0);
-                setPayreqDescription("");
-                setPayreqModalActive(false);
-                props.selectedDiscussion.lastMsgId = res.sentMessage.id;
-                props.selectedDiscussion.lastReadMsgId = res.sentMessage.id;
-                appendToChatHistory(props, res.sentMessage);
-                props.updateCurrentFunds();
-                props.setLastFundChange(
-                  `-${Number(
-                    res.sentMessage.amtMsat / 1000 +
-                      res.sentMessage.totalFeesMsat / 1000
-                  )}`
+              if(ress) {
+                messageClient().sendMessage(
+                  {
+                    discussionId: props.selectedDiscussion.id,
+                    payload: createC13nPpMessage(
+                      "payreq",
+                      ress.invoice.paymentRequest,
+                      ress.invoice.memo
+                    ),
+                    amtMsat: 1000,
+                  },
+                  (err, res) => {
+                    if (err) {
+                      NotificationManager.error("Could not send message");
+                      console.log(err);
+                    }
+                    if (res) {
+                      setPayreqAmount(0);
+                      setPayreqDescription("");
+                      setPayreqExpiry(-1);
+                      setPayreqPrivate(false);
+                      setPayreqModalActive(false);
+                      props.selectedDiscussion.lastMsgId = res.sentMessage.id;
+                      props.selectedDiscussion.lastReadMsgId = res.sentMessage.id;
+                      appendToChatHistory(props, res.sentMessage);
+                      props.updateChatScroll();
+                      props.updateCurrentFunds();
+                      props.setLastFundChange(
+                        `-${Number(
+                          res.sentMessage.amtMsat / 1000 +
+                            res.sentMessage.totalFeesMsat / 1000
+                        )}`
+                      );
+                    }
+                  }
                 );
               }
             }
           );
+          console.log("Calling sendMessage");
         }}
         onCancel={() => {
           setPayreqModalActive(false);
@@ -463,12 +483,12 @@ const ChatHistoryInput = (props) => {
               amount <
               parseFloat(cryptoUtils.retrieveDefaultCryptoAmount(props))
             ) {
-              setAmount(
+              setPayreqAmount(
                 parseFloat(cryptoUtils.retrieveDefaultCryptoAmount(props))
               );
             }
-            if (amount > 1000000) {
-              setAmount(1000000);
+            if (amount > 10000000) {
+              setPayreqAmount(10000000);
             }
           }}
           onFocus={() => {
@@ -486,7 +506,31 @@ const ChatHistoryInput = (props) => {
             }
           }}
         />
+        <br />
+        Expiry:
+        <br />
+        <Select
+          defaultValue={3600*24}
+          onChange={(value) => {
+            setPayreqExpiry(value);
+          }}
+        >
+          <Select.Option value={3600}>1 hour</Select.Option>
+          <Select.Option value={3600*24}>24 hours</Select.Option>
+          <Select.Option value={3600*24*7}>7 days</Select.Option>
+          <Select.Option value={3600*24*30}>30 days</Select.Option>
+        </Select>
+        <br />
+        Private:
+        <br />
+        <Switch
+          defaultChecked={false}
+          onChange={(value) => {
+            setPayreqPrivate(value);
+          }}
+        />
       </Modal>
+
     </div>
   );
 };

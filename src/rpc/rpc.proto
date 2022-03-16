@@ -1,23 +1,11 @@
 syntax = "proto3";
 
-option go_package = "git.programize.com/c13n/c13n-backend/rpc/services";
+option go_package = "github.com/c13n-io/c13n-go/rpc/services";
 
 package services;
 
 import "google/protobuf/timestamp.proto";
 import "validator.proto";
-
-/**
- Corresponds to pagination parameters for requests.
- Represents a request for page_size elements,
- skipping the most recent skip_recent elements (reverse order).
-*/
-message PageOptions {
-	/** The number of most recent elements to skip. */
-	int64 skip_recent = 1 [(validator.field) = {msg_exists: true}];
-	/** The number of elements to return. */
-	int64 page_size = 2 [(validator.field) = {msg_exists: true}];
-}
 
 /**
  Corresponds to pagination parameters for requests.
@@ -147,13 +135,13 @@ message SelfBalanceResponse {
 message GetNodesRequest {
 }
 
-/** Corresponds to a node query based on the node address. */
+/** Corresponds to a node query based on node address. */
 message SearchNodeByAddressRequest {
 	/** The node address to search. */
 	string address = 1 [(validator.field) = {regex: "^[a-z0-9]{66}$"}];
 }
 
-/** Corresponds to a node query based on the node alias. */
+/** Corresponds to a node query based on node alias. */
 message SearchNodeByAliasRequest {
 	/** The node alias substring to search. */
 	string alias = 1;
@@ -178,12 +166,11 @@ message ConnectNodeRequest {
 }
 
 /** A ConnectNodeResponse is received in response to a ConnectNode request. */
-message ConnectNodeResponse{
+message ConnectNodeResponse {
 }
 
 /**
- ChannelService exposes endpoints pertaining
- to channel management.
+ ChannelService exposes endpoints pertaining to channel management.
  */
 service ChannelService {
 	/**
@@ -203,16 +190,19 @@ message OpenChannelRequest {
 	uint64 amt_msat = 2;
 	/** The amount to be sent to the other party (in millisatoshi). */
 	uint64 push_amt_msat = 3;
-	/** The minimum number of confirmations each input
-	 of the channel funding transaction must have.
+	/** The minimum number of confirmations
+	 each input of the channel funding transaction must have.
 
 	 In case of a negative value being provided, unconfirmed funds can be used.
 	*/
 	int32 min_input_confs = 4;
 	/** The number of blocks the funding transaction should confirm by.
-	 This is used for fee estimation.
+
+	 Used for fee estimation.
 	*/
 	uint32 target_confirmation_block = 5;
+	/** The fee rate (satoshis per virtual byte) the funding transaction should cost. */
+	uint64 sat_per_vbyte = 6;
 }
 
 /** An OpenChannelResponse is received in response to an OpenChannel call. */
@@ -224,8 +214,7 @@ message OpenChannelResponse {
 }
 
 /**
- ContactService exposes endpoints pertaining to handling
- nodes of the Lightning network and contacts.
+ ContactService exposes endpoints pertaining to contacts.
  */
 service ContactService {
 	/**
@@ -330,7 +319,7 @@ service MessageService {
 	rpc SubscribeMessages(SubscribeMessageRequest) returns (stream SubscribeMessageResponse) {}
 }
 
-/** A message representing a message of the application. */
+/** Represents a message of the application. */
 message Message {
 	/** The unique id of the message. */
 	uint64 id = 1;
@@ -373,7 +362,7 @@ message Message {
 	string pay_req = 13;
 }
 
-/** A message representing a route fulfilling a payment HTLC. */
+/** Represents a route fulfilling a payment HTLC. */
 message PaymentRoute {
 	/** The list of hops for this route. */
 	repeated PaymentHop hops = 1;
@@ -385,7 +374,7 @@ message PaymentRoute {
 	int64 route_fees_msat = 4;
 }
 
-/** A message representing a hop of the route for sending a message. */
+/** Represents a hop of a route of a message. */
 message PaymentHop {
 	/** The channel id. */
 	uint64 chan_id = 1;
@@ -397,7 +386,7 @@ message PaymentHop {
 	int64 fee_msat = 4;
 }
 
-/** MessageOptions represents messaging options. */
+/** Represents messaging options. */
 message MessageOptions {
 	/** The maximum fee allowed for a message (in millisatoshi). */
 	int64 fee_limit_msat = 1;
@@ -481,7 +470,7 @@ service DiscussionService {
 	 Creates a unidirectional stream from server to client
 	 over which all discussions' info are sent.
 
-	 The stream terminates when all discussions' info is transmitted.
+	 The stream terminates when all discussion info is transmitted.
 	*/
 	rpc GetDiscussions(GetDiscussionsRequest) returns (stream GetDiscussionsResponse) {}
 	/**
@@ -516,6 +505,7 @@ message DiscussionInfo {
 	uint64 id = 1 [(validator.field) = {msg_exists: true}];
 	/** The list of participants in the discussion. */
 	repeated string participants = 2 [(validator.field) = {repeated_count_min: 1}];
+	/** The default options applicable for all discussion messages. */
 	DiscussionOptions options = 3;
 	/** The id of the last read message in the discussion. */
 	uint64 last_read_msg_id = 4;
@@ -525,8 +515,7 @@ message DiscussionInfo {
 
 /** DiscussionOptions represents the per-discussion options. */
 message DiscussionOptions {
-	/**
-	 The maximum fee allowed for sending a message (in millisatoshi).
+	/** The maximum fee allowed for sending a message (in millisatoshi).
 
 	 If not set, the default fee limit, as defined in the app package, is used.
 	*/
@@ -554,6 +543,7 @@ message GetDiscussionsResponse {
 message GetDiscussionHistoryByIDRequest {
 	/** The discussion id of interest. */
 	uint64 id = 1 [(validator.field) = {msg_exists: true}];
+	/** The pagination options of the request. */
 	KeySetPageOptions page_options = 2;
 }
 
@@ -625,4 +615,134 @@ message RemoveDiscussionRequest {
 
 /** A RemoveDiscussionResponse is received in response to a RemoveDiscussion rpc call. */
 message RemoveDiscussionResponse {
+}
+
+/**
+ PaymentService exposes payment and invoice functionality.
+*/
+service PaymentService {
+	/**
+	 Creates a new invoice.
+	*/
+	rpc CreateInvoice(CreateInvoiceRequest) returns (CreateInvoiceResponse) {}
+
+	/**
+	 Performs an invoice lookup.
+	*/
+	rpc LookupInvoice(LookupInvoiceRequest) returns (LookupInvoiceResponse) {}
+}
+
+/** Corresponds to an invoice creation request. */
+message CreateInvoiceRequest {
+	/** Memo of the invoice. */
+	string memo = 1;
+	/** The invoice amount (in millisatoshi). */
+	uint64 amt_msat = 2;
+	/** Invoice expiry time (in seconds since creation). */
+	int64 expiry = 3;
+	/** Whether to include hints for private channels. */
+	bool private = 4;
+}
+
+/** A CreateInvoiceResponse is received in response to an invoice creation request. */
+message CreateInvoiceResponse {
+	/** The created invoice. */
+	Invoice invoice = 1;
+}
+
+/** Corresponds to an invoice lookup request. */
+message LookupInvoiceRequest {
+	/** Payment Request */
+	string pay_req = 1;
+}
+
+/** A LookupResponse is received in response to an invoice lookup request. */
+message LookupInvoiceResponse {
+	/** The returned invoice. */
+	Invoice invoice = 1;
+}
+
+/** Represents an Lightning network invoice. */
+message Invoice {
+	/** The invoice memo. */
+	string memo = 1;
+	/** The preimage hash. */
+	string hash = 2;
+	/** The invoice preimage. */
+	string preimage = 3;
+	/** The payment request of the invoice. */
+	string payment_request = 4;
+	/** The value (amount requested) of the invoice (in millisatoshi). */
+	uint64 value_msat = 5;
+	/** The amount paid to the invoice (in millisatoshi). */
+	uint64 amt_paid_msat = 6;
+	/** The time the invoice was created. */
+	google.protobuf.Timestamp created_timestamp = 7;
+	/** The time the invoice was settled. */
+	google.protobuf.Timestamp settled_timestamp = 8;
+	/** The invoice expiry (in seconds since creation time). */
+	int64 expiry = 9;
+	/** Whether the invoice contains hints for private channels. */
+	bool private = 10;
+	/** Invoice route hints. */
+	repeated RouteHint route_hints = 11;
+	/** The invoice state. */
+	InvoiceState state = 12;
+	/** The add index of the invoice. */
+	uint64 add_index = 13;
+	/** The settle index of the invoice. */
+	uint64 settle_index = 14;
+	/** The set of HTLCs paying to the invoice. */
+	repeated InvoiceHTLC invoice_htlcs  = 15;
+}
+
+/** Represents the state of an invoice. */
+enum InvoiceState {
+	INVOICE_OPEN = 0;
+	INVOICE_ACCEPTED = 1;
+	INVOICE_SETTLED = 2;
+	INVOICE_CANCELLED = 3;
+}
+
+/** Represents a route hint for assistance in invoice payment. */
+message RouteHint {
+	/** A chain of hop hints that can reach the desetination. */
+	repeated HopHint hop_hints = 1;
+}
+
+/** Represents a hop hint. */
+message HopHint {
+	/** Public key of hop ingress node. */
+	string pubkey = 1;
+	/** The short channel id of the channel to be used for the hop. */
+	uint64 chan_id = 2;
+	/** The base fee of the channel (in millisatoshi). */
+	uint32 fee_base_msat = 3;
+	/** The fee rate of the channel (in microsatoshi/sat). */
+	uint32 fee_rate = 4;
+	/** The timelock delta of the channel. */
+	uint32 cltv_expiry_delta = 5;
+}
+
+/** Represents an HTLC paying to an invoice. */
+message InvoiceHTLC {
+	/** The short channel id of the channel the HTLC was arrived. */
+	uint64 chan_id = 1;
+	/** The amount of this HTLC (in millisatoshi). */
+	uint64 amt_msat = 2;
+	/** State of the HTLC. */
+	InvoiceHTLCState state = 3;
+	/** HTLC accept timestamp. */
+	google.protobuf.Timestamp accept_timestamp = 4;
+	/** HTLC resolve timestamp.*/
+	google.protobuf.Timestamp resolve_timestamp = 5;
+	/** Block height at which this HTLC expires. */
+	int32 expiry_height = 6;
+}
+
+/** Represents the state of an invoice HTLC. */
+enum InvoiceHTLCState {
+	INVOICE_HTLC_ACCEPTED = 0;
+	INVOICE_HTLC_SETTLED = 1;
+	INVOICE_HTLC_CANCELLED = 2;
 }

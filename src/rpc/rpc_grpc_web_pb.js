@@ -1947,5 +1947,217 @@ proto.services.DiscussionServicePromiseClient.prototype.removeDiscussion =
 };
 
 
+/**
+ * @param {string} hostname
+ * @param {?Object} credentials
+ * @param {?Object} options
+ * @constructor
+ * @struct
+ * @final
+ */
+proto.services.PaymentServiceClient =
+    function(hostname, credentials, options) {
+  if (!options) options = {};
+  options['format'] = 'text';
+
+  /**
+   * @private @const {!grpc.web.GrpcWebClientBase} The client
+   */
+  this.client_ = new grpc.web.GrpcWebClientBase(options);
+
+  /**
+   * @private @const {string} The hostname
+   */
+  this.hostname_ = hostname;
+
+};
+
+
+/**
+ * @param {string} hostname
+ * @param {?Object} credentials
+ * @param {?Object} options
+ * @constructor
+ * @struct
+ * @final
+ */
+proto.services.PaymentServicePromiseClient =
+    function(hostname, credentials, options) {
+  if (!options) options = {};
+  options['format'] = 'text';
+
+  /**
+   * @private @const {!grpc.web.GrpcWebClientBase} The client
+   */
+  this.client_ = new grpc.web.GrpcWebClientBase(options);
+
+  /**
+   * @private @const {string} The hostname
+   */
+  this.hostname_ = hostname;
+
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.services.CreateInvoiceRequest,
+ *   !proto.services.CreateInvoiceResponse>}
+ */
+const methodDescriptor_PaymentService_CreateInvoice = new grpc.web.MethodDescriptor(
+  '/services.PaymentService/CreateInvoice',
+  grpc.web.MethodType.UNARY,
+  proto.services.CreateInvoiceRequest,
+  proto.services.CreateInvoiceResponse,
+  /**
+   * @param {!proto.services.CreateInvoiceRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.services.CreateInvoiceResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.services.CreateInvoiceRequest,
+ *   !proto.services.CreateInvoiceResponse>}
+ */
+const methodInfo_PaymentService_CreateInvoice = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.services.CreateInvoiceResponse,
+  /**
+   * @param {!proto.services.CreateInvoiceRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.services.CreateInvoiceResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.services.CreateInvoiceRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.services.CreateInvoiceResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.services.CreateInvoiceResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.services.PaymentServiceClient.prototype.createInvoice =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/services.PaymentService/CreateInvoice',
+      request,
+      metadata || {},
+      methodDescriptor_PaymentService_CreateInvoice,
+      callback);
+};
+
+
+/**
+ * @param {!proto.services.CreateInvoiceRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.services.CreateInvoiceResponse>}
+ *     Promise that resolves to the response
+ */
+proto.services.PaymentServicePromiseClient.prototype.createInvoice =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/services.PaymentService/CreateInvoice',
+      request,
+      metadata || {},
+      methodDescriptor_PaymentService_CreateInvoice);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.services.LookupInvoiceRequest,
+ *   !proto.services.LookupInvoiceResponse>}
+ */
+const methodDescriptor_PaymentService_LookupInvoice = new grpc.web.MethodDescriptor(
+  '/services.PaymentService/LookupInvoice',
+  grpc.web.MethodType.UNARY,
+  proto.services.LookupInvoiceRequest,
+  proto.services.LookupInvoiceResponse,
+  /**
+   * @param {!proto.services.LookupInvoiceRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.services.LookupInvoiceResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.services.LookupInvoiceRequest,
+ *   !proto.services.LookupInvoiceResponse>}
+ */
+const methodInfo_PaymentService_LookupInvoice = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.services.LookupInvoiceResponse,
+  /**
+   * @param {!proto.services.LookupInvoiceRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.services.LookupInvoiceResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.services.LookupInvoiceRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.services.LookupInvoiceResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.services.LookupInvoiceResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.services.PaymentServiceClient.prototype.lookupInvoice =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/services.PaymentService/LookupInvoice',
+      request,
+      metadata || {},
+      methodDescriptor_PaymentService_LookupInvoice,
+      callback);
+};
+
+
+/**
+ * @param {!proto.services.LookupInvoiceRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.services.LookupInvoiceResponse>}
+ *     Promise that resolves to the response
+ */
+proto.services.PaymentServicePromiseClient.prototype.lookupInvoice =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/services.PaymentService/LookupInvoice',
+      request,
+      metadata || {},
+      methodDescriptor_PaymentService_LookupInvoice);
+};
+
+
 module.exports = proto.services;
 
