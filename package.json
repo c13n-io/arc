@@ -21,10 +21,7 @@
     "react-json-pretty": "^2.2.0",
     "react-markdown": "^4.3.1",
     "react-notifications": "^1.7.2",
-    "react-scripts": "4.0.3",
-    "react-window-size-listener": "^1.5.4",
-    "standard": "14.3.4",
-    "web-vitals": "^0.2.4"
+    "react-scripts": "4.0.3"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -3,7 +3,7 @@ import {
   NotificationManager,
   NotificationContainer,
 } from "react-notifications";
-import WindowSizeListener from "react-window-size-listener";
+// import WindowSizeListener from "react-window-size-listener";
 
 import Contents from "./contents";
 import Side from "./side";
@@ -595,7 +595,7 @@ const Main = () => {
           enterTimeout={smoothAnimations ? 200 : 0}
           leaveTimeout={smoothAnimations ? 200 : 0}
         />
-        <WindowSizeListener
+        {/* <WindowSizeListener
           onResize={(size) => {
             let width = size.windowWidth;
             if (selectedPage === "chatHistory") {
@@ -614,10 +614,10 @@ const Main = () => {
               setSideActivated(false);
             }
           }}
-        >
+        > */}
           <Side {...mainProps} />
           <Contents {...mainProps} />
-        </WindowSizeListener>
+        {/* </WindowSizeListener> */}
         <FundsInitialization
           {...mainProps}
           visible={fundsInitVisible}
