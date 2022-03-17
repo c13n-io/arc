@@ -25,7 +25,7 @@ proto.services = require('./rpc_pb.js');
 /**
  * @param {string} hostname
  * @param {?Object} credentials
- * @param {?Object} options
+ * @param {?grpc.web.ClientOptions} options
  * @constructor
  * @struct
  * @final
@@ -33,7 +33,7 @@ proto.services = require('./rpc_pb.js');
 proto.services.NodeInfoServiceClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
-  options['format'] = 'text';
+  options.format = 'text';
 
   /**
    * @private @const {!grpc.web.GrpcWebClientBase} The client
@@ -51,7 +51,7 @@ proto.services.NodeInfoServiceClient =
 /**
  * @param {string} hostname
  * @param {?Object} credentials
- * @param {?Object} options
+ * @param {?grpc.web.ClientOptions} options
  * @constructor
  * @struct
  * @final
@@ -59,7 +59,7 @@ proto.services.NodeInfoServiceClient =
 proto.services.NodeInfoServicePromiseClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
-  options['format'] = 'text';
+  options.format = 'text';
 
   /**
    * @private @const {!grpc.web.GrpcWebClientBase} The client
@@ -97,30 +97,11 @@ const methodDescriptor_NodeInfoService_GetVersion = new grpc.web.MethodDescripto
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.VersionRequest,
- *   !proto.services.Version>}
- */
-const methodInfo_NodeInfoService_GetVersion = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.Version,
-  /**
-   * @param {!proto.services.VersionRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.Version.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.VersionRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.services.Version)}
+ * @param {function(?grpc.web.RpcError, ?proto.services.Version)}
  *     callback The callback function(error, response)
  * @return {!grpc.web.ClientReadableStream<!proto.services.Version>|undefined}
  *     The XHR Node Readable Stream
@@ -139,7 +120,7 @@ proto.services.NodeInfoServiceClient.prototype.getVersion =
 /**
  * @param {!proto.services.VersionRequest} request The
  *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.services.Version>}
  *     Promise that resolves to the response
@@ -177,30 +158,11 @@ const methodDescriptor_NodeInfoService_GetSelfInfo = new grpc.web.MethodDescript
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.SelfInfoRequest,
- *   !proto.services.SelfInfoResponse>}
- */
-const methodInfo_NodeInfoService_GetSelfInfo = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.SelfInfoResponse,
-  /**
-   * @param {!proto.services.SelfInfoRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.SelfInfoResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.SelfInfoRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.services.SelfInfoResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.services.SelfInfoResponse)}
  *     callback The callback function(error, response)
  * @return {!grpc.web.ClientReadableStream<!proto.services.SelfInfoResponse>|undefined}
  *     The XHR Node Readable Stream
@@ -219,7 +181,7 @@ proto.services.NodeInfoServiceClient.prototype.getSelfInfo =
 /**
  * @param {!proto.services.SelfInfoRequest} request The
  *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.services.SelfInfoResponse>}
  *     Promise that resolves to the response
@@ -257,30 +219,11 @@ const methodDescriptor_NodeInfoService_GetSelfBalance = new grpc.web.MethodDescr
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.SelfBalanceRequest,
- *   !proto.services.SelfBalanceResponse>}
- */
-const methodInfo_NodeInfoService_GetSelfBalance = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.SelfBalanceResponse,
-  /**
-   * @param {!proto.services.SelfBalanceRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.SelfBalanceResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.SelfBalanceRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.services.SelfBalanceResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.services.SelfBalanceResponse)}
  *     callback The callback function(error, response)
  * @return {!grpc.web.ClientReadableStream<!proto.services.SelfBalanceResponse>|undefined}
  *     The XHR Node Readable Stream
@@ -299,7 +242,7 @@ proto.services.NodeInfoServiceClient.prototype.getSelfBalance =
 /**
  * @param {!proto.services.SelfBalanceRequest} request The
  *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.services.SelfBalanceResponse>}
  *     Promise that resolves to the response
@@ -337,30 +280,11 @@ const methodDescriptor_NodeInfoService_GetNodes = new grpc.web.MethodDescriptor(
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.GetNodesRequest,
- *   !proto.services.NodeInfoResponse>}
- */
-const methodInfo_NodeInfoService_GetNodes = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.NodeInfoResponse,
-  /**
-   * @param {!proto.services.GetNodesRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.NodeInfoResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.GetNodesRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.services.NodeInfoResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.services.NodeInfoResponse)}
  *     callback The callback function(error, response)
  * @return {!grpc.web.ClientReadableStream<!proto.services.NodeInfoResponse>|undefined}
  *     The XHR Node Readable Stream
@@ -379,7 +303,7 @@ proto.services.NodeInfoServiceClient.prototype.getNodes =
 /**
  * @param {!proto.services.GetNodesRequest} request The
  *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.services.NodeInfoResponse>}
  *     Promise that resolves to the response
@@ -417,30 +341,11 @@ const methodDescriptor_NodeInfoService_SearchNodeByAddress = new grpc.web.Method
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.SearchNodeByAddressRequest,
- *   !proto.services.NodeInfoResponse>}
- */
-const methodInfo_NodeInfoService_SearchNodeByAddress = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.NodeInfoResponse,
-  /**
-   * @param {!proto.services.SearchNodeByAddressRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.NodeInfoResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.SearchNodeByAddressRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.services.NodeInfoResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.services.NodeInfoResponse)}
  *     callback The callback function(error, response)
  * @return {!grpc.web.ClientReadableStream<!proto.services.NodeInfoResponse>|undefined}
  *     The XHR Node Readable Stream
@@ -459,7 +364,7 @@ proto.services.NodeInfoServiceClient.prototype.searchNodeByAddress =
 /**
  * @param {!proto.services.SearchNodeByAddressRequest} request The
  *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.services.NodeInfoResponse>}
  *     Promise that resolves to the response
@@ -497,30 +402,11 @@ const methodDescriptor_NodeInfoService_SearchNodeByAlias = new grpc.web.MethodDe
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.SearchNodeByAliasRequest,
- *   !proto.services.NodeInfoResponse>}
- */
-const methodInfo_NodeInfoService_SearchNodeByAlias = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.NodeInfoResponse,
-  /**
-   * @param {!proto.services.SearchNodeByAliasRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.NodeInfoResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.SearchNodeByAliasRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.services.NodeInfoResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.services.NodeInfoResponse)}
  *     callback The callback function(error, response)
  * @return {!grpc.web.ClientReadableStream<!proto.services.NodeInfoResponse>|undefined}
  *     The XHR Node Readable Stream
@@ -539,7 +425,7 @@ proto.services.NodeInfoServiceClient.prototype.searchNodeByAlias =
 /**
  * @param {!proto.services.SearchNodeByAliasRequest} request The
  *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.services.NodeInfoResponse>}
  *     Promise that resolves to the response
@@ -577,30 +463,11 @@ const methodDescriptor_NodeInfoService_ConnectNode = new grpc.web.MethodDescript
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.ConnectNodeRequest,
- *   !proto.services.ConnectNodeResponse>}
- */
-const methodInfo_NodeInfoService_ConnectNode = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.ConnectNodeResponse,
-  /**
-   * @param {!proto.services.ConnectNodeRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.ConnectNodeResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.ConnectNodeRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.services.ConnectNodeResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.services.ConnectNodeResponse)}
  *     callback The callback function(error, response)
  * @return {!grpc.web.ClientReadableStream<!proto.services.ConnectNodeResponse>|undefined}
  *     The XHR Node Readable Stream
@@ -619,7 +486,7 @@ proto.services.NodeInfoServiceClient.prototype.connectNode =
 /**
  * @param {!proto.services.ConnectNodeRequest} request The
  *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.services.ConnectNodeResponse>}
  *     Promise that resolves to the response
@@ -637,7 +504,7 @@ proto.services.NodeInfoServicePromiseClient.prototype.connectNode =
 /**
  * @param {string} hostname
  * @param {?Object} credentials
- * @param {?Object} options
+ * @param {?grpc.web.ClientOptions} options
  * @constructor
  * @struct
  * @final
@@ -645,7 +512,7 @@ proto.services.NodeInfoServicePromiseClient.prototype.connectNode =
 proto.services.ChannelServiceClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
-  options['format'] = 'text';
+  options.format = 'text';
 
   /**
    * @private @const {!grpc.web.GrpcWebClientBase} The client
@@ -663,7 +530,7 @@ proto.services.ChannelServiceClient =
 /**
  * @param {string} hostname
  * @param {?Object} credentials
- * @param {?Object} options
+ * @param {?grpc.web.ClientOptions} options
  * @constructor
  * @struct
  * @final
@@ -671,7 +538,7 @@ proto.services.ChannelServiceClient =
 proto.services.ChannelServicePromiseClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
-  options['format'] = 'text';
+  options.format = 'text';
 
   /**
    * @private @const {!grpc.web.GrpcWebClientBase} The client
@@ -709,30 +576,11 @@ const methodDescriptor_ChannelService_OpenChannel = new grpc.web.MethodDescripto
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.OpenChannelRequest,
- *   !proto.services.OpenChannelResponse>}
- */
-const methodInfo_ChannelService_OpenChannel = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.OpenChannelResponse,
-  /**
-   * @param {!proto.services.OpenChannelRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.OpenChannelResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.OpenChannelRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.services.OpenChannelResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.services.OpenChannelResponse)}
  *     callback The callback function(error, response)
  * @return {!grpc.web.ClientReadableStream<!proto.services.OpenChannelResponse>|undefined}
  *     The XHR Node Readable Stream
@@ -751,7 +599,7 @@ proto.services.ChannelServiceClient.prototype.openChannel =
 /**
  * @param {!proto.services.OpenChannelRequest} request The
  *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.services.OpenChannelResponse>}
  *     Promise that resolves to the response
@@ -769,7 +617,7 @@ proto.services.ChannelServicePromiseClient.prototype.openChannel =
 /**
  * @param {string} hostname
  * @param {?Object} credentials
- * @param {?Object} options
+ * @param {?grpc.web.ClientOptions} options
  * @constructor
  * @struct
  * @final
@@ -777,7 +625,7 @@ proto.services.ChannelServicePromiseClient.prototype.openChannel =
 proto.services.ContactServiceClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
-  options['format'] = 'text';
+  options.format = 'text';
 
   /**
    * @private @const {!grpc.web.GrpcWebClientBase} The client
@@ -795,7 +643,7 @@ proto.services.ContactServiceClient =
 /**
  * @param {string} hostname
  * @param {?Object} credentials
- * @param {?Object} options
+ * @param {?grpc.web.ClientOptions} options
  * @constructor
  * @struct
  * @final
@@ -803,7 +651,7 @@ proto.services.ContactServiceClient =
 proto.services.ContactServicePromiseClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
-  options['format'] = 'text';
+  options.format = 'text';
 
   /**
    * @private @const {!grpc.web.GrpcWebClientBase} The client
@@ -841,30 +689,11 @@ const methodDescriptor_ContactService_GetContacts = new grpc.web.MethodDescripto
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.GetContactsRequest,
- *   !proto.services.GetContactsResponse>}
- */
-const methodInfo_ContactService_GetContacts = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.GetContactsResponse,
-  /**
-   * @param {!proto.services.GetContactsRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.GetContactsResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.GetContactsRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.services.GetContactsResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.services.GetContactsResponse)}
  *     callback The callback function(error, response)
  * @return {!grpc.web.ClientReadableStream<!proto.services.GetContactsResponse>|undefined}
  *     The XHR Node Readable Stream
@@ -883,7 +712,7 @@ proto.services.ContactServiceClient.prototype.getContacts =
 /**
  * @param {!proto.services.GetContactsRequest} request The
  *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.services.GetContactsResponse>}
  *     Promise that resolves to the response
@@ -921,30 +750,11 @@ const methodDescriptor_ContactService_AddContact = new grpc.web.MethodDescriptor
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.AddContactRequest,
- *   !proto.services.AddContactResponse>}
- */
-const methodInfo_ContactService_AddContact = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.AddContactResponse,
-  /**
-   * @param {!proto.services.AddContactRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.AddContactResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.AddContactRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.services.AddContactResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.services.AddContactResponse)}
  *     callback The callback function(error, response)
  * @return {!grpc.web.ClientReadableStream<!proto.services.AddContactResponse>|undefined}
  *     The XHR Node Readable Stream
@@ -963,7 +773,7 @@ proto.services.ContactServiceClient.prototype.addContact =
 /**
  * @param {!proto.services.AddContactRequest} request The
  *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.services.AddContactResponse>}
  *     Promise that resolves to the response
@@ -1001,30 +811,11 @@ const methodDescriptor_ContactService_RemoveContactByID = new grpc.web.MethodDes
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.RemoveContactByIDRequest,
- *   !proto.services.RemoveContactResponse>}
- */
-const methodInfo_ContactService_RemoveContactByID = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.RemoveContactResponse,
-  /**
-   * @param {!proto.services.RemoveContactByIDRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.RemoveContactResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.RemoveContactByIDRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.services.RemoveContactResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.services.RemoveContactResponse)}
  *     callback The callback function(error, response)
  * @return {!grpc.web.ClientReadableStream<!proto.services.RemoveContactResponse>|undefined}
  *     The XHR Node Readable Stream
@@ -1043,7 +834,7 @@ proto.services.ContactServiceClient.prototype.removeContactByID =
 /**
  * @param {!proto.services.RemoveContactByIDRequest} request The
  *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.services.RemoveContactResponse>}
  *     Promise that resolves to the response
@@ -1081,30 +872,11 @@ const methodDescriptor_ContactService_RemoveContactByAddress = new grpc.web.Meth
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.RemoveContactByAddressRequest,
- *   !proto.services.RemoveContactResponse>}
- */
-const methodInfo_ContactService_RemoveContactByAddress = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.RemoveContactResponse,
-  /**
-   * @param {!proto.services.RemoveContactByAddressRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.RemoveContactResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.RemoveContactByAddressRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.services.RemoveContactResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.services.RemoveContactResponse)}
  *     callback The callback function(error, response)
  * @return {!grpc.web.ClientReadableStream<!proto.services.RemoveContactResponse>|undefined}
  *     The XHR Node Readable Stream
@@ -1123,7 +895,7 @@ proto.services.ContactServiceClient.prototype.removeContactByAddress =
 /**
  * @param {!proto.services.RemoveContactByAddressRequest} request The
  *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.services.RemoveContactResponse>}
  *     Promise that resolves to the response
@@ -1141,7 +913,7 @@ proto.services.ContactServicePromiseClient.prototype.removeContactByAddress =
 /**
  * @param {string} hostname
  * @param {?Object} credentials
- * @param {?Object} options
+ * @param {?grpc.web.ClientOptions} options
  * @constructor
  * @struct
  * @final
@@ -1149,7 +921,7 @@ proto.services.ContactServicePromiseClient.prototype.removeContactByAddress =
 proto.services.MessageServiceClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
-  options['format'] = 'text';
+  options.format = 'text';
 
   /**
    * @private @const {!grpc.web.GrpcWebClientBase} The client
@@ -1167,7 +939,7 @@ proto.services.MessageServiceClient =
 /**
  * @param {string} hostname
  * @param {?Object} credentials
- * @param {?Object} options
+ * @param {?grpc.web.ClientOptions} options
  * @constructor
  * @struct
  * @final
@@ -1175,7 +947,7 @@ proto.services.MessageServiceClient =
 proto.services.MessageServicePromiseClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
-  options['format'] = 'text';
+  options.format = 'text';
 
   /**
    * @private @const {!grpc.web.GrpcWebClientBase} The client
@@ -1213,30 +985,11 @@ const methodDescriptor_MessageService_EstimateMessage = new grpc.web.MethodDescr
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.EstimateMessageRequest,
- *   !proto.services.EstimateMessageResponse>}
- */
-const methodInfo_MessageService_EstimateMessage = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.EstimateMessageResponse,
-  /**
-   * @param {!proto.services.EstimateMessageRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.EstimateMessageResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.EstimateMessageRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.services.EstimateMessageResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.services.EstimateMessageResponse)}
  *     callback The callback function(error, response)
  * @return {!grpc.web.ClientReadableStream<!proto.services.EstimateMessageResponse>|undefined}
  *     The XHR Node Readable Stream
@@ -1255,7 +1008,7 @@ proto.services.MessageServiceClient.prototype.estimateMessage =
 /**
  * @param {!proto.services.EstimateMessageRequest} request The
  *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.services.EstimateMessageResponse>}
  *     Promise that resolves to the response
@@ -1293,30 +1046,11 @@ const methodDescriptor_MessageService_SendMessage = new grpc.web.MethodDescripto
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.SendMessageRequest,
- *   !proto.services.SendMessageResponse>}
- */
-const methodInfo_MessageService_SendMessage = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.SendMessageResponse,
-  /**
-   * @param {!proto.services.SendMessageRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.SendMessageResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.SendMessageRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.services.SendMessageResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.services.SendMessageResponse)}
  *     callback The callback function(error, response)
  * @return {!grpc.web.ClientReadableStream<!proto.services.SendMessageResponse>|undefined}
  *     The XHR Node Readable Stream
@@ -1335,7 +1069,7 @@ proto.services.MessageServiceClient.prototype.sendMessage =
 /**
  * @param {!proto.services.SendMessageRequest} request The
  *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.services.SendMessageResponse>}
  *     Promise that resolves to the response
@@ -1373,27 +1107,8 @@ const methodDescriptor_MessageService_SubscribeMessages = new grpc.web.MethodDes
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.SubscribeMessageRequest,
- *   !proto.services.SubscribeMessageResponse>}
- */
-const methodInfo_MessageService_SubscribeMessages = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.SubscribeMessageResponse,
-  /**
-   * @param {!proto.services.SubscribeMessageRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.SubscribeMessageResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.SubscribeMessageRequest} request The request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!grpc.web.ClientReadableStream<!proto.services.SubscribeMessageResponse>}
  *     The XHR Node Readable Stream
@@ -1410,7 +1125,7 @@ proto.services.MessageServiceClient.prototype.subscribeMessages =
 
 /**
  * @param {!proto.services.SubscribeMessageRequest} request The request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!grpc.web.ClientReadableStream<!proto.services.SubscribeMessageResponse>}
  *     The XHR Node Readable Stream
@@ -1428,7 +1143,7 @@ proto.services.MessageServicePromiseClient.prototype.subscribeMessages =
 /**
  * @param {string} hostname
  * @param {?Object} credentials
- * @param {?Object} options
+ * @param {?grpc.web.ClientOptions} options
  * @constructor
  * @struct
  * @final
@@ -1436,7 +1151,7 @@ proto.services.MessageServicePromiseClient.prototype.subscribeMessages =
 proto.services.DiscussionServiceClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
-  options['format'] = 'text';
+  options.format = 'text';
 
   /**
    * @private @const {!grpc.web.GrpcWebClientBase} The client
@@ -1454,7 +1169,7 @@ proto.services.DiscussionServiceClient =
 /**
  * @param {string} hostname
  * @param {?Object} credentials
- * @param {?Object} options
+ * @param {?grpc.web.ClientOptions} options
  * @constructor
  * @struct
  * @final
@@ -1462,7 +1177,7 @@ proto.services.DiscussionServiceClient =
 proto.services.DiscussionServicePromiseClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
-  options['format'] = 'text';
+  options.format = 'text';
 
   /**
    * @private @const {!grpc.web.GrpcWebClientBase} The client
@@ -1500,27 +1215,8 @@ const methodDescriptor_DiscussionService_GetDiscussions = new grpc.web.MethodDes
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.GetDiscussionsRequest,
- *   !proto.services.GetDiscussionsResponse>}
- */
-const methodInfo_DiscussionService_GetDiscussions = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.GetDiscussionsResponse,
-  /**
-   * @param {!proto.services.GetDiscussionsRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.GetDiscussionsResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.GetDiscussionsRequest} request The request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!grpc.web.ClientReadableStream<!proto.services.GetDiscussionsResponse>}
  *     The XHR Node Readable Stream
@@ -1537,7 +1233,7 @@ proto.services.DiscussionServiceClient.prototype.getDiscussions =
 
 /**
  * @param {!proto.services.GetDiscussionsRequest} request The request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!grpc.web.ClientReadableStream<!proto.services.GetDiscussionsResponse>}
  *     The XHR Node Readable Stream
@@ -1575,27 +1271,8 @@ const methodDescriptor_DiscussionService_GetDiscussionHistoryByID = new grpc.web
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.GetDiscussionHistoryByIDRequest,
- *   !proto.services.GetDiscussionHistoryResponse>}
- */
-const methodInfo_DiscussionService_GetDiscussionHistoryByID = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.GetDiscussionHistoryResponse,
-  /**
-   * @param {!proto.services.GetDiscussionHistoryByIDRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.GetDiscussionHistoryResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.GetDiscussionHistoryByIDRequest} request The request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!grpc.web.ClientReadableStream<!proto.services.GetDiscussionHistoryResponse>}
  *     The XHR Node Readable Stream
@@ -1612,7 +1289,7 @@ proto.services.DiscussionServiceClient.prototype.getDiscussionHistoryByID =
 
 /**
  * @param {!proto.services.GetDiscussionHistoryByIDRequest} request The request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!grpc.web.ClientReadableStream<!proto.services.GetDiscussionHistoryResponse>}
  *     The XHR Node Readable Stream
@@ -1650,30 +1327,11 @@ const methodDescriptor_DiscussionService_GetDiscussionStatistics = new grpc.web.
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.GetDiscussionStatisticsRequest,
- *   !proto.services.GetDiscussionStatisticsResponse>}
- */
-const methodInfo_DiscussionService_GetDiscussionStatistics = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.GetDiscussionStatisticsResponse,
-  /**
-   * @param {!proto.services.GetDiscussionStatisticsRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.GetDiscussionStatisticsResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.GetDiscussionStatisticsRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.services.GetDiscussionStatisticsResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.services.GetDiscussionStatisticsResponse)}
  *     callback The callback function(error, response)
  * @return {!grpc.web.ClientReadableStream<!proto.services.GetDiscussionStatisticsResponse>|undefined}
  *     The XHR Node Readable Stream
@@ -1692,7 +1350,7 @@ proto.services.DiscussionServiceClient.prototype.getDiscussionStatistics =
 /**
  * @param {!proto.services.GetDiscussionStatisticsRequest} request The
  *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.services.GetDiscussionStatisticsResponse>}
  *     Promise that resolves to the response
@@ -1730,30 +1388,11 @@ const methodDescriptor_DiscussionService_AddDiscussion = new grpc.web.MethodDesc
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.AddDiscussionRequest,
- *   !proto.services.AddDiscussionResponse>}
- */
-const methodInfo_DiscussionService_AddDiscussion = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.AddDiscussionResponse,
-  /**
-   * @param {!proto.services.AddDiscussionRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.AddDiscussionResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.AddDiscussionRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.services.AddDiscussionResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.services.AddDiscussionResponse)}
  *     callback The callback function(error, response)
  * @return {!grpc.web.ClientReadableStream<!proto.services.AddDiscussionResponse>|undefined}
  *     The XHR Node Readable Stream
@@ -1772,7 +1411,7 @@ proto.services.DiscussionServiceClient.prototype.addDiscussion =
 /**
  * @param {!proto.services.AddDiscussionRequest} request The
  *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.services.AddDiscussionResponse>}
  *     Promise that resolves to the response
@@ -1810,30 +1449,11 @@ const methodDescriptor_DiscussionService_UpdateDiscussionLastRead = new grpc.web
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.UpdateDiscussionLastReadRequest,
- *   !proto.services.UpdateDiscussionResponse>}
- */
-const methodInfo_DiscussionService_UpdateDiscussionLastRead = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.UpdateDiscussionResponse,
-  /**
-   * @param {!proto.services.UpdateDiscussionLastReadRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.UpdateDiscussionResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.UpdateDiscussionLastReadRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.services.UpdateDiscussionResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.services.UpdateDiscussionResponse)}
  *     callback The callback function(error, response)
  * @return {!grpc.web.ClientReadableStream<!proto.services.UpdateDiscussionResponse>|undefined}
  *     The XHR Node Readable Stream
@@ -1852,7 +1472,7 @@ proto.services.DiscussionServiceClient.prototype.updateDiscussionLastRead =
 /**
  * @param {!proto.services.UpdateDiscussionLastReadRequest} request The
  *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.services.UpdateDiscussionResponse>}
  *     Promise that resolves to the response
@@ -1890,30 +1510,11 @@ const methodDescriptor_DiscussionService_RemoveDiscussion = new grpc.web.MethodD
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.RemoveDiscussionRequest,
- *   !proto.services.RemoveDiscussionResponse>}
- */
-const methodInfo_DiscussionService_RemoveDiscussion = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.RemoveDiscussionResponse,
-  /**
-   * @param {!proto.services.RemoveDiscussionRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.RemoveDiscussionResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.RemoveDiscussionRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.services.RemoveDiscussionResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.services.RemoveDiscussionResponse)}
  *     callback The callback function(error, response)
  * @return {!grpc.web.ClientReadableStream<!proto.services.RemoveDiscussionResponse>|undefined}
  *     The XHR Node Readable Stream
@@ -1932,7 +1533,7 @@ proto.services.DiscussionServiceClient.prototype.removeDiscussion =
 /**
  * @param {!proto.services.RemoveDiscussionRequest} request The
  *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.services.RemoveDiscussionResponse>}
  *     Promise that resolves to the response
@@ -1950,7 +1551,7 @@ proto.services.DiscussionServicePromiseClient.prototype.removeDiscussion =
 /**
  * @param {string} hostname
  * @param {?Object} credentials
- * @param {?Object} options
+ * @param {?grpc.web.ClientOptions} options
  * @constructor
  * @struct
  * @final
@@ -1958,7 +1559,7 @@ proto.services.DiscussionServicePromiseClient.prototype.removeDiscussion =
 proto.services.PaymentServiceClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
-  options['format'] = 'text';
+  options.format = 'text';
 
   /**
    * @private @const {!grpc.web.GrpcWebClientBase} The client
@@ -1976,7 +1577,7 @@ proto.services.PaymentServiceClient =
 /**
  * @param {string} hostname
  * @param {?Object} credentials
- * @param {?Object} options
+ * @param {?grpc.web.ClientOptions} options
  * @constructor
  * @struct
  * @final
@@ -1984,7 +1585,7 @@ proto.services.PaymentServiceClient =
 proto.services.PaymentServicePromiseClient =
     function(hostname, credentials, options) {
   if (!options) options = {};
-  options['format'] = 'text';
+  options.format = 'text';
 
   /**
    * @private @const {!grpc.web.GrpcWebClientBase} The client
@@ -2022,30 +1623,11 @@ const methodDescriptor_PaymentService_CreateInvoice = new grpc.web.MethodDescrip
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.CreateInvoiceRequest,
- *   !proto.services.CreateInvoiceResponse>}
- */
-const methodInfo_PaymentService_CreateInvoice = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.CreateInvoiceResponse,
-  /**
-   * @param {!proto.services.CreateInvoiceRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.CreateInvoiceResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.CreateInvoiceRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.services.CreateInvoiceResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.services.CreateInvoiceResponse)}
  *     callback The callback function(error, response)
  * @return {!grpc.web.ClientReadableStream<!proto.services.CreateInvoiceResponse>|undefined}
  *     The XHR Node Readable Stream
@@ -2064,7 +1646,7 @@ proto.services.PaymentServiceClient.prototype.createInvoice =
 /**
  * @param {!proto.services.CreateInvoiceRequest} request The
  *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.services.CreateInvoiceResponse>}
  *     Promise that resolves to the response
@@ -2102,30 +1684,11 @@ const methodDescriptor_PaymentService_LookupInvoice = new grpc.web.MethodDescrip
 
 
 /**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.services.LookupInvoiceRequest,
- *   !proto.services.LookupInvoiceResponse>}
- */
-const methodInfo_PaymentService_LookupInvoice = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.services.LookupInvoiceResponse,
-  /**
-   * @param {!proto.services.LookupInvoiceRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.services.LookupInvoiceResponse.deserializeBinary
-);
-
-
-/**
  * @param {!proto.services.LookupInvoiceRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.services.LookupInvoiceResponse)}
+ * @param {function(?grpc.web.RpcError, ?proto.services.LookupInvoiceResponse)}
  *     callback The callback function(error, response)
  * @return {!grpc.web.ClientReadableStream<!proto.services.LookupInvoiceResponse>|undefined}
  *     The XHR Node Readable Stream
@@ -2144,7 +1707,7 @@ proto.services.PaymentServiceClient.prototype.lookupInvoice =
 /**
  * @param {!proto.services.LookupInvoiceRequest} request The
  *     request proto
- * @param {?Object<string, string>} metadata User defined
+ * @param {?Object<string, string>=} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.services.LookupInvoiceResponse>}
  *     Promise that resolves to the response
