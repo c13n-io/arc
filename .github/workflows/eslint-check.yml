@@ -21,10 +21,19 @@ jobs:
     needs: branch_naming
     steps:
       - uses: actions/checkout@v2
+
+      - name: Lint Dockerfile
+        uses: hadolint/hadolint-action@master
+        with:
+          recursive: true
+          dockerfile: "Dockerfile"
+
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
+
       - name: Install eslint
         run: npm install -g eslint
+
       - name: Run ESLint
         run: npm run lint
